@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Young's blog]]></title>
+  <subtitle><![CDATA[talk is cheap,show me the code]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://youngyangyang.com/"/>
+  <updated>2015-01-07T12:29:26.596Z</updated>
+  <id>http://youngyangyang.com/</id>
+  
+  <author>
+    <name><![CDATA[Young Kun]]></name>
+    <email><![CDATA[297502779@qq.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[]]></title>
+    <link href="http://youngyangyang.com/2014/12/30/my-new-post/"/>
+    <id>http://youngyangyang.com/2014/12/30/my-new-post/</id>
+    <published>2014-12-30T10:42:20.000Z</published>
+    <updated>2014-12-30T10:51:14.000Z</updated>
+    <content type="html"><![CDATA[<p>title: 我的第一篇文章<br>date: 2014-12-30 18:42:20</p>
+<h2 id="tags:[生活记录]">tags:[生活记录]</h2>
+<h1 id="这是我的第一篇文章">这是我的第一篇文章</h1>
+<p>markdown的语法怎么这么别扭，看起来一点都不舒服</p>
+<h2 id="要不来总结一下2014年吧">要不来总结一下2014年吧</h2>
+<h3 id="我才没那么无聊呢">我才没那么无聊呢</h3>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>title: 我的第一篇文章<br>date: 2014-12-30 18:42:20</p>
+<h2 id="tags:[生活记录]">tags:[生活记录]</h2>
+<h1 id="这是我的第一篇文章">这是我的第一篇文章</h1>
+<p>markdown的语法怎么这]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
