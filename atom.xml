@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[Young's blog]]></title>
-  <subtitle><![CDATA[talk is cheap,show me the code]]></subtitle>
+  <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-01-14T13:16:11.814Z</updated>
+  <updated>2015-03-26T12:56:33.828Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
