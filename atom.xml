@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-03-31T11:52:31.547Z</updated>
+  <updated>2015-03-31T12:01:50.432Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[�鵥]]></title>
+    <title><![CDATA[mybook]]></title>
     <link href="http://youngyangyang.com/2015/03/31/booklist/"/>
     <id>http://youngyangyang.com/2015/03/31/booklist/</id>
-    <published>2015-03-31T11:47:30.000Z</published>
-    <updated>2015-03-31T11:52:06.000Z</updated>
+    <published>2015-03-31T12:01:20.000Z</published>
+    <updated>2015-03-31T12:01:38.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>�����ڶ���</p>
 <p>��ͳ��ѧϰ������ �</p>
@@ -40,6 +40,8 @@
 <p>������</p>
 <p>��C++ Primer��Stanley B.Lippman    Jo]]>
     </summary>
+    
+      <category term="books" scheme="http://youngyangyang.com/tags/books/"/>
     
       <category term="booklist" scheme="http://youngyangyang.com/categories/booklist/"/>
     
