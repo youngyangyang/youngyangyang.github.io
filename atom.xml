@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-03-31T12:16:34.628Z</updated>
+  <updated>2015-04-03T14:19:15.119Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,30 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[写在考试之后]]></title>
+    <link href="http://youngyangyang.com/2015/04/03/afterexam/"/>
+    <id>http://youngyangyang.com/2015/04/03/afterexam/</id>
+    <published>2015-04-03T14:11:37.000Z</published>
+    <updated>2015-04-03T14:18:50.000Z</updated>
+    <content type="html"><![CDATA[<p>刚刚考完了微软实习生的在线笔试，昨天做了阿里的在线笔试，最近又在做阿里的大数据竞赛。感觉真的忙不过来，不过从这段时间的经历来看，自己有很多事要做。</p>
+<blockquote>
+<p>-巩固计算机语言：从几次笔试的过程来看，自己虽然说是略懂某种程序语言，但实在不是精通。而且除了微软之外，其他的公司都同时考几种语言，看来过去那种一种语言打天下的日子已经一去不复返了。<br>-刷题。今天的微软在线笔试就是很好的例子，从读题到写出程序只要二十分钟，但调试到AC却要一个小时，这说明题量不够，还需要刷题。<br>-还有自己一直要学的机器学习方面的知识还要巩固。一本书都没读完，的确进度太慢。要抓紧。</p>
+</blockquote>
+<p>三月结束了实习，总算给自己一个自由身。自己也要抓紧机会弥补。四月时间并不长，要有紧迫感。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>刚刚考完了微软实习生的在线笔试，昨天做了阿里的在线笔试，最近又在做阿里的大数据竞赛。感觉真的忙不过来，不过从这段时间的经历来看，自己有很多事要做。</p>
+<blockquote>
+<p>-巩固计算机语言：从几次笔试的过程来看，自己虽然说是略懂某种程序语言，但实在不是精通。]]>
+    </summary>
+    
+      <category term="生活记录" scheme="http://youngyangyang.com/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/"/>
+    
+      <category term="生活点滴" scheme="http://youngyangyang.com/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[我的书籍]]></title>
