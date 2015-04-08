@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-03T14:19:15.119Z</updated>
+  <updated>2015-04-08T07:25:54.905Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1142]]></title>
+    <link href="http://youngyangyang.com/2015/04/08/hiho1142/"/>
+    <id>http://youngyangyang.com/2015/04/08/hiho1142/</id>
+    <published>2015-04-08T07:20:08.000Z</published>
+    <updated>2015-04-08T07:25:45.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="题目1142：三分-三分求极值">题目1142：三分.三分求极值</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这一次我们就简单一点了，题目在此：<br><img src="http://media.hihocoder.com/problem_images/20150404/14281364249436.png" style="width:70%;" title="week40_1.PNG"><br>在直角坐标系中有一条抛物线y=ax^2+bx+c和一个点P(x,y)，求点P到抛物线的最短距离d。<br><strong>输入</strong><br>第1行：5个整数a,b,c,x,y。前三个数构成抛物线的参数，后两个数x,y表示P点坐标。-200≤a,b,c,x,y≤200<br><strong>输出</strong><br>第1行：1个实数d，保留3位小数(四舍五入)<br><strong>样例输入</strong></p>
+<blockquote>
+<p>2 8 2 -2 6<br><strong>样例输出</strong><br>2.437</p>
+</blockquote>
+<h2 id="分析"><strong>分析</strong></h2>
+<p>我刚开始没看提示，考虑做法：假设固定点p为（x1，y1）。在抛物线上有一点q（x0，y0）在任意移动。其中满足<br> $$ y0=ax^2+bx+c<br>则我只要考虑曲线在点（x0，y0）处的切线的方向向量和向量pq的夹角是不是为90°即可。而这应该是一个只有一个0点的函数。<br>但是后来发现有问题，假设a&gt;0，这只满足点p在曲线下方区域的情况，如果点p在曲线上方，就不可以这么做了。<br>当然不是不可以做，只是需要判断，所以我就没这么做下去。而是采用了提示中的方法。<br>pq的距离函数是一个关于x0的凸函数（至于为什么是凸函数，对于一元函数来说，就是二阶导数恒大于等于0）。<br>那么采用三分法就可以解决这个问题了。这个问题的解决有两个trick：</p>
+<blockquote>
+<p>第一是a==0的情况，需要单独考虑，这个时候就是点到直线的距离，直接用公式就可以了<br>第二是不管是三分还是二分法都需要初始的范围，那么我的方法就是找到两个点x1和x2，使得对于其中点mid=（x1+x2）/2.<br>有f(x1)&gt;f(mid)且f(x2)&gt;f(mid)。作为初始的范围。</p>
+</blockquote>
+<h2 id="以下是我的代码"><strong>以下是我的代码</strong></h2>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;math.h&gt;<span class="comment">//g++里sqrt需要include这个头文件</span></span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iomanip&gt;<span class="comment">//格式化输出需要include这个头文件</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">double</span> distances(<span class="keyword">const</span> <span class="keyword">double</span> a, <span class="keyword">const</span> <span class="keyword">double</span> b, <span class="keyword">const</span> <span class="keyword">double</span> c, <span class="keyword">const</span> <span class="keyword">double</span> x, <span class="keyword">const</span> <span class="keyword">double</span> y, <span class="keyword">double</span> xx)</div><div class="line">{</div><div class="line">	<span class="keyword">double</span> temp[<span class="number">5</span>];</div><div class="line">	temp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</div><div class="line">		temp[i] = temp[i - <span class="number">1</span>] * xx;</div><div class="line">	<span class="keyword">return</span> (a*a*temp[<span class="number">4</span>] + <span class="number">2</span> * a*b*temp[<span class="number">3</span>] + (<span class="number">1</span> + b*b + <span class="number">2</span> * a*c - <span class="number">2</span> * y*a)*temp[<span class="number">2</span>] + (-<span class="number">2</span> * x + <span class="number">2</span> * b*c - <span class="number">2</span> * b*y)*xx + x*x + c*c + y*y - <span class="number">2</span> * c*y);</div><div class="line">}</div><div class="line"><span class="keyword">double</span> tri(<span class="keyword">const</span> <span class="keyword">double</span> a,<span class="keyword">const</span> <span class="keyword">double</span> b,<span class="keyword">const</span> <span class="keyword">double</span> c,<span class="keyword">const</span> <span class="keyword">double</span> x,<span class="keyword">const</span> <span class="keyword">double</span> y,<span class="keyword">double</span> x1, <span class="keyword">double</span> x2)</div><div class="line">{</div><div class="line">	<span class="keyword">double</span> len = x2 - x1;</div><div class="line">	<span class="keyword">double</span> lm = x1 + len / <span class="number">3</span>;</div><div class="line">	<span class="keyword">double</span> rm = x2 - len / <span class="number">3</span>;</div><div class="line">	<span class="keyword">if</span> (rm - lm &lt; <span class="number">0.001</span>) <span class="keyword">return</span> (rm + lm) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">double</span> dlm = distances(a, b, c, x, y, lm);</div><div class="line">	<span class="keyword">double</span> rlm = distances(a, b, c, x, y, rm);</div><div class="line">	<span class="keyword">if</span> (dlm == rlm) <span class="keyword">return</span> tri(a, b, c, x, y, lm, rm);</div><div class="line">	<span class="keyword">if</span> (dlm &lt; rlm) <span class="keyword">return</span> tri(a, b, c, x, y, x1, rm);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tri(a, b, c, x, y, lm, x2);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> a, b, c, x, y;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; x &gt;&gt; y;</div><div class="line">	<span class="keyword">if</span> (a == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">abs</span>(b*x - y + c) / <span class="built_in">sqrt</span>(b*b + c*c) &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">double</span> x1 = x - <span class="number">10</span>, x2 = x + <span class="number">10</span>;</div><div class="line">		<span class="keyword">double</span> mid = x;</div><div class="line">		<span class="keyword">double</span> distancofmid = distances(a, b, c, x, y, mid);</div><div class="line">		<span class="keyword">while</span> (!(distances(a, b, c, x, y, x1) &gt; distancofmid && distances(a, b, c, x, y, x2) &gt; distancofmid))</div><div class="line">		{</div><div class="line">			x1 -= <span class="number">10</span>;</div><div class="line">			x2 += <span class="number">10</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">double</span> ansOfX = tri(a, b, c, x, y, x1, x2);</div><div class="line">		<span class="keyword">double</span> ansOfY = a*ansOfX*ansOfX + b*ansOfX + c;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; setiosflags(ios::fixed);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt;setprecision(<span class="number">3</span>)&lt;&lt; <span class="built_in">sqrt</span>((ansOfX - x)*(ansOfX - x) + (ansOfY - y)*(ansOfY - y)) &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="题目1142：三分-三分求极值">题目1142：三分.三分求极值</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这一次我们就简单一点了，题目在此：<]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[写在考试之后]]></title>
