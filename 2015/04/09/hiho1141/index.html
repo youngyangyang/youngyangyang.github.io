@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hiho1141.md | Young&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目1141：二分.归并排序之逆序对
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。这一天Nettle在检查自己的舰队列表：我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1141.md">
+<meta property="og:url" content="http://youngyangyang.com/2015/04/09/hiho1141/">
+<meta property="og:site_name" content="Young's blog">
+<meta property="og:description" content="题目1141：二分.归并排序之逆序对
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。这一天Nettle在检查自己的舰队列表：我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150328/14275388536115.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiho1141.md">
+<meta name="twitter:description" content="题目1141：二分.归并排序之逆序对
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。这一天Nettle在检查自己的舰队列表：我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Young&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">哀吾生之须臾，羡长江之无穷</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+	  
+	<!-- 使用swiftype自定义搜索 -->
+	  
+		<div id="search-form-wrap">
+		<form class="search-form">
+			<input type="text" id="st-search-input" class="search-form-input" placeholder="Search" />
+			<input type="submit" value="" class="search-form-submit"> 
+		</form>		
+	</div>
+	  	
+
+    </div>
+  </div>
+  
+<!-- 从Swiftype官网粘贴安装代码到下面，使用overlay的needs a search field类型 -->
+
+
+	<!-- 此处Swiftype搜索代码 -->
+          
+  
+
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hiho1141" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/09/hiho1141/" class="article-date">
+  <time datetime="2015-04-09T06:31:49.000Z" itemprop="datePublished">4月 9 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hiho1141.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1141：二分-归并排序之逆序对">题目1141：二分.归并排序之逆序对</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。<br>这一天Nettle在检查自己的舰队列表：<br><img src="http://media.hihocoder.com/problem_images/20150328/14275388536115.png" title="list.png" style="width:70%;border:1px solid #ccc;padding:5px;margin:10px 0;"><br>我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于B船这样的情况。比如上图中77级的飞龙改二火力就小于55级的夕立改二。<br>现在Nettle将按照等级高低的顺序给出所有船的火力值，请你计算出一共有多少对船满足上面提到的这种情况。<br><strong>输入</strong><br>第1行：1个整数N。N表示舰船数量, 1≤N≤100,000<br>第2行：N个整数，第i个数表示等级第i低的船的火力值a[i]，1≤a[i]≤2^31-1。<br><strong>输出</strong><br>第1行：一个整数，表示有多少对船满足“A船比B船等级高，但是A船火力低于B船”。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10<br>1559614248 709366232 500801802 128741032 1669935692 1993231896 369000208 381379206 962247088 237855491<br><strong>样例输出</strong><br>27</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>本题的思想就是归并排序。什么时候我要写个类实现各种排序，分享一下。<br>归并排序实现一下就行了，然后再统计一下左半边比右半边大的数目，求个和。</p>
+<blockquote>
+<p>tip：输出的大小要是long long型，因为N最大可以取100,000，所以如果全部是逆序的话，那么就有1+2+……+99,999=自己算一下吧，应该是超过int型了。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span>  mergesort(<span class="keyword">long</span> <span class="keyword">long</span>  * a, <span class="keyword">int</span> head, <span class="keyword">int</span> tail)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head &gt;= tail) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> mid = (head + tail) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans = mergesort(a, head, mid) + mergesort(a, mid + <span class="number">1</span>, tail);<span class="comment">//归并是一种递归，所以要先做完小的，再做大的。小的的范围一定要确定好。</span></div><div class="line">	<span class="keyword">int</span> templefthead = head, temprighthead = mid + <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> numberofb=<span class="number">0</span>;<span class="comment">//记录已经排序好了的后面数组中的个数，有点绕头，其实就是提示里面排好序的b数组中的元素个数</span></div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> *b = <span class="keyword">new</span> <span class="keyword">long</span> <span class="keyword">long</span>[tail - head + <span class="number">1</span>];<span class="comment">//归并排序需要另外开辟空间</span></div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> tempans = <span class="number">0</span>;<span class="comment">//统计本次归并总共找到的逆序对数</span></div><div class="line">	<span class="keyword">while</span> (templefthead &lt;= mid && temprighthead &lt;= tail)</div><div class="line">	{</div><div class="line">		<span class="keyword">if</span> (a[templefthead] &lt;= a[temprighthead])</div><div class="line">		{</div><div class="line">			b[index++] = a[templefthead++];</div><div class="line">			tempans += numberofb;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			b[index++] = a[temprighthead++];</div><div class="line">			numberofb++;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">if</span> (templefthead &gt; mid)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (temprighthead &lt;= tail)</div><div class="line">			b[index++] = a[temprighthead++];</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span>{</div><div class="line">		<span class="keyword">while</span> (templefthead &lt;= mid)</div><div class="line">		{</div><div class="line">			b[index++] = a[templefthead++];</div><div class="line">			tempans += numberofb;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	index = <span class="number">0</span>;</div><div class="line">	templefthead = head;</div><div class="line">	<span class="keyword">while</span> (templefthead &lt;= tail)</div><div class="line">		a[templefthead++] = b[index++];</div><div class="line">	<span class="keyword">return</span> (ans + tempans);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> *a = <span class="keyword">new</span> <span class="keyword">long</span> <span class="keyword">long</span>[n];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;mergesort(a, <span class="number">0</span>, n - <span class="number">1</span>)&lt;&lt;endl;</div><div class="line">	<span class="comment">/*for (int i = 0; i &lt; n; i++)</span></div><div class="line">		cout &lt;&lt; a[i] &lt;&lt; endl;*/</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/09/hiho1141/" data-id="meml1z9g645mcc84" data-title="hiho1141.md | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/09/hiho1141/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/08/hiho1142/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1142</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/04/09/hiho1141/" data-title="hiho1141.md" data-url="http://youngyangyang.com/2015/04/09/hiho1141/"></div>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/04/09/hiho1141/">hiho1141.md</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/08/hiho1142/">hiho1142</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/03/afterexam/">写在考试之后</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/31/booklist/">我的书籍</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/30/hiho1000/">hiho1000</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://youngyangyang.github.io/" target="_blank">Youngyangyang</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2484873700&verifier=44959cf7&dpc=1"></iframe>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Young Kun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/Beeder/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+  
+  <!-- 隐藏CNZZ图标 -->
+  <div style="display:none">
+	<!-- 此处粘贴站长统计代码 -->
+  </div> 
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"youngyangyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+  </div>
+</body>
+</html>

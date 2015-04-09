@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-08T07:25:54.905Z</updated>
+  <updated>2015-04-09T06:33:21.155Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1141.md]]></title>
+    <link href="http://youngyangyang.com/2015/04/09/hiho1141/"/>
+    <id>http://youngyangyang.com/2015/04/09/hiho1141/</id>
+    <published>2015-04-09T06:31:49.000Z</published>
+    <updated>2015-04-09T06:33:05.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="题目1141：二分-归并排序之逆序对">题目1141：二分.归并排序之逆序对</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。<br>这一天Nettle在检查自己的舰队列表：<br><img src="http://media.hihocoder.com/problem_images/20150328/14275388536115.png" title="list.png" style="width:70%;border:1px solid #ccc;padding:5px;margin:10px 0;"><br>我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于B船这样的情况。比如上图中77级的飞龙改二火力就小于55级的夕立改二。<br>现在Nettle将按照等级高低的顺序给出所有船的火力值，请你计算出一共有多少对船满足上面提到的这种情况。<br><strong>输入</strong><br>第1行：1个整数N。N表示舰船数量, 1≤N≤100,000<br>第2行：N个整数，第i个数表示等级第i低的船的火力值a[i]，1≤a[i]≤2^31-1。<br><strong>输出</strong><br>第1行：一个整数，表示有多少对船满足“A船比B船等级高，但是A船火力低于B船”。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10<br>1559614248 709366232 500801802 128741032 1669935692 1993231896 369000208 381379206 962247088 237855491<br><strong>样例输出</strong><br>27</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>本题的思想就是归并排序。什么时候我要写个类实现各种排序，分享一下。<br>归并排序实现一下就行了，然后再统计一下左半边比右半边大的数目，求个和。</p>
+<blockquote>
+<p>tip：输出的大小要是long long型，因为N最大可以取100,000，所以如果全部是逆序的话，那么就有1+2+……+99,999=自己算一下吧，应该是超过int型了。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span>  mergesort(<span class="keyword">long</span> <span class="keyword">long</span>  * a, <span class="keyword">int</span> head, <span class="keyword">int</span> tail)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head &gt;= tail) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> mid = (head + tail) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans = mergesort(a, head, mid) + mergesort(a, mid + <span class="number">1</span>, tail);<span class="comment">//归并是一种递归，所以要先做完小的，再做大的。小的的范围一定要确定好。</span></div><div class="line">	<span class="keyword">int</span> templefthead = head, temprighthead = mid + <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> numberofb=<span class="number">0</span>;<span class="comment">//记录已经排序好了的后面数组中的个数，有点绕头，其实就是提示里面排好序的b数组中的元素个数</span></div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> *b = <span class="keyword">new</span> <span class="keyword">long</span> <span class="keyword">long</span>[tail - head + <span class="number">1</span>];<span class="comment">//归并排序需要另外开辟空间</span></div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> tempans = <span class="number">0</span>;<span class="comment">//统计本次归并总共找到的逆序对数</span></div><div class="line">	<span class="keyword">while</span> (templefthead &lt;= mid && temprighthead &lt;= tail)</div><div class="line">	{</div><div class="line">		<span class="keyword">if</span> (a[templefthead] &lt;= a[temprighthead])</div><div class="line">		{</div><div class="line">			b[index++] = a[templefthead++];</div><div class="line">			tempans += numberofb;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			b[index++] = a[temprighthead++];</div><div class="line">			numberofb++;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">if</span> (templefthead &gt; mid)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (temprighthead &lt;= tail)</div><div class="line">			b[index++] = a[temprighthead++];</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span>{</div><div class="line">		<span class="keyword">while</span> (templefthead &lt;= mid)</div><div class="line">		{</div><div class="line">			b[index++] = a[templefthead++];</div><div class="line">			tempans += numberofb;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	index = <span class="number">0</span>;</div><div class="line">	templefthead = head;</div><div class="line">	<span class="keyword">while</span> (templefthead &lt;= tail)</div><div class="line">		a[templefthead++] = b[index++];</div><div class="line">	<span class="keyword">return</span> (ans + tempans);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> *a = <span class="keyword">new</span> <span class="keyword">long</span> <span class="keyword">long</span>[n];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;mergesort(a, <span class="number">0</span>, n - <span class="number">1</span>)&lt;&lt;endl;</div><div class="line">	<span class="comment">/*for (int i = 0; i &lt; n; i++)</span></div><div class="line">		cout &lt;&lt; a[i] &lt;&lt; endl;*/</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="题目1141：二分-归并排序之逆序对">题目1141：二分.归并排序之逆序对</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回、上上回以及上上]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1142]]></title>
