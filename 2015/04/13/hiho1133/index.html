@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hiho1133 | Young&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目1133：二分·二分查找之k小数
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1133">
+<meta property="og:url" content="http://youngyangyang.com/2015/04/13/hiho1133/">
+<meta property="og:site_name" content="Young's blog">
+<meta property="og:description" content="题目1133：二分·二分查找之k小数
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiho1133">
+<meta name="twitter:description" content="题目1133：二分·二分查找之k小数
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Young&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">哀吾生之须臾，羡长江之无穷</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+	  
+	<!-- 使用swiftype自定义搜索 -->
+	  
+		<div id="search-form-wrap">
+		<form class="search-form">
+			<input type="text" id="st-search-input" class="search-form-input" placeholder="Search" />
+			<input type="submit" value="" class="search-form-submit"> 
+		</form>		
+	</div>
+	  	
+
+    </div>
+  </div>
+  
+<!-- 从Swiftype官网粘贴安装代码到下面，使用overlay的needs a search field类型 -->
+
+
+	<!-- 此处Swiftype搜索代码 -->
+          
+  
+
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hiho1133" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/13/hiho1133/" class="article-date">
+  <time datetime="2015-04-13T07:21:41.000Z" itemprop="datePublished">4月 13 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hiho1133
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选择一个k，然后拆掉稀有度第k小的船。 已知每一艘船都有自己的稀有度，Nettle现在把所有船的稀有度值告诉你，希望你能帮他找出目标船。<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10 4<br>1732 4176 2602 6176 1303 6207 3125 1 1011 6600</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>1732</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>这道题应该可以用两种方法来做：</p>
+<blockquote>
+<p>第一种是堆排序，先将前k个数构建成一个最大堆，然后每次读入一个新的数就进行上滤，直到读完，最后将堆顶的数输出，这就是第k小的数了。<br>第二种是二分查找，思想是采用类似于快速排序的方法，将数组分为三段，第一段为小于a的数，第二段为a，第三段为大于d的数，那么如果a是第k小的数，就输出，如果不是就在两侧找。</p>
+</blockquote>
+<p>我在这道题里用了几个trick:</p>
+<blockquote>
+<p>1、添加一个0项，因为要排序的数都大于0，所以可以用0来填补数组[0]的位置，减少逻辑上的问题<br>2、为了避免二分查找退化，我在找标志数的时候，是比较head，mid，tail处三个数的大小，然后将中间一个放在首位，最小的放在mid位，最大的放在tail位。这也可以实现一个防止数组越界的问题。<br>3、如果tail和head相差太小（我设为5），那么做二分的意义也就不大了，我直接做了一个冒泡排序，会更简单一点。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[left];</div><div class="line">	shiparr[left] = shiparr[right];</div><div class="line">	shiparr[right] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsort(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">return</span> shiparr[k];</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail,<span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head + <span class="number">5</span> &gt;= tail)</div><div class="line">		<span class="keyword">return</span> popsort(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid=(head+tail)/<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail])swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);<span class="comment">//好像以前这个题目wa的时候就是因为没写这句话</span></div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (k == j) <span class="keyword">return</span> shiparr[j];</div><div class="line">	<span class="keyword">if</span> (k &lt; j)<span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr=<span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="keyword">if</span> (k &gt; n || k &lt; <span class="number">1</span>) </div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n,k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/13/hiho1133/" data-id="uzud4ncfjipqq7ct" data-title="hiho1133 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/13/hiho1133/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/12/hiho1143/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1143</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/04/13/hiho1133/" data-title="hiho1133" data-url="http://youngyangyang.com/2015/04/13/hiho1133/"></div>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/04/13/hiho1133/">hiho1133</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/12/hiho1143/">hiho1143</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/10/hiho1139/">hiho1139</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/09/hiho1141/">hiho1141.md</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/08/hiho1142/">hiho1142</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://youngyangyang.github.io/" target="_blank">Youngyangyang</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2484873700&verifier=44959cf7&dpc=1"></iframe>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Young Kun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/Beeder/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+  
+  <!-- 隐藏CNZZ图标 -->
+  <div style="display:none">
+	<!-- 此处粘贴站长统计代码 -->
+  </div> 
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"youngyangyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+  </div>
+</body>
+</html>

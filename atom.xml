@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-12T14:59:21.114Z</updated>
+  <updated>2015-04-13T07:23:28.652Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,47 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1133]]></title>
+    <link href="http://youngyangyang.com/2015/04/13/hiho1133/"/>
+    <id>http://youngyangyang.com/2015/04/13/hiho1133/</id>
+    <published>2015-04-13T07:21:41.000Z</published>
+    <updated>2015-04-13T07:23:09.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选择一个k，然后拆掉稀有度第k小的船。 已知每一艘船都有自己的稀有度，Nettle现在把所有船的稀有度值告诉你，希望你能帮他找出目标船。<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10 4<br>1732 4176 2602 6176 1303 6207 3125 1 1011 6600</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>1732</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>这道题应该可以用两种方法来做：</p>
+<blockquote>
+<p>第一种是堆排序，先将前k个数构建成一个最大堆，然后每次读入一个新的数就进行上滤，直到读完，最后将堆顶的数输出，这就是第k小的数了。<br>第二种是二分查找，思想是采用类似于快速排序的方法，将数组分为三段，第一段为小于a的数，第二段为a，第三段为大于d的数，那么如果a是第k小的数，就输出，如果不是就在两侧找。</p>
+</blockquote>
+<p>我在这道题里用了几个trick:</p>
+<blockquote>
+<p>1、添加一个0项，因为要排序的数都大于0，所以可以用0来填补数组[0]的位置，减少逻辑上的问题<br>2、为了避免二分查找退化，我在找标志数的时候，是比较head，mid，tail处三个数的大小，然后将中间一个放在首位，最小的放在mid位，最大的放在tail位。这也可以实现一个防止数组越界的问题。<br>3、如果tail和head相差太小（我设为5），那么做二分的意义也就不大了，我直接做了一个冒泡排序，会更简单一点。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[left];</div><div class="line">	shiparr[left] = shiparr[right];</div><div class="line">	shiparr[right] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsort(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">return</span> shiparr[k];</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail,<span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head + <span class="number">5</span> &gt;= tail)</div><div class="line">		<span class="keyword">return</span> popsort(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid=(head+tail)/<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail])swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);<span class="comment">//好像以前这个题目wa的时候就是因为没写这句话</span></div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (k == j) <span class="keyword">return</span> shiparr[j];</div><div class="line">	<span class="keyword">if</span> (k &lt; j)<span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr=<span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="keyword">if</span> (k &gt; n || k &lt; <span class="number">1</span>) </div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n,k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Net]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1143]]></title>
