@@ -84,6 +84,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1128" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/14/hiho1128/" class="article-date">
+  <time datetime="2015-04-14T04:11:02.000Z" itemprop="datePublished">4月 14 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/14/hiho1128/">hiho1128</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Nettle收集了很多很多的船(这里我们假设Nettle氪了很多金，开了无数个船位)。去除掉重复的船之后，还剩下N(1≤N≤1,000,000)种不同的船。每一艘船有一个稀有值，任意两艘船的稀有值都不相同，稀有值越小的船越稀有，价值也就越高。<br>Nettle现在通过大建又造出了一艘船，他想知道这艘船是不是重复的。如果是重复的，那么这艘船在Nettle所有的船里面稀有值排多少位。<br>问题一<br>Nettle已经先把自己所有船按照稀有值从小到大排列好了(a[1..N])，我们要做的是看看新得到的船(假设稀有值为K)是否在这个序列中，且有对应的a[i]=K时，i为多少？<br>问题二<br>因为Nettle的船太多了，他不愿意去给所有船按照稀有值排序，而是直接告诉了我们每一艘船的稀有值。在这种情况下我们该如何解决这个问题呢？<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，K表示需要查找的数；<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示K在数组中是第t小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10 5180<br>2970 663 5480 4192 4949 1 1387 4428 5180 2761</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>9</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>连续两天一次AC的感觉真是太好了。<br>现在分析问题：</p>
+<blockquote>
+<p>问题一，其实是一个排好序之后的二分查找问题<br>问题二，其实是在一的基础上，用类似于快速排序的思想将数组分成三段，然后找出其中的一段继续进行二分查找</p>
+</blockquote>
+<p>trick和昨天是一样的</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[i];</div><div class="line">	shiparr[i] = shiparr[j];</div><div class="line">	shiparr[j] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">int</span> index = head;</div><div class="line">	<span class="keyword">while</span> (index &lt;= tail && shiparr[index] != k)</div><div class="line">		index++;</div><div class="line">	<span class="keyword">if</span> (index &lt;= tail) <span class="keyword">return</span> index;</div><div class="line">	<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (tail &lt;= head + <span class="number">5</span>) <span class="keyword">return</span> popsearch(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid = (head + tail) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail]) swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);</div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (shiparr[j] == k) <span class="keyword">return</span> j;</div><div class="line">	<span class="keyword">if</span> (shiparr[j] &gt; k) <span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n, k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/14/hiho1128/" data-id="gbkq4veyr3cj14l2" data-title="hiho1128 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/14/hiho1128/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1133" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/13/hiho1133/" class="article-date">
@@ -258,7 +330,7 @@
       
         <h2 id="题目1139：二分-二分答案">题目1139：二分.二分答案</h2>
 <hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problaem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
 <p>特别说明：两个战略点之间可能不止一条航线，两个相邻战略点之间可能不止一条航线。保证至少存在一条路径能在燃料子弹用完前到达boss点。<br><strong>输入</strong><br>第1行：4个整数N,M,K,T。N表示战略点数量，M表示航线数量，K表示最多能经过的航路，T表示boss点编号, 1≤N,K≤10,000, N≤M≤100,000<br>第2..M+1行：3个整数u,v,w，表示战略点u,v之间存在航路，w表示该航路需求的索敌值，1≤w≤1,000,000。<br><strong>输出</strong><br>第1行：一个整数，表示舰队需要的最小索敌值。<br><strong>样例输入</strong></p>
 <blockquote>
 <p>5 6 2 5<br>1 2 3<br>1 3 2<br>1 4 4<br>2 5 2<br>3 5 5<br>4 5 3<br><strong>样例输出</strong><br>3</p>
@@ -316,7 +388,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/09/hiho1141/">hiho1141.md</a>
+      <a class="article-title" href="/2015/04/09/hiho1141/">hiho1141</a>
     </h1>
   
 
@@ -348,78 +420,11 @@
       
 	  
       
-        <a data-url="http://youngyangyang.com/2015/04/09/hiho1141/" data-id="meml1z9g645mcc84" data-title="hiho1141.md | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+        <a data-url="http://youngyangyang.com/2015/04/09/hiho1141/" data-id="meml1z9g645mcc84" data-title="hiho1141 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
       
 		
       
         <a href="http://youngyangyang.com/2015/04/09/hiho1141/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hiho1142" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/08/hiho1142/" class="article-date">
-  <time datetime="2015-04-08T07:20:08.000Z" itemprop="datePublished">4月 8 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/08/hiho1142/">hiho1142</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目1142：三分-三分求极值">题目1142：三分.三分求极值</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这一次我们就简单一点了，题目在此：<br><img src="http://media.hihocoder.com/problem_images/20150404/14281364249436.png" style="width:70%;" title="week40_1.PNG"><br>在直角坐标系中有一条抛物线y=ax^2+bx+c和一个点P(x,y)，求点P到抛物线的最短距离d。<br><strong>输入</strong><br>第1行：5个整数a,b,c,x,y。前三个数构成抛物线的参数，后两个数x,y表示P点坐标。-200≤a,b,c,x,y≤200<br><strong>输出</strong><br>第1行：1个实数d，保留3位小数(四舍五入)<br><strong>样例输入</strong></p>
-<blockquote>
-<p>2 8 2 -2 6<br><strong>样例输出</strong><br>2.437</p>
-</blockquote>
-<h2 id="分析"><strong>分析</strong></h2>
-<p>我刚开始没看提示，考虑做法：假设固定点p为（x1，y1）。在抛物线上有一点q（x0，y0）在任意移动。其中满足<br> $$ y0=ax^2+bx+c<br>则我只要考虑曲线在点（x0，y0）处的切线的方向向量和向量pq的夹角是不是为90°即可。而这应该是一个只有一个0点的函数。<br>但是后来发现有问题，假设a&gt;0，这只满足点p在曲线下方区域的情况，如果点p在曲线上方，就不可以这么做了。<br>当然不是不可以做，只是需要判断，所以我就没这么做下去。而是采用了提示中的方法。<br>pq的距离函数是一个关于x0的凸函数（至于为什么是凸函数，对于一元函数来说，就是二阶导数恒大于等于0）。<br>那么采用三分法就可以解决这个问题了。这个问题的解决有两个trick：</p>
-<blockquote>
-<p>第一是a==0的情况，需要单独考虑，这个时候就是点到直线的距离，直接用公式就可以了<br>第二是不管是三分还是二分法都需要初始的范围，那么我的方法就是找到两个点x1和x2，使得对于其中点mid=（x1+x2）/2.<br>有f(x1)&gt;f(mid)且f(x2)&gt;f(mid)。作为初始的范围。</p>
-</blockquote>
-<h2 id="以下是我的代码"><strong>以下是我的代码</strong></h2>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;math.h&gt;<span class="comment">//g++里sqrt需要include这个头文件</span></span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iomanip&gt;<span class="comment">//格式化输出需要include这个头文件</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">double</span> distances(<span class="keyword">const</span> <span class="keyword">double</span> a, <span class="keyword">const</span> <span class="keyword">double</span> b, <span class="keyword">const</span> <span class="keyword">double</span> c, <span class="keyword">const</span> <span class="keyword">double</span> x, <span class="keyword">const</span> <span class="keyword">double</span> y, <span class="keyword">double</span> xx)</div><div class="line">{</div><div class="line">	<span class="keyword">double</span> temp[<span class="number">5</span>];</div><div class="line">	temp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</div><div class="line">		temp[i] = temp[i - <span class="number">1</span>] * xx;</div><div class="line">	<span class="keyword">return</span> (a*a*temp[<span class="number">4</span>] + <span class="number">2</span> * a*b*temp[<span class="number">3</span>] + (<span class="number">1</span> + b*b + <span class="number">2</span> * a*c - <span class="number">2</span> * y*a)*temp[<span class="number">2</span>] + (-<span class="number">2</span> * x + <span class="number">2</span> * b*c - <span class="number">2</span> * b*y)*xx + x*x + c*c + y*y - <span class="number">2</span> * c*y);</div><div class="line">}</div><div class="line"><span class="keyword">double</span> tri(<span class="keyword">const</span> <span class="keyword">double</span> a,<span class="keyword">const</span> <span class="keyword">double</span> b,<span class="keyword">const</span> <span class="keyword">double</span> c,<span class="keyword">const</span> <span class="keyword">double</span> x,<span class="keyword">const</span> <span class="keyword">double</span> y,<span class="keyword">double</span> x1, <span class="keyword">double</span> x2)</div><div class="line">{</div><div class="line">	<span class="keyword">double</span> len = x2 - x1;</div><div class="line">	<span class="keyword">double</span> lm = x1 + len / <span class="number">3</span>;</div><div class="line">	<span class="keyword">double</span> rm = x2 - len / <span class="number">3</span>;</div><div class="line">	<span class="keyword">if</span> (rm - lm &lt; <span class="number">0.001</span>) <span class="keyword">return</span> (rm + lm) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">double</span> dlm = distances(a, b, c, x, y, lm);</div><div class="line">	<span class="keyword">double</span> rlm = distances(a, b, c, x, y, rm);</div><div class="line">	<span class="keyword">if</span> (dlm == rlm) <span class="keyword">return</span> tri(a, b, c, x, y, lm, rm);</div><div class="line">	<span class="keyword">if</span> (dlm &lt; rlm) <span class="keyword">return</span> tri(a, b, c, x, y, x1, rm);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tri(a, b, c, x, y, lm, x2);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> a, b, c, x, y;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; x &gt;&gt; y;</div><div class="line">	<span class="keyword">if</span> (a == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">abs</span>(b*x - y + c) / <span class="built_in">sqrt</span>(b*b + c*c) &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">double</span> x1 = x - <span class="number">10</span>, x2 = x + <span class="number">10</span>;</div><div class="line">		<span class="keyword">double</span> mid = x;</div><div class="line">		<span class="keyword">double</span> distancofmid = distances(a, b, c, x, y, mid);</div><div class="line">		<span class="keyword">while</span> (!(distances(a, b, c, x, y, x1) &gt; distancofmid && distances(a, b, c, x, y, x2) &gt; distancofmid))</div><div class="line">		{</div><div class="line">			x1 -= <span class="number">10</span>;</div><div class="line">			x2 += <span class="number">10</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">double</span> ansOfX = tri(a, b, c, x, y, x1, x2);</div><div class="line">		<span class="keyword">double</span> ansOfY = a*ansOfX*ansOfX + b*ansOfX + c;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; setiosflags(ios::fixed);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt;setprecision(<span class="number">3</span>)&lt;&lt; <span class="built_in">sqrt</span>((ansOfX - x)*(ansOfX - x) + (ansOfY - y)*(ansOfY - y)) &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/08/hiho1142/" data-id="xgtyks20yyonf4zn" data-title="hiho1142 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/08/hiho1142/#ds-thread" class="article-comment-link">Comments</a>
       
 	  
       
@@ -445,7 +450,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -454,7 +459,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -472,7 +477,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -482,6 +487,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/04/14/hiho1128/">hiho1128</a>
+          </li>
         
           <li>
             <a href="/2015/04/13/hiho1133/">hiho1133</a>
@@ -496,11 +505,7 @@
           </li>
         
           <li>
-            <a href="/2015/04/09/hiho1141/">hiho1141.md</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/08/hiho1142/">hiho1142</a>
+            <a href="/2015/04/09/hiho1141/">hiho1141</a>
           </li>
         
       </ul>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-13T07:23:28.652Z</updated>
+  <updated>2015-04-14T04:16:49.497Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1128]]></title>
+    <link href="http://youngyangyang.com/2015/04/14/hiho1128/"/>
+    <id>http://youngyangyang.com/2015/04/14/hiho1128/</id>
+    <published>2015-04-14T04:11:02.000Z</published>
+    <updated>2015-04-14T04:12:25.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Nettle收集了很多很多的船(这里我们假设Nettle氪了很多金，开了无数个船位)。去除掉重复的船之后，还剩下N(1≤N≤1,000,000)种不同的船。每一艘船有一个稀有值，任意两艘船的稀有值都不相同，稀有值越小的船越稀有，价值也就越高。<br>Nettle现在通过大建又造出了一艘船，他想知道这艘船是不是重复的。如果是重复的，那么这艘船在Nettle所有的船里面稀有值排多少位。<br>问题一<br>Nettle已经先把自己所有船按照稀有值从小到大排列好了(a[1..N])，我们要做的是看看新得到的船(假设稀有值为K)是否在这个序列中，且有对应的a[i]=K时，i为多少？<br>问题二<br>因为Nettle的船太多了，他不愿意去给所有船按照稀有值排序，而是直接告诉了我们每一艘船的稀有值。在这种情况下我们该如何解决这个问题呢？<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，K表示需要查找的数；<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示K在数组中是第t小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10 5180<br>2970 663 5480 4192 4949 1 1387 4428 5180 2761</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>9</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>连续两天一次AC的感觉真是太好了。<br>现在分析问题：</p>
+<blockquote>
+<p>问题一，其实是一个排好序之后的二分查找问题<br>问题二，其实是在一的基础上，用类似于快速排序的思想将数组分成三段，然后找出其中的一段继续进行二分查找</p>
+</blockquote>
+<p>trick和昨天是一样的</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[i];</div><div class="line">	shiparr[i] = shiparr[j];</div><div class="line">	shiparr[j] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">int</span> index = head;</div><div class="line">	<span class="keyword">while</span> (index &lt;= tail && shiparr[index] != k)</div><div class="line">		index++;</div><div class="line">	<span class="keyword">if</span> (index &lt;= tail) <span class="keyword">return</span> index;</div><div class="line">	<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (tail &lt;= head + <span class="number">5</span>) <span class="keyword">return</span> popsearch(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid = (head + tail) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail]) swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);</div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (shiparr[j] == k) <span class="keyword">return</span> j;</div><div class="line">	<span class="keyword">if</span> (shiparr[j] &gt; k) <span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n, k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Ne]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1133]]></title>
@@ -97,10 +135,10 @@
     <link href="http://youngyangyang.com/2015/04/10/hiho1139/"/>
     <id>http://youngyangyang.com/2015/04/10/hiho1139/</id>
     <published>2015-04-10T13:34:33.000Z</published>
-    <updated>2015-04-10T13:37:26.000Z</updated>
+    <updated>2015-04-14T04:16:39.000Z</updated>
     <content type="html"><![CDATA[<h2 id="题目1139：二分-二分答案">题目1139：二分.二分答案</h2>
 <hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problaem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
 <p>特别说明：两个战略点之间可能不止一条航线，两个相邻战略点之间可能不止一条航线。保证至少存在一条路径能在燃料子弹用完前到达boss点。<br><strong>输入</strong><br>第1行：4个整数N,M,K,T。N表示战略点数量，M表示航线数量，K表示最多能经过的航路，T表示boss点编号, 1≤N,K≤10,000, N≤M≤100,000<br>第2..M+1行：3个整数u,v,w，表示战略点u,v之间存在航路，w表示该航路需求的索敌值，1≤w≤1,000,000。<br><strong>输出</strong><br>第1行：一个整数，表示舰队需要的最小索敌值。<br><strong>样例输入</strong></p>
 <blockquote>
 <p>5 6 2 5<br>1 2 3<br>1 3 2<br>1 4 4<br>2 5 2<br>3 5 5<br>4 5 3<br><strong>样例输出</strong><br>3</p>
@@ -127,11 +165,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[hiho1141.md]]></title>
+    <title><![CDATA[hiho1141]]></title>
     <link href="http://youngyangyang.com/2015/04/09/hiho1141/"/>
     <id>http://youngyangyang.com/2015/04/09/hiho1141/</id>
     <published>2015-04-09T06:31:49.000Z</published>
-    <updated>2015-04-09T06:33:05.000Z</updated>
+    <updated>2015-04-14T04:16:39.000Z</updated>
     <content type="html"><![CDATA[<h2 id="题目1141：二分-归并排序之逆序对">题目1141：二分.归并排序之逆序对</h2>
 <hr>
 <p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回、上上回以及上上上回里我们知道Nettle在玩《艦これ》。经过了一番苦战之后，Nettle又获得了的很多很多的船。<br>这一天Nettle在检查自己的舰队列表：<br><img src="http://media.hihocoder.com/problem_images/20150328/14275388536115.png" title="list.png" style="width:70%;border:1px solid #ccc;padding:5px;margin:10px 0;"><br>我们可以看到，船默认排序是以等级为参数。但实际上一个船的火力值和等级的关系并不大，所以会存在A船比B船等级高，但是A船火力却低于B船这样的情况。比如上图中77级的飞龙改二火力就小于55级的夕立改二。<br>现在Nettle将按照等级高低的顺序给出所有船的火力值，请你计算出一共有多少对船满足上面提到的这种情况。<br><strong>输入</strong><br>第1行：1个整数N。N表示舰船数量, 1≤N≤100,000<br>第2行：N个整数，第i个数表示等级第i低的船的火力值a[i]，1≤a[i]≤2^31-1。<br><strong>输出</strong><br>第1行：一个整数，表示有多少对船满足“A船比B船等级高，但是A船火力低于B船”。<br><strong>样例输入</strong></p>

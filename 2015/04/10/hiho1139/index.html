@@ -15,7 +15,7 @@
 <meta property="og:description" content="题目1139：二分.二分答案
 
 时间限制:10000ms单点时限:1000ms内存限制:256MB描述在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)">
-<meta property="og:image" content="http://media.hihocoder.com/problaem_images/20150321/14269264041008.png">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150321/14269264041008.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hiho1139">
 <meta name="twitter:description" content="题目1139：二分.二分答案
@@ -117,7 +117,7 @@
       
         <h2 id="题目1139：二分-二分答案">题目1139：二分.二分答案</h2>
 <hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problaem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
 <p>特别说明：两个战略点之间可能不止一条航线，两个相邻战略点之间可能不止一条航线。保证至少存在一条路径能在燃料子弹用完前到达boss点。<br><strong>输入</strong><br>第1行：4个整数N,M,K,T。N表示战略点数量，M表示航线数量，K表示最多能经过的航路，T表示boss点编号, 1≤N,K≤10,000, N≤M≤100,000<br>第2..M+1行：3个整数u,v,w，表示战略点u,v之间存在航路，w表示该航路需求的索敌值，1≤w≤1,000,000。<br><strong>输出</strong><br>第1行：一个整数，表示舰队需要的最小索敌值。<br><strong>样例输入</strong></p>
 <blockquote>
 <p>5 6 2 5<br>1 2 3<br>1 3 2<br>1 4 4<br>2 5 2<br>3 5 5<br>4 5 3<br><strong>样例输出</strong><br>3</p>
@@ -168,7 +168,7 @@
   
     <a href="/2015/04/09/hiho1141/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">hiho1141.md</div>
+      <div class="article-nav-title">hiho1141</div>
     </a>
   
 </nav>
@@ -188,7 +188,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -197,7 +197,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -215,7 +215,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -225,6 +225,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/04/14/hiho1128/">hiho1128</a>
+          </li>
         
           <li>
             <a href="/2015/04/13/hiho1133/">hiho1133</a>
@@ -239,11 +243,7 @@
           </li>
         
           <li>
-            <a href="/2015/04/09/hiho1141/">hiho1141.md</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/08/hiho1142/">hiho1142</a>
+            <a href="/2015/04/09/hiho1141/">hiho1141</a>
           </li>
         
       </ul>
