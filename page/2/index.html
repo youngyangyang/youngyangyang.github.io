@@ -84,6 +84,220 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1133" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/13/hiho1133/" class="article-date">
+  <time datetime="2015-04-13T07:21:41.000Z" itemprop="datePublished">4月 13 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/13/hiho1133/">hiho1133</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选择一个k，然后拆掉稀有度第k小的船。 已知每一艘船都有自己的稀有度，Nettle现在把所有船的稀有度值告诉你，希望你能帮他找出目标船。<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>10 4<br>1732 4176 2602 6176 1303 6207 3125 1 1011 6600</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>1732</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>这道题应该可以用两种方法来做：</p>
+<blockquote>
+<p>第一种是堆排序，先将前k个数构建成一个最大堆，然后每次读入一个新的数就进行上滤，直到读完，最后将堆顶的数输出，这就是第k小的数了。<br>第二种是二分查找，思想是采用类似于快速排序的方法，将数组分为三段，第一段为小于a的数，第二段为a，第三段为大于d的数，那么如果a是第k小的数，就输出，如果不是就在两侧找。</p>
+</blockquote>
+<p>我在这道题里用了几个trick:</p>
+<blockquote>
+<p>1、添加一个0项，因为要排序的数都大于0，所以可以用0来填补数组[0]的位置，减少逻辑上的问题<br>2、为了避免二分查找退化，我在找标志数的时候，是比较head，mid，tail处三个数的大小，然后将中间一个放在首位，最小的放在mid位，最大的放在tail位。这也可以实现一个防止数组越界的问题。<br>3、如果tail和head相差太小（我设为5），那么做二分的意义也就不大了，我直接做了一个冒泡排序，会更简单一点。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[left];</div><div class="line">	shiparr[left] = shiparr[right];</div><div class="line">	shiparr[right] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsort(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">return</span> shiparr[k];</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail,<span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head + <span class="number">5</span> &gt;= tail)</div><div class="line">		<span class="keyword">return</span> popsort(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid=(head+tail)/<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail])swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);<span class="comment">//好像以前这个题目wa的时候就是因为没写这句话</span></div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (k == j) <span class="keyword">return</span> shiparr[j];</div><div class="line">	<span class="keyword">if</span> (k &lt; j)<span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr=<span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="keyword">if</span> (k &gt; n || k &lt; <span class="number">1</span>) </div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n,k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/13/hiho1133/" data-id="uzud4ncfjipqq7ct" data-title="hiho1133 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/13/hiho1133/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hiho1143" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/12/hiho1143/" class="article-date">
+  <time datetime="2015-04-12T14:56:27.000Z" itemprop="datePublished">4月 12 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/12/hiho1143/">hiho1143</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1143：骨牌覆盖问题·一">题目1143：骨牌覆盖问题·一</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>骨牌，一种古老的玩具。今天我们要研究的是骨牌的覆盖问题：<br>我们有一个2xN的长条形棋盘，然后用1x2的骨牌去覆盖整个棋盘。对于这个棋盘，一共有多少种不同的覆盖方法呢？<br> 举个例子，对于长度为1到3的棋盘，我们有下面几种覆盖方式：<br> <img src="http://media.hihocoder.com/problem_images/20150411/1428731713269.png" style="width:50%;" title="week41_1.PNG"><br><strong>输入</strong><br>第1行：1个整数N。表示棋盘长度。1≤N≤100,000,000<br><strong>输出</strong><br>第1行：1个整数，表示覆盖方案数 MOD 19999997<br><strong>样例输入</strong></p>
+<blockquote>
+<p>62247088</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>17748018</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>画图可以知道这就是一个斐波那契数列，递推公式一致f(n)=f(n-1)+f(n-2)。<br>提示里面有关矩阵相乘的化简方法非常棒：将n转换成2进制，然后再求响应的乘积就行了，这和我们算标量的幂的化简方法是一样的。<br>因为要mod19999997，所以最大可能为19999996，而19999996^2超过int型了，所以要用long或者long long型。</p>
+<blockquote>
+<p>可以考虑特征向量和特征根的方法来求，我觉得也很简单，毕竟特征根和特征向量存在的意义之一就是求解矩阵的n次幂和某个向量成乘积。就是最后的结果应该是取最近的整数，毕竟是某个无理数的幂。</p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">void</span> oct2bi(<span class="keyword">int</span> n, <span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> &bivec)</div><div class="line">{</div><div class="line">	<span class="keyword">while</span> (n != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		bivec.push_back(n % <span class="number">2</span>);</div><div class="line">		n /= <span class="number">2</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="comment">//n = 62247088;</span></div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> bivec;</div><div class="line">	oct2bi(n, bivec);</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> mi[<span class="number">100</span>][<span class="number">4</span>];</div><div class="line">	mi[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; mi[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">	mi[<span class="number">0</span>][<span class="number">2</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">3</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++)</div><div class="line">	{</div><div class="line">		mi[i][<span class="number">0</span>] = (mi[i - <span class="number">1</span>][<span class="number">0</span>] * mi[i - <span class="number">1</span>][<span class="number">0</span>] + mi[i - <span class="number">1</span>][<span class="number">1</span>] * mi[i - <span class="number">1</span>][<span class="number">2</span>]) % <span class="number">19999997</span>;</div><div class="line">		mi[i][<span class="number">1</span>] = ((mi[i - <span class="number">1</span>][<span class="number">0</span>] + mi[i - <span class="number">1</span>][<span class="number">3</span>])*mi[i - <span class="number">1</span>][<span class="number">1</span>]) % <span class="number">19999997</span>;</div><div class="line">		mi[i][<span class="number">2</span>] = ((mi[i - <span class="number">1</span>][<span class="number">0</span>] + mi[i - <span class="number">1</span>][<span class="number">3</span>])*mi[i - <span class="number">1</span>][<span class="number">2</span>]) % <span class="number">19999997</span>;</div><div class="line">		mi[i][<span class="number">3</span>] = (mi[i - <span class="number">1</span>][<span class="number">1</span>] * mi[i - <span class="number">1</span>][<span class="number">2</span>] + mi[i - <span class="number">1</span>][<span class="number">3</span>] * mi[i - <span class="number">1</span>][<span class="number">3</span>]) % <span class="number">19999997</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans[<span class="number">4</span>];</div><div class="line">	ans[<span class="number">0</span>] = <span class="number">1</span>; ans[<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">	ans[<span class="number">2</span>] = <span class="number">0</span>; ans[<span class="number">3</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = bivec.size()-<span class="number">1</span>; i &gt;=<span class="number">0</span>;i--)</div><div class="line">		<span class="keyword">if</span> (bivec[i] == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">long</span> <span class="keyword">long</span> temp[<span class="number">4</span>];</div><div class="line">			temp[<span class="number">0</span>] = (ans[<span class="number">0</span>] * mi[i][<span class="number">0</span>] + ans[<span class="number">1</span>] * mi[i][<span class="number">2</span>]) % <span class="number">19999997</span>;</div><div class="line">			temp[<span class="number">1</span>] = (ans[<span class="number">0</span>] * mi[i][<span class="number">1</span>] + ans[<span class="number">1</span>] * mi[i][<span class="number">3</span>]) % <span class="number">19999997</span>;</div><div class="line">			temp[<span class="number">2</span>] = (ans[<span class="number">2</span>] * mi[i][<span class="number">0</span>] + ans[<span class="number">3</span>] * mi[i][<span class="number">2</span>]) % <span class="number">19999997</span>;</div><div class="line">			temp[<span class="number">3</span>] = (ans[<span class="number">2</span>] * mi[i][<span class="number">1</span>] + ans[<span class="number">3</span>] * mi[i][<span class="number">3</span>]) % <span class="number">19999997</span>;;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)</div><div class="line">				ans[j] = temp[j];</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans[<span class="number">3</span>] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/12/hiho1143/" data-id="jxxrk0d6xz9houxv" data-title="hiho1143 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/12/hiho1143/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hiho1139" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/10/hiho1139/" class="article-date">
+  <time datetime="2015-04-10T13:34:33.000Z" itemprop="datePublished">4月 10 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/10/hiho1139/">hiho1139</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目1139：二分-二分答案">题目1139：二分.二分答案</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回和上上回里我们知道Nettle在玩《艦これ》，Nettle在整理好舰队之后终于准备出海捞船和敌军交战了。<br>在这个游戏里面，海域是N个战略点(编号1..N)组成，如下图所示<br><img src="http://media.hihocoder.com/problem_images/20150321/14269264041008.png" style="width:100%;" title="map.png"><br>其中红色的点表示有敌人驻扎，猫头像的的点表示该地图敌军主力舰队(boss)的驻扎点，虚线表示各个战略点之间的航线(无向边)。<br>在游戏中要从一个战略点到相邻战略点需要满足一定的条件，即需要舰队的索敌值大于等于这两点之间航线的索敌值需求。<br>由于提高索敌值需要将攻击机、轰炸机换成侦察机，舰队索敌值越高，也就意味着舰队的战力越低。<br>另外在每一个战略点会发生一次战斗，需要消耗1/K的燃料和子弹。必须在燃料和子弹未用完的情况下进入boss点才能与boss进行战斗，所以舰队最多只能走过K条航路。<br>现在Nettle想要以最高的战力来进攻boss点，所以他希望能够找出一条从起始点(编号为1的点)到boss点的航路，使得舰队需要达到的索敌值最低，并且有剩余的燃料和子弹。</p>
+<p>特别说明：两个战略点之间可能不止一条航线，两个相邻战略点之间可能不止一条航线。保证至少存在一条路径能在燃料子弹用完前到达boss点。<br><strong>输入</strong><br>第1行：4个整数N,M,K,T。N表示战略点数量，M表示航线数量，K表示最多能经过的航路，T表示boss点编号, 1≤N,K≤10,000, N≤M≤100,000<br>第2..M+1行：3个整数u,v,w，表示战略点u,v之间存在航路，w表示该航路需求的索敌值，1≤w≤1,000,000。<br><strong>输出</strong><br>第1行：一个整数，表示舰队需要的最小索敌值。<br><strong>样例输入</strong></p>
+<blockquote>
+<p>5 6 2 5<br>1 2 3<br>1 3 2<br>1 4 4<br>2 5 2<br>3 5 5<br>4 5 3<br><strong>样例输出</strong><br>3</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>本题的提示还是比较奇葩的= =因为我觉得如果这么做，不就是做若干次搜索么，不如完整做一次搜索岂不是更好？<br>所以就考虑了直接上搜索了，而如果用深搜的话，因为k最大可以取10000，我担心栈会溢出，所以还是采用了宽搜的方法。<br>但还是调了一天，出错原因找到了，在我的代码里也标注出来了。<br>出错情况在于，如果有若干个点可以到达同一个点，且宽搜里面排在后面到达的值比较小的话，如果不加这句话会出错。<br>出错原因。。。我还要想想，妈蛋怎么想都不用加的啊。<br>最后有两个tip：</p>
+<blockquote>
+<p>以后宽搜不用自己写队列了，用stl给的queue就行了<br>以前存储邻接矩阵用的是vector<vector<int>&gt;，今天发现用map更简单</vector<int></p>
+</blockquote>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">include &lt;iostream&gt;</div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> mymap[<span class="number">10001</span>];</div><div class="line"><span class="keyword">struct</span> node{</div><div class="line">	<span class="keyword">int</span> a,cost,k;<span class="comment">//a表示现在在哪个点，k表示宽搜到了第几层</span></div><div class="line">	node(<span class="keyword">int</span> _a,<span class="keyword">int</span> _cost, <span class="keyword">int</span> _k) :a(_a),cost(_cost), k(_k){}</div><div class="line">};</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m, k, t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; t;</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> maxweight = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>,u,v,w; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</div><div class="line">		<span class="keyword">if</span> (w&gt;maxweight) maxweight = w;</div><div class="line">		<span class="keyword">if</span> (mymap[u][v] == <span class="number">0</span> || mymap[u][v]&gt;w)</div><div class="line">			mymap[u][v] = w;</div><div class="line">		mymap[v][u] = mymap[u][v];</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> *pointweight = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	pointweight[<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)<span class="comment">//因为权值最大也不会超过maxweight，所以我将到达每个点所需要的权值设为max</span></div><div class="line">		pointweight[i] = maxweight;</div><div class="line">	<span class="stl_container"><span class="built_in">queue</span>&lt;node&gt;</span> myque;</div><div class="line">	myque.push(node(<span class="number">1</span>, <span class="number">0</span>,<span class="number">0</span>));</div><div class="line">	<span class="keyword">while</span> (!myque.empty())</div><div class="line">	{</div><div class="line">		node cur = myque.front();</div><div class="line">		myque.pop();</div><div class="line">		<span class="keyword">if</span> (pointweight[cur.a] &lt; cur.cost)<span class="comment">//原来没有加这句话，出错</span></div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		<span class="keyword">if</span> (cur.k == k)<span class="comment">//如果已经走满k条边，那么结束</span></div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator it = mymap[cur.a].begin(); it != mymap[cur.a].end(); it++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> nowmax = (pointweight[cur.a] &gt; it-&gt;second ? pointweight[cur.a] : it-&gt;second);<span class="comment">//找从a到it-&gt;first点所需要的权值，为到点a和点a到it-&gt;first点路程中最大的那个</span></div><div class="line">			<span class="keyword">if</span> (pointweight[it-&gt;first] &gt; nowmax)<span class="comment">//如果到it-&gt;first能比现在的小，那么就更新</span></div><div class="line">			{</div><div class="line">				pointweight[it-&gt;first] = nowmax;</div><div class="line">				myque.push(node(it-&gt;first,nowmax, cur.k + <span class="number">1</span>));</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; pointweight[t] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/10/hiho1139/" data-id="ecq1p4auewkg5hs2" data-title="hiho1139 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/10/hiho1139/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1141" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/09/hiho1141/" class="article-date">
@@ -218,201 +432,6 @@
 
 
   
-    <article id="post-afterexam" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/03/afterexam/" class="article-date">
-  <time datetime="2015-04-03T14:11:37.000Z" itemprop="datePublished">4月 3 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活点滴/">生活点滴</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/03/afterexam/">写在考试之后</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>刚刚考完了微软实习生的在线笔试，昨天做了阿里的在线笔试，最近又在做阿里的大数据竞赛。感觉真的忙不过来，不过从这段时间的经历来看，自己有很多事要做。</p>
-<blockquote>
-<p>-巩固计算机语言：从几次笔试的过程来看，自己虽然说是略懂某种程序语言，但实在不是精通。而且除了微软之外，其他的公司都同时考几种语言，看来过去那种一种语言打天下的日子已经一去不复返了。<br>-刷题。今天的微软在线笔试就是很好的例子，从读题到写出程序只要二十分钟，但调试到AC却要一个小时，这说明题量不够，还需要刷题。<br>-还有自己一直要学的机器学习方面的知识还要巩固。一本书都没读完，的确进度太慢。要抓紧。</p>
-</blockquote>
-<p>三月结束了实习，总算给自己一个自由身。自己也要抓紧机会弥补。四月时间并不长，要有紧迫感。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/03/afterexam/" data-id="dkd5hwploji4wya2" data-title="写在考试之后 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/03/afterexam/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-booklist" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/03/31/booklist/" class="article-date">
-  <time datetime="2015-03-31T12:01:20.000Z" itemprop="datePublished">3月 31 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/booklist/">booklist</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/31/booklist/">我的书籍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近在读：</p>
-<p>《统计学习方法》 李航</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>读过：</p>
-<p>《C++ Primer》Stanley B.Lippman    Josee Lajoie     Barbara E.Moo</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/03/31/booklist/" data-id="y2letcaz3ggujnsf" data-title="我的书籍 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/03/31/booklist/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/books/">books</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hiho1000" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/01/30/hiho1000/" class="article-date">
-  <time datetime="2015-01-30T06:10:20.000Z" itemprop="datePublished">1月 30 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/30/hiho1000/">hiho1000</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题目名称：A+B</p>
-<p>时间限制:1000ms<br>单点时限:1000ms<br>内存限制:256MB</p>
-<p>描述</p>
-<p>求两个整数A+B的和</p>
-<p>输入</p>
-<p>输入包含多组数据。<br>每组数据包含两个整数A(1 ≤ A ≤ 100)和B(1 ≤ A ≤ 100)。</p>
-<p>输出</p>
-<p>对于每组数据输出A+B的和。</p>
-<p>样例输入</p>
-<blockquote>
-<p>1 2<br>3 4</p>
-</blockquote>
-<p>样例输出</p>
-<blockquote>
-<p>3<br>7</p>
-</blockquote>
-<p>我的分析</p>
-<blockquote>
-<p>这道题很简单啦，就是给大家学会怎么使用这个OnlineJudge平台的练手题目而已。基本的C++语法没有问题就OK啦。</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">    <span class="keyword">int</span> a,b;</div><div class="line">    <span class="keyword">while</span> ((<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b)){</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;(a+b)&lt;&lt;endl;</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/01/30/hiho1000/" data-id="hxt9ig6t1f8idpm3" data-title="hiho1000 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/01/30/hiho1000/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -426,7 +445,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -435,7 +454,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -444,7 +463,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/tag1/" style="font-size: 10.00px;">tag1</a><a href="/tags/tag2/" style="font-size: 10.00px;">tag2</a><a href="/tags/tag3/" style="font-size: 10.00px;">tag3</a><a href="/tags/数据挖掘/" style="font-size: 13.33px;">数据挖掘</a><a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/翻译/" style="font-size: 13.33px;">翻译</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
     </div>
   </div>
 
@@ -453,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -465,23 +484,23 @@
       <ul>
         
           <li>
+            <a href="/2015/04/21/learning-from-the-best/">learning from the best</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/21/hihoartpro2/">微软编程之美挑战赛2015资格赛第二题</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/21/hihoartpro1/">编程之美挑战赛2015资格赛第一题</a>
+          </li>
+        
+          <li>
             <a href="/2015/04/15/hiho1121/">hiho1121</a>
           </li>
         
           <li>
             <a href="/2015/04/14/hiho1128/">hiho1128</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/13/hiho1133/">hiho1133</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/12/hiho1143/">hiho1143</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/10/hiho1139/">hiho1139</a>
           </li>
         
       </ul>
