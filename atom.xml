@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-23T15:10:18.113Z</updated>
+  <updated>2015-04-24T07:12:24.114Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,55 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1014]]></title>
+    <link href="http://youngyangyang.com/2015/04/24/hiho1014/"/>
+    <id>http://youngyangyang.com/2015/04/24/hiho1014/</id>
+    <published>2015-04-24T07:10:53.000Z</published>
+    <updated>2015-04-24T07:12:16.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1014_:_Trie树">1014 : Trie树</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。</p>
+<p>这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能<strong>对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？</strong>”</p>
+<p>身经百战的小Ho答道：“怎么会不能呢！<strong>你每给我一个字符串，我就依次遍历词典里的所有单词，检查你给我的字符串是不是这个单词的前缀不就是了？</strong>”</p>
+<p>小Hi笑道：“你啊，还是太年轻了！~假设这本词典里有10万个单词，我询问你一万次，你得要算到哪年哪月去？”</p>
+<p>小Ho低头算了一算，看着那一堆堆的0，顿时感觉自己这辈子都要花在上面了…</p>
+<p>小Hi看着小Ho的囧样，也是继续笑道：“让我来提高一下你的知识水平吧~你知道树这样一种数据结构么？”</p>
+<p>小Ho想了想，说道：“知道~它是一种基础的数据结构，就像<a href="http://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="external">这里</a>)说的一样！”</p>
+<p>小Hi满意的点了点头，说道：“那你知道我怎么样用一棵树来表示整个词典么？”</p>
+<p>小Ho摇摇头表示自己不清楚。<br>“你看，我们现在得到了这样一棵树，那么你看，如果我给你一个字符串ap，你要怎么找到所有以ap开头的单词呢？”小Hi又开始考校小Ho。</p>
+<p>“唔…一个个遍历所有的单词？”小Ho还是不忘自己最开始提出来的算法。</p>
+<p>“笨！这棵树难道就白构建了！”小Hi教训完小Ho，继续道：“看好了！”<br>“那么现在！赶紧去用代码实现吧！”小Hi如是说道<br><strong>输入</strong><br>输入的第一行为一个正整数n，表示词典的大小，其后n行，每一行一个单词（不保证是英文单词，也有可能是火星文单词哦），单词由不超过10个的小写英文字母组成，可能存在相同的单词，此时应将其视作不同的单词。接下来的一行为一个正整数m，表示小Hi询问的次数，其后m行，每一行一个字符串，该字符串由不超过10个的小写英文字母组成，表示小Hi的一个询问。</p>
+<p>在20%的数据中n, m&lt;=10，词典的字母表大小&lt;=2.</p>
+<p>在60%的数据中n, m&lt;=1000，词典的字母表大小&lt;=5.</p>
+<p>在100%的数据中n, m&lt;=100000，词典的字母表大小&lt;=26.</p>
+<p><strong>输出</strong><br>对于小Hi的每一个询问，输出一个整数Ans,表示词典中以小Hi给出的字符串为前缀的单词的个数。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>5<br>babaab<br>babbbaaaa<br>abba<br>aaaaabaa<br>babaababb<br>5<br>babb<br>baabaaa<br>bab<br>bb<br>bbabbaab</p>
+</blockquote>
+<p>**样例输</p>
+<blockquote>
+<p>1<br>0<br>3<br>0<br>0</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>Trie树是遇到的一个比较有意思的数据结构，很好的运用了树的性质，就好像我们查字典一样，将单词都索引起来，这样就可以避免逐个去比对单词。<br>在构建这个树的时候我考虑用了map来存储子节点的指针，因为可以用26个字母来映射。所以可以避免用vector或者数组存储存在的不方便的问题。<br>对于map的对象如dict，dict.count(a)则可以查看a是否存在于dict对象里，这是我从刘汝佳大神的《算法竞赛入门经典（第二版）》P114页看到的。<br>就避免了之前使用dict.find（a）==dict.end()这么复杂的语句了。</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//提一句，最后numofchild这个东西我并没用到= =但是写在这，表示每个节点会有多少个儿子</span></div><div class="line"><span class="keyword">struct</span> Node{</div><div class="line">	<span class="keyword">char</span> letter;</div><div class="line">	<span class="keyword">int</span> count;</div><div class="line">	<span class="comment">//Node * next;</span></div><div class="line">	<span class="keyword">int</span> numOfchild;</div><div class="line">	<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span> next;</div><div class="line">};</div><div class="line"><span class="keyword">void</span> inithead(Node *head)</div><div class="line">{</div><div class="line">	head-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">	head-&gt;count = <span class="number">0</span>;</div><div class="line">	head-&gt;letter = <span class="string">' '</span>;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> destructTree(Node *p)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span>::iterator iter = p-&gt;next.begin(); iter != p-&gt;next.end(); iter++)</div><div class="line">		destructTree(iter-&gt;second);</div><div class="line">	<span class="keyword">delete</span> p;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	Node * head = <span class="keyword">new</span> Node;</div><div class="line">	inithead(head);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">while</span> (s.length()&gt;<span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (!start-&gt;next.count(cur))</div><div class="line">			{<span class="comment">//不存在cur</span></div><div class="line">				Node * next = <span class="keyword">new</span> Node;</div><div class="line">				next-&gt;letter = cur;</div><div class="line">				next-&gt;count = <span class="number">1</span>;</div><div class="line">				next-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">				start-&gt;next[cur] = next;</div><div class="line">				start-&gt;numOfchild++;</div><div class="line">				start = next;</div><div class="line">				</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{<span class="comment">//存在cur</span></div><div class="line">				Node *next = start-&gt;next[cur];</div><div class="line">				next-&gt;count++;</div><div class="line">				start = next;</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="comment">//cout &lt;&lt; head-&gt;numOfchild &lt;&lt; endl;</span></div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s; </div><div class="line">		<span class="keyword">bool</span> flag = <span class="keyword">true</span>;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (flag && s.size() &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (start-&gt;next.count(cur))</div><div class="line">			{</div><div class="line">				start = start-&gt;next[cur];</div><div class="line">				ans = start-&gt;count;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				flag = <span class="keyword">false</span>;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (flag)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	</div><div class="line">	}</div><div class="line">	<span class="comment">//析构是个好习惯——毛新宇</span></div><div class="line">	destructTree(head);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1014_:_Trie树">1014 : Trie树</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1127]]></title>

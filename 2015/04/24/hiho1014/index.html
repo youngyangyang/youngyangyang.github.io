@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hiho1014 | Young&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1014 : Trie树
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。
+这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？”
+身经百战的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1014">
+<meta property="og:url" content="http://youngyangyang.com/2015/04/24/hiho1014/">
+<meta property="og:site_name" content="Young's blog">
+<meta property="og:description" content="1014 : Trie树
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。
+这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？”
+身经百战的">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiho1014">
+<meta name="twitter:description" content="1014 : Trie树
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。
+这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？”
+身经百战的">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Young&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">哀吾生之须臾，羡长江之无穷</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+	  
+	<!-- 使用swiftype自定义搜索 -->
+	  
+		<div id="search-form-wrap">
+		<form class="search-form">
+			<input type="text" id="st-search-input" class="search-form-input" placeholder="Search" />
+			<input type="submit" value="" class="search-form-submit"> 
+		</form>		
+	</div>
+	  	
+
+    </div>
+  </div>
+  
+<!-- 从Swiftype官网粘贴安装代码到下面，使用overlay的needs a search field类型 -->
+
+
+	<!-- 此处Swiftype搜索代码 -->
+          
+  
+
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hiho1014" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/24/hiho1014/" class="article-date">
+  <time datetime="2015-04-24T07:10:53.000Z" itemprop="datePublished">4月 24 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hiho1014
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1014_:_Trie树">1014 : Trie树</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。</p>
+<p>这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能<strong>对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？</strong>”</p>
+<p>身经百战的小Ho答道：“怎么会不能呢！<strong>你每给我一个字符串，我就依次遍历词典里的所有单词，检查你给我的字符串是不是这个单词的前缀不就是了？</strong>”</p>
+<p>小Hi笑道：“你啊，还是太年轻了！~假设这本词典里有10万个单词，我询问你一万次，你得要算到哪年哪月去？”</p>
+<p>小Ho低头算了一算，看着那一堆堆的0，顿时感觉自己这辈子都要花在上面了…</p>
+<p>小Hi看着小Ho的囧样，也是继续笑道：“让我来提高一下你的知识水平吧~你知道树这样一种数据结构么？”</p>
+<p>小Ho想了想，说道：“知道~它是一种基础的数据结构，就像<a href="http://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="external">这里</a>)说的一样！”</p>
+<p>小Hi满意的点了点头，说道：“那你知道我怎么样用一棵树来表示整个词典么？”</p>
+<p>小Ho摇摇头表示自己不清楚。<br>“你看，我们现在得到了这样一棵树，那么你看，如果我给你一个字符串ap，你要怎么找到所有以ap开头的单词呢？”小Hi又开始考校小Ho。</p>
+<p>“唔…一个个遍历所有的单词？”小Ho还是不忘自己最开始提出来的算法。</p>
+<p>“笨！这棵树难道就白构建了！”小Hi教训完小Ho，继续道：“看好了！”<br>“那么现在！赶紧去用代码实现吧！”小Hi如是说道<br><strong>输入</strong><br>输入的第一行为一个正整数n，表示词典的大小，其后n行，每一行一个单词（不保证是英文单词，也有可能是火星文单词哦），单词由不超过10个的小写英文字母组成，可能存在相同的单词，此时应将其视作不同的单词。接下来的一行为一个正整数m，表示小Hi询问的次数，其后m行，每一行一个字符串，该字符串由不超过10个的小写英文字母组成，表示小Hi的一个询问。</p>
+<p>在20%的数据中n, m&lt;=10，词典的字母表大小&lt;=2.</p>
+<p>在60%的数据中n, m&lt;=1000，词典的字母表大小&lt;=5.</p>
+<p>在100%的数据中n, m&lt;=100000，词典的字母表大小&lt;=26.</p>
+<p><strong>输出</strong><br>对于小Hi的每一个询问，输出一个整数Ans,表示词典中以小Hi给出的字符串为前缀的单词的个数。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>5<br>babaab<br>babbbaaaa<br>abba<br>aaaaabaa<br>babaababb<br>5<br>babb<br>baabaaa<br>bab<br>bb<br>bbabbaab</p>
+</blockquote>
+<p>**样例输</p>
+<blockquote>
+<p>1<br>0<br>3<br>0<br>0</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>Trie树是遇到的一个比较有意思的数据结构，很好的运用了树的性质，就好像我们查字典一样，将单词都索引起来，这样就可以避免逐个去比对单词。<br>在构建这个树的时候我考虑用了map来存储子节点的指针，因为可以用26个字母来映射。所以可以避免用vector或者数组存储存在的不方便的问题。<br>对于map的对象如dict，dict.count(a)则可以查看a是否存在于dict对象里，这是我从刘汝佳大神的《算法竞赛入门经典（第二版）》P114页看到的。<br>就避免了之前使用dict.find（a）==dict.end()这么复杂的语句了。</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//提一句，最后numofchild这个东西我并没用到= =但是写在这，表示每个节点会有多少个儿子</span></div><div class="line"><span class="keyword">struct</span> Node{</div><div class="line">	<span class="keyword">char</span> letter;</div><div class="line">	<span class="keyword">int</span> count;</div><div class="line">	<span class="comment">//Node * next;</span></div><div class="line">	<span class="keyword">int</span> numOfchild;</div><div class="line">	<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span> next;</div><div class="line">};</div><div class="line"><span class="keyword">void</span> inithead(Node *head)</div><div class="line">{</div><div class="line">	head-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">	head-&gt;count = <span class="number">0</span>;</div><div class="line">	head-&gt;letter = <span class="string">' '</span>;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> destructTree(Node *p)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span>::iterator iter = p-&gt;next.begin(); iter != p-&gt;next.end(); iter++)</div><div class="line">		destructTree(iter-&gt;second);</div><div class="line">	<span class="keyword">delete</span> p;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	Node * head = <span class="keyword">new</span> Node;</div><div class="line">	inithead(head);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">while</span> (s.length()&gt;<span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (!start-&gt;next.count(cur))</div><div class="line">			{<span class="comment">//不存在cur</span></div><div class="line">				Node * next = <span class="keyword">new</span> Node;</div><div class="line">				next-&gt;letter = cur;</div><div class="line">				next-&gt;count = <span class="number">1</span>;</div><div class="line">				next-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">				start-&gt;next[cur] = next;</div><div class="line">				start-&gt;numOfchild++;</div><div class="line">				start = next;</div><div class="line">				</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{<span class="comment">//存在cur</span></div><div class="line">				Node *next = start-&gt;next[cur];</div><div class="line">				next-&gt;count++;</div><div class="line">				start = next;</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="comment">//cout &lt;&lt; head-&gt;numOfchild &lt;&lt; endl;</span></div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s; </div><div class="line">		<span class="keyword">bool</span> flag = <span class="keyword">true</span>;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (flag && s.size() &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (start-&gt;next.count(cur))</div><div class="line">			{</div><div class="line">				start = start-&gt;next[cur];</div><div class="line">				ans = start-&gt;count;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				flag = <span class="keyword">false</span>;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (flag)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	</div><div class="line">	}</div><div class="line">	<span class="comment">//析构是个好习惯——毛新宇</span></div><div class="line">	destructTree(head);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/24/hiho1014/" data-id="brs3zi1b3t8bls0q" data-title="hiho1014 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/24/hiho1014/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/23/hiho1127/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1127</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/04/24/hiho1014/" data-title="hiho1014" data-url="http://youngyangyang.com/2015/04/24/hiho1014/"></div>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/tag1/" style="font-size: 10.00px;">tag1</a><a href="/tags/tag2/" style="font-size: 10.00px;">tag2</a><a href="/tags/tag3/" style="font-size: 10.00px;">tag3</a><a href="/tags/数据挖掘/" style="font-size: 13.33px;">数据挖掘</a><a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/翻译/" style="font-size: 13.33px;">翻译</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/04/24/hiho1014/">hiho1014</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/23/hiho1127/">hiho1127</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/22/hiho1122/">hiho1122</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/21/hiho1148/">hiho1148</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/21/learning-from-the-best/">learning from the best</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://youngyangyang.github.io/" target="_blank">Youngyangyang</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2484873700&verifier=44959cf7&dpc=1"></iframe>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Young Kun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/Beeder/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+  
+  <!-- 隐藏CNZZ图标 -->
+  <div style="display:none">
+	<!-- 此处粘贴站长统计代码 -->
+  </div> 
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"youngyangyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+  </div>
+</body>
+</html>
