@@ -3,17 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Young&#39;s blog</title>
+  <title>hiho1156 | Young&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="talk is cheap,show me the code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Young's blog">
-<meta property="og:url" content="http://youngyangyang.com/">
+  <meta name="description" content="1156 : 骨牌覆盖问题·三
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述前两周里，我们讲解了2xN,3xN骨牌覆盖的问题，并且引入了两种不同的递推方法。 这一次我们再加强一次题目，对于给定的K和N，我们需要去求KxN棋盘的覆盖方案数。输入第1行：2个整数N。表示棋盘宽度为k，长度为N。2≤K≤7，1≤N≤100,000,000
+输出第1行：1个整数，表示覆盖方案数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1156">
+<meta property="og:url" content="http://youngyangyang.com/2015/04/27/hiho1156/">
 <meta property="og:site_name" content="Young's blog">
-<meta property="og:description" content="talk is cheap,show me the code">
+<meta property="og:description" content="1156 : 骨牌覆盖问题·三
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述前两周里，我们讲解了2xN,3xN骨牌覆盖的问题，并且引入了两种不同的递推方法。 这一次我们再加强一次题目，对于给定的K和N，我们需要去求KxN棋盘的覆盖方案数。输入第1行：2个整数N。表示棋盘宽度为k，长度为N。2≤K≤7，1≤N≤100,000,000
+输出第1行：1个整数，表示覆盖方案数">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Young's blog">
-<meta name="twitter:description" content="talk is cheap,show me the code">
+<meta name="twitter:title" content="hiho1156">
+<meta name="twitter:description" content="1156 : 骨牌覆盖问题·三
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述前两周里，我们讲解了2xN,3xN骨牌覆盖的问题，并且引入了两种不同的递推方法。 这一次我们再加强一次题目，对于给定的K和N，我们需要去求KxN棋盘的覆盖方案数。输入第1行：2个整数N。表示棋盘宽度为k，长度为N。2≤K≤7，1≤N≤100,000,000
+输出第1行：1个整数，表示覆盖方案数">
 
   
     <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
@@ -82,9 +91,7 @@
 
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hiho1156" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-hiho1156" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/27/hiho1156/" class="article-date">
   <time datetime="2015-04-27T02:34:56.000Z" itemprop="datePublished">4月 27 2015</time>
@@ -101,8 +108,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/27/hiho1156/">hiho1156</a>
+    <h1 class="article-title" itemprop="name">
+      hiho1156
     </h1>
   
 
@@ -153,325 +160,24 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hiho1014" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/24/hiho1014/" class="article-date">
-  <time datetime="2015-04-24T07:10:53.000Z" itemprop="datePublished">4月 24 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/24/hiho1014/">hiho1014</a>
-    </h1>
+    <a href="/2015/04/24/hiho1014/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1014</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1014_:_Trie树">1014 : Trie树</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。</p>
-<p>这一天，他们遇到了一本词典，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能<strong>对于每一个我给出的字符串，都在这个词典里面找到以这个字符串开头的所有单词呢？</strong>”</p>
-<p>身经百战的小Ho答道：“怎么会不能呢！<strong>你每给我一个字符串，我就依次遍历词典里的所有单词，检查你给我的字符串是不是这个单词的前缀不就是了？</strong>”</p>
-<p>小Hi笑道：“你啊，还是太年轻了！~假设这本词典里有10万个单词，我询问你一万次，你得要算到哪年哪月去？”</p>
-<p>小Ho低头算了一算，看着那一堆堆的0，顿时感觉自己这辈子都要花在上面了…</p>
-<p>小Hi看着小Ho的囧样，也是继续笑道：“让我来提高一下你的知识水平吧~你知道树这样一种数据结构么？”</p>
-<p>小Ho想了想，说道：“知道~它是一种基础的数据结构，就像<a href="http://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="external">这里</a>)说的一样！”</p>
-<p>小Hi满意的点了点头，说道：“那你知道我怎么样用一棵树来表示整个词典么？”</p>
-<p>小Ho摇摇头表示自己不清楚。<br>“你看，我们现在得到了这样一棵树，那么你看，如果我给你一个字符串ap，你要怎么找到所有以ap开头的单词呢？”小Hi又开始考校小Ho。</p>
-<p>“唔…一个个遍历所有的单词？”小Ho还是不忘自己最开始提出来的算法。</p>
-<p>“笨！这棵树难道就白构建了！”小Hi教训完小Ho，继续道：“看好了！”<br>“那么现在！赶紧去用代码实现吧！”小Hi如是说道<br><strong>输入</strong><br>输入的第一行为一个正整数n，表示词典的大小，其后n行，每一行一个单词（不保证是英文单词，也有可能是火星文单词哦），单词由不超过10个的小写英文字母组成，可能存在相同的单词，此时应将其视作不同的单词。接下来的一行为一个正整数m，表示小Hi询问的次数，其后m行，每一行一个字符串，该字符串由不超过10个的小写英文字母组成，表示小Hi的一个询问。</p>
-<p>在20%的数据中n, m&lt;=10，词典的字母表大小&lt;=2.</p>
-<p>在60%的数据中n, m&lt;=1000，词典的字母表大小&lt;=5.</p>
-<p>在100%的数据中n, m&lt;=100000，词典的字母表大小&lt;=26.</p>
-<p><strong>输出</strong><br>对于小Hi的每一个询问，输出一个整数Ans,表示词典中以小Hi给出的字符串为前缀的单词的个数。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5<br>babaab<br>babbbaaaa<br>abba<br>aaaaabaa<br>babaababb<br>5<br>babb<br>baabaaa<br>bab<br>bb<br>bbabbaab</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>1<br>0<br>3<br>0<br>0</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>Trie树是遇到的一个比较有意思的数据结构，很好的运用了树的性质，就好像我们查字典一样，将单词都索引起来，这样就可以避免逐个去比对单词。<br>在构建这个树的时候我考虑用了map来存储子节点的指针，因为可以用26个字母来映射。所以可以避免用vector或者数组存储存在的不方便的问题。<br>对于map的对象如dict，dict.count(a)则可以查看a是否存在于dict对象里，这是我从刘汝佳大神的《算法竞赛入门经典（第二版）》P114页看到的。<br>就避免了之前使用dict.find（a）==dict.end()这么复杂的语句了。</p>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//提一句，最后numofchild这个东西我并没用到= =但是写在这，表示每个节点会有多少个儿子</span></div><div class="line"><span class="keyword">struct</span> Node{</div><div class="line">	<span class="keyword">char</span> letter;</div><div class="line">	<span class="keyword">int</span> count;</div><div class="line">	<span class="comment">//Node * next;</span></div><div class="line">	<span class="keyword">int</span> numOfchild;</div><div class="line">	<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span> next;</div><div class="line">};</div><div class="line"><span class="keyword">void</span> inithead(Node *head)</div><div class="line">{</div><div class="line">	head-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">	head-&gt;count = <span class="number">0</span>;</div><div class="line">	head-&gt;letter = <span class="string">' '</span>;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> destructTree(Node *p)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">char</span>, Node *&gt;</span>::iterator iter = p-&gt;next.begin(); iter != p-&gt;next.end(); iter++)</div><div class="line">		destructTree(iter-&gt;second);</div><div class="line">	<span class="keyword">delete</span> p;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	Node * head = <span class="keyword">new</span> Node;</div><div class="line">	inithead(head);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">while</span> (s.length()&gt;<span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (!start-&gt;next.count(cur))</div><div class="line">			{<span class="comment">//不存在cur</span></div><div class="line">				Node * next = <span class="keyword">new</span> Node;</div><div class="line">				next-&gt;letter = cur;</div><div class="line">				next-&gt;count = <span class="number">1</span>;</div><div class="line">				next-&gt;numOfchild = <span class="number">0</span>;</div><div class="line">				start-&gt;next[cur] = next;</div><div class="line">				start-&gt;numOfchild++;</div><div class="line">				start = next;</div><div class="line">				</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{<span class="comment">//存在cur</span></div><div class="line">				Node *next = start-&gt;next[cur];</div><div class="line">				next-&gt;count++;</div><div class="line">				start = next;</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="comment">//cout &lt;&lt; head-&gt;numOfchild &lt;&lt; endl;</span></div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s; </div><div class="line">		<span class="keyword">bool</span> flag = <span class="keyword">true</span>;</div><div class="line">		Node *start = head;</div><div class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (flag && s.size() &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">char</span> cur = s[<span class="number">0</span>];</div><div class="line">			s = s.substr(<span class="number">1</span>, s.size() - <span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span> (start-&gt;next.count(cur))</div><div class="line">			{</div><div class="line">				start = start-&gt;next[cur];</div><div class="line">				ans = start-&gt;count;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				flag = <span class="keyword">false</span>;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (flag)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	</div><div class="line">	}</div><div class="line">	<span class="comment">//析构是个好习惯——毛新宇</span></div><div class="line">	destructTree(head);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/24/hiho1014/" data-id="brs3zi1b3t8bls0q" data-title="hiho1014 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/24/hiho1014/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-    <article id="post-hiho1127" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/23/hiho1127/" class="article-date">
-  <time datetime="2015-04-23T15:08:55.000Z" itemprop="datePublished">4月 23 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/23/hiho1127/">hiho1127</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1127_:_二分图三·二分图最小点覆盖和最大独立集">1127 : 二分图三·二分图最小点覆盖和最大独立集</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上次安排完相亲之后又过了挺长时间，大家好像都差不多见过面了。不过相亲这个事不是说那么容易的，所以Nettle的姑姑打算收集一下之前的情况并再安排一次相亲。所以现在摆在Nettle面前的有2个问题：</p>
-<p>1.姑姑想要了解之前所有相亲的情况。对于任一个一次相亲，只要跟参与相亲的两人交流就可以得到这次相亲的情况。如果一个人参加了多次相亲，那么跟他交流就可以知道这几次相亲的情况。那么问题来了，挖掘技术到底哪家强姑姑最少需要跟多少人进行交流可以了解到所有相亲的情况。</p>
-<blockquote>
-<p>同样的转化为图G=(V,E)，则问题转化为：在图G中选取尽可能少的点，使得图中每一条边至少有一个端点被选中。这个问题在二分图问题中被称为最小点覆盖问题。即用最少的点去覆盖所有的边。结论：<strong>由König定理可知最小点覆盖的点数 = 二分图最大匹配</strong><br>本结论的证明见<a href="http://www.matrix67.com/blog/archives/116" target="_blank" rel="external">二分图最大匹配的König定理及其证明</a></p>
-</blockquote>
-<p>2.因为春节快要结束了，姑姑打算给这些人再安排一次集体相亲。集体相亲也就是所有人在一起相亲，不再安排一对一对的进行相亲。但是姑姑有个条件，要求所有参与相亲的人之前都没有见过。也就是说在之前的每一次相亲中的两人不会被同时邀请来参加这次集体相亲。那么问题又来了，姑姑最多可以让多少人参与这个集体相亲。</p>
-<blockquote>
-<p>依旧转化为图G=(V,E)，则问题转化为：在图G中选取尽可能多的点，使得任意两个点之间没有连边。这个问题在二分图问题中被称为最大独立集问题。结论：<strong>最大独立集的点数 = 总点数 - 二分图最大匹配</strong><br>证明：<br>假设最大独立集的点数为|U|，二分图最大匹配的匹配数为|M|，最大匹配中所有顶点集合为EM<br>先证明 |U|≤|V|-|M|<br>M中任意一条边的两个端点是连接的，所有对于M中的边必有一个端点不在|U|集合中，所以|M|≤|V|-|U|<br>再证明|U|≥|V|-|M|<br>首先我们知道一定有|U|≥|V|-|EM|，即将最大匹配的点删除之后，剩下的点一定都不相连。接下来我们考虑能否将M集合中的一个端点放入U中：假设(x,y)属于M，存在(a,x),(b,y)，且a,b都在U中，则会出现两种情况：<br>•如果(a,b)连接，则有一个更大的匹配存在，矛盾<br>•如果(a,b)不连接，a-&gt;x-&gt;y-&gt;b有一个新的增广路，因此有一个更大的匹配，矛盾<br>故有a,b两点中至多只有1个点属于U，则我们总是可以选取x,y中一个点放入集合U。所以|U|≥|V|-|EM|+|M|=|V|-|M|<br>综上有|U|=|V|-|M|</p>
-</blockquote>
-<p><strong>输入</strong><br>第1行：2个正整数，N,M(N表示点数 2≤N≤1,000，M表示边数1≤M≤5,000)<br>第2..M+1行：每行两个整数u,v，表示一条无向边(u,v)<br><strong>输出</strong><br>第1行：1个整数，表示最大匹配数</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5 4<br>3 2<br>1 3<br>5 4<br>1 5</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>2<br>3</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>原题的分析已经很清楚了。。。我就不多废话了。。</p>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjlist[<span class="number">1001</span>];</div><div class="line"><span class="keyword">int</span> *connected;</div><div class="line"><span class="keyword">void</span> decide(<span class="keyword">int</span> cur, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> & myset, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set2)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (myset.find(iter-&gt;first) != myset.end())</div><div class="line">		{</div><div class="line">			myset.erase(myset.find(iter-&gt;first));</div><div class="line">			set2-&gt;insert(iter-&gt;first);</div><div class="line">			decide(iter-&gt;first, myset, set2, set1);</div><div class="line">		}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> findvacant(<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (connected[iter-&gt;first] == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">return</span> iter-&gt;first;</div><div class="line">		}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> choosematch(<span class="keyword">int</span> cur,<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> &searched)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> next = findvacant(cur);</div><div class="line">	<span class="keyword">if</span> (next != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		connected[cur] = next;</div><div class="line">		connected[next] = cur;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">			<span class="keyword">if</span> (searched.find(iter-&gt;first) == searched.end())</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> mid = iter-&gt;first;</div><div class="line">				<span class="keyword">int</span> next = connected[mid];</div><div class="line">				searched.insert(mid);</div><div class="line">				<span class="keyword">if</span> (choosematch(next, searched))</div><div class="line">				{</div><div class="line">					connected[cur] = iter-&gt;first;</div><div class="line">					connected[iter-&gt;first] = cur;</div><div class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>, *set2=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>;</div><div class="line">	set1-&gt;clear(); set2-&gt;clear();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjlist[u][v] = <span class="number">1</span>;</div><div class="line">		adjlist[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> myset;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		myset.insert(i);</div><div class="line">	<span class="keyword">while</span> (myset.size()&gt;<span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *(myset.begin());</div><div class="line">		myset.erase(myset.begin());</div><div class="line">		set1-&gt;insert(cur);</div><div class="line">		decide(cur, myset, set1, set2);</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> * finalset;</div><div class="line">	<span class="keyword">if</span> (set1-&gt;size() &lt; set2-&gt;size())</div><div class="line">	{</div><div class="line">		finalset = set1;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		finalset = set2;</div><div class="line">	}</div><div class="line">	connected = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		connected[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter = finalset-&gt;begin(); iter != finalset-&gt;end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *iter;</div><div class="line">		<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> searched;</div><div class="line">		searched.clear();</div><div class="line">		choosematch(cur,searched);</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (connected[i] != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			ans++;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; n - (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/23/hiho1127/" data-id="hrxwrbzu7f2gn44n" data-title="hiho1127 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/23/hiho1127/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hiho1122" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/22/hiho1122/" class="article-date">
-  <time datetime="2015-04-22T14:09:22.000Z" itemprop="datePublished">4月 22 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/22/hiho1122/">hiho1122</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1122_:_二分图二•二分图最大匹配之匈牙利算法">1122 : 二分图二•二分图最大匹配之匈牙利算法</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上一回我们已经将所有有问题的相亲情况表剔除了，那么接下来要做的就是安排相亲了。<br>因为过年时间并不是很长，所以姑姑希望能够尽可能在一天安排比较多的相亲。由于一个人同一天只能和一个人相亲，所以要<strong>从当前的相亲情况表里选择尽可能多的组合，且每个人不会出现两次</strong>。<br>不知道有没有什么好办法，对于当前给定的相亲情况表，能够算出最多能同时安排多少组相亲呢？<br>同样的，我们先将给定的情况表转换成图G=(V,E)。在上一回中我们已经知道这个图可以被染成黑白两色。不妨将所有表示女性的节点记为点集A，表示男性的节点记为点集B。<br>则有A∪B=V。由问题可知所有边e的两个端点分别属于AB两个集合。则可以表示成如下的图：<br><img title="hiho34_00.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245073889563.png"><br>同样的，我们将所有的边分为两个集合。集合S和集合M，同样有S∪M=E。边集S表示在这一轮相亲会中将要进行的相亲，边集M表示在不在这一次进行。<br>对于任意边(u,v) ∈ S，我们称u和v为一组匹配，它们之间相互匹配。在图G，我们将边集S用实线表示，边集M用虚线表示。得到下图：<br><img title="hiho34_01.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/1424507533697.png"><br>则原问题转化为，最多能选择多少条边到集合S，使得S集合中任何两条边不相邻(即有共同的顶点)。显然的，|S|&lt;=Min{|A|, |B|}。<br>那么能不能找到一个算法，使得能够很容易计算出尽可能多的边能够放入集合S？我们不妨来看一个例子：<br><img title="hiho34_01.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/1424507533697.png"><br>对于已经匹配的点我们先不考虑，我们从未匹配的点来做。这里我们选择A集合中尚未匹配的点(A3和A4)考虑：<br>对于A3点，我们可以发现A3与B4右边相连，且都未匹配。则直接将(A3,B4)边加入集合S即可。<br><img title="hiho34_02.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076439118.png"><br>对于A4点，我们发现和A4相连的B3，B4点都已经匹配了。但是再观察可以发现，如果我们将A2和B2相连，则可以将B3点空出来。那么就可以同时将(A2,B2)，(A4,B3)相连。<br>将原来的一个匹配变成了两个匹配。<br>让我们来仔细看看这一步：我们将这次变换中相关联的边标记出来，如下图所示紫色的3条边(A2,B2),(A2,B3),(A4,B3)。<br><img title="hiho34_03.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076642615.png"><br>这三条边构成了一条路径，可以发现这条路径有个非常特殊的性质。<br><strong>虚线和实线相互交错，并且起点和终点都是尚未匹配的点，且属于两个不同的集合。我们称这样的路径为交错路径。 </strong><br>再进一步分析，对于任意一条交错路径，虚线的数量一定比实线的数量多1。我们将虚线和实线交换一下，就变成了下面的图：<br><img title="hiho34_04.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076816061.png"><br>在原来1个匹配的基础上，我们得到了2个新的匹配，S集合边的数量也增加了1。并且原来在已经匹配的点仍然是已经匹配的状态。<br>再回头看看A3点匹配时的情况：对于(A3,B4)这一条路径，同样满足了交错路径的性质。至此我们得到了一个找新匹配的有效算法：<br>选取一个未匹配的点，查找是否存在一条以它为起点的交错路径。<br>若存在，将该交错路径的边虚实交换。否则在当前的情况下，该点找不到可以匹配的点。<br>又有对于已经匹配的点，该算法并不会改变一个点的匹配状态。所以当我们对所有未匹配的点都计算过后，仍然没有交错路径，则不可能找到更多的匹配。<br>此时S集合中的边数即为最大边数，我们称为最大匹配数。<br>那么我们再一次梳理整个算法： </p>
-<blockquote>
-<ol>
-<li>依次枚举每一个点i；</li>
-<li>若点i尚未匹配，则以此点为起点查询一次交错路径。<br>最后即可得到最大匹配数。在这个基础上仍然有两个可以优化的地方：<br>1.对于点的枚举：当我们枚举了所有A中的点后，无需再枚举B中的点，就已经得到了最大匹配。<br>2.在查询交错路径的过程中，有可能出现Ai与Bj直接相连，其中Bj为已经匹配的点，且Bj之后找不到交错路径。之后又通过Ai查找到了一条交错路径{Ai,Bx,Ay,…,Az,Bj}延伸到Bj。由于之前已经计算过Bj没有交错路径，若此时再计算一次就有了额外的冗余。所以我们需要枚举每个Ai时记录B集合中的点是否已经查询过，起点不同时需要清空记录。 </li>
-</ol>
-</blockquote>
-<p><strong>输入</strong><br>第1行：2个正整数，N,M(N表示点数 2≤N≤1,000，M表示边数1≤M≤5,000)<br>第2..M+1行：每行两个整数u,v，表示一条无向边(u,v)<br><strong>输出</strong><br>第1行：1个整数，表示最大匹配数</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5 4<br>3 2<br>1 3<br>5 4<br>1 5</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>2</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>原题的分析已经很清楚了。。。我就不多废话了。。</p>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjlist[<span class="number">1001</span>];</div><div class="line"><span class="keyword">int</span> *connected;</div><div class="line"><span class="keyword">void</span> decide(<span class="keyword">int</span> cur, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> & myset, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set2)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (myset.find(iter-&gt;first) != myset.end())</div><div class="line">		{</div><div class="line">			myset.erase(myset.find(iter-&gt;first));</div><div class="line">			set2-&gt;insert(iter-&gt;first);</div><div class="line">			decide(iter-&gt;first, myset, set2, set1);</div><div class="line">		}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> findvacant(<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (connected[iter-&gt;first] == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">return</span> iter-&gt;first;</div><div class="line">		}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> choosematch(<span class="keyword">int</span> cur,<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> &searched)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> next = findvacant(cur);</div><div class="line">	<span class="keyword">if</span> (next != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		connected[cur] = next;</div><div class="line">		connected[next] = cur;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">			<span class="keyword">if</span> (searched.find(iter-&gt;first) == searched.end())</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> mid = iter-&gt;first;</div><div class="line">				<span class="keyword">int</span> next = connected[mid];</div><div class="line">				searched.insert(mid);</div><div class="line">				<span class="keyword">if</span> (choosematch(next, searched))</div><div class="line">				{</div><div class="line">					connected[cur] = iter-&gt;first;</div><div class="line">					connected[iter-&gt;first] = cur;</div><div class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>, *set2=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>;</div><div class="line">	set1-&gt;clear(); set2-&gt;clear();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjlist[u][v] = <span class="number">1</span>;</div><div class="line">		adjlist[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> myset;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		myset.insert(i);</div><div class="line">	<span class="keyword">while</span> (myset.size()&gt;<span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *(myset.begin());</div><div class="line">		myset.erase(myset.begin());</div><div class="line">		set1-&gt;insert(cur);</div><div class="line">		decide(cur, myset, set1, set2);</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> * finalset;</div><div class="line">	<span class="keyword">if</span> (set1-&gt;size() &lt; set2-&gt;size())</div><div class="line">	{</div><div class="line">		finalset = set1;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		finalset = set2;</div><div class="line">	}</div><div class="line">	connected = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		connected[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter = finalset-&gt;begin(); iter != finalset-&gt;end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *iter;</div><div class="line">		<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> searched;</div><div class="line">		searched.clear();</div><div class="line">		choosematch(cur,searched);</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (connected[i] != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			ans++;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/22/hiho1122/" data-id="rdyl5wi88mnarlv1" data-title="hiho1122 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/22/hiho1122/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hiho1148" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/21/hiho1148/" class="article-date">
-  <time datetime="2015-04-21T14:37:09.000Z" itemprop="datePublished">4月 21 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/21/hiho1148/">hiho1148</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="hiho1148：骨牌覆盖问题·二">hiho1148：骨牌覆盖问题·二</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上一周我们研究了2xN的骨牌问题，这一周我们不妨加大一下难度，研究一下3xN的骨牌问题？<br>所以我们的题目是：对于3xN的棋盘，使用1x2的骨牌去覆盖一共有多少种不同的覆盖方法呢？<br>首先我们可以肯定，奇数长度一定是没有办法覆盖的；对于偶数长度，比如2，4，我们有下面几种覆盖方式：<br><img src="http://media.hihocoder.com/problem_images/20150418/1429340404434.png" style="float:none;" title="week42_1.PNG"><br><strong>输入</strong><br>第1行：1个整数N。表示棋盘长度。1≤N≤100,000,000<br><strong>输出</strong><br>第1行：1个整数，表示覆盖方案数 MOD 12357</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>62247088</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>4037</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>个人感觉本题的状态转移矩阵的推导并不十分清晰，我就自己思考了一下，然后解释一下。<br>首先是考虑第i列的状况，说明第i-1列已经填满，且第i+1列还没有任何骨牌覆盖。那么我们可以用0~7这8个数字的二进制来表示第i列被覆盖的骨牌位置。<br>我们依次分析状态转移，</p>
-<blockquote>
-<p>0-&gt;7：这没什么好讲的，横着放三块<br>1-&gt;6: 横着放两块。我一直很好奇，为什么不能1-&gt;0?但仔细想想，如果是1-&gt;0的话，那么就是说在第i列要放竖着的一块骨牌，这样第i+1列才是0。但这个状态不就是7了么？<br>也就是说其实我们这里是1-&gt;6而不是1-&gt;6和0的原因就是不要重复计算状态。</p>
-</blockquote>
-<p>剩下的也一样推理，可以得到转移矩阵。<br>其实按照矩阵的乘法，我们可以先把方阵都乘好，最后再乘以列向量，而因为列向量除了最后一位为1其余都是0，所以最终结果应该是方阵的最右下角的值。</p>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> oct2bi(<span class="keyword">int</span> n, <span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> &bivec)</div><div class="line">{</div><div class="line">	<span class="keyword">while</span> (n != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		bivec.push_back(n % <span class="number">2</span>);</div><div class="line">		n /= <span class="number">2</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> bivec;</div><div class="line">	oct2bi(n, bivec);</div><div class="line">	<span class="keyword">int</span> mi[<span class="number">100</span>][<span class="number">8</span>][<span class="number">8</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">			mi[<span class="number">0</span>][i][j] = <span class="number">0</span>;</div><div class="line">	mi[<span class="number">0</span>][<span class="number">0</span>][<span class="number">7</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">1</span>][<span class="number">6</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">2</span>][<span class="number">5</span>] = <span class="number">1</span>;</div><div class="line">	mi[<span class="number">0</span>][<span class="number">3</span>][<span class="number">4</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">3</span>][<span class="number">7</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">4</span>][<span class="number">3</span>] = <span class="number">1</span>;</div><div class="line">	mi[<span class="number">0</span>][<span class="number">5</span>][<span class="number">2</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">6</span>][<span class="number">1</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">6</span>][<span class="number">7</span>] = <span class="number">1</span>;</div><div class="line">	mi[<span class="number">0</span>][<span class="number">7</span>][<span class="number">0</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">7</span>][<span class="number">3</span>] = <span class="number">1</span>; mi[<span class="number">0</span>][<span class="number">7</span>][<span class="number">6</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)</div><div class="line">				mi[i][j][k] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)</div><div class="line">			{</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; <span class="number">8</span>; t++)</div><div class="line">					mi[i][j][k] =(mi[i][j][k]+mi[i - <span class="number">1</span>][j][t] * mi[i - <span class="number">1</span>][t][k])%<span class="number">12357</span>;</div><div class="line">			}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> temp[<span class="number">8</span>][<span class="number">8</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>;j++)</div><div class="line">			<span class="keyword">if</span> (i == j)</div><div class="line">			{</div><div class="line">				temp[i][j] = <span class="number">1</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span>{</div><div class="line">				temp[i][j] = <span class="number">0</span>;</div><div class="line">			}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = bivec.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</div><div class="line">		<span class="keyword">if</span> (bivec[i] == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> tempans[<span class="number">8</span>][<span class="number">8</span>];</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)</div><div class="line">					tempans[j][k] = <span class="number">0</span>;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)</div><div class="line">				{</div><div class="line">					<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; <span class="number">8</span>; t++)</div><div class="line">						tempans[j][k] =(tempans[j][k]+ temp[j][t] * mi[i][t][k])%<span class="number">12357</span>;</div><div class="line">				}</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; j++)</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">8</span>; k++)</div><div class="line">					temp[j][k] = tempans[j][k];</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; temp[<span class="number">7</span>][<span class="number">7</span>] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/21/hiho1148/" data-id="0r6wj6jrygrykg23" data-title="hiho1148 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/21/hiho1148/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/04/27/hiho1156/" data-title="hiho1156" data-url="http://youngyangyang.com/2015/04/27/hiho1156/"></div>
+  </section>
 </section>
         
           <aside id="sidebar">
