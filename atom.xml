@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-04-29T13:30:19.867Z</updated>
+  <updated>2015-04-30T07:38:14.433Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -15,11 +15,55 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[hiho1032]]></title>
+    <link href="http://youngyangyang.com/2015/04/30/hiho1032/"/>
+    <id>http://youngyangyang.com/2015/04/30/hiho1032/</id>
+    <published>2015-04-30T07:30:12.000Z</published>
+    <updated>2015-04-30T07:38:00.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1032_:_最长回文子串">1032 : 最长回文子串</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。 </p>
+<p>这一天，他们遇到了一连串的字符串，于是小Hi就向小Ho提出了那个经典的问题：“小Ho，你能不能分别在这些字符串中找到它们每一个的最长回文子串呢？” </p>
+<p>小Ho奇怪的问道：“什么叫做最长回文子串呢？”</p>
+<p>小Hi回答道：“一个字符串中连续的一段就是这个字符串的子串，而回文串指的是12421这种从前往后读和从后往前读一模一样的字符串，所以最长回文子串的意思就是这个字符串中最长的身为回文串的子串啦~”</p>
+<p>小Ho道：“原来如此！那么我该怎么得到这些字符串呢？我又应该怎么告诉你我所计算出的最长回文子串呢？</p>
+<p>小Hi笑着说道：“这个很容易啦，你只需要写一个程序，先从标准输入读取一个整数N（N&lt;=30)，代表我给你的字符串的个数，然后接下来的就是我要给你的那N个字符串（字符串长度&lt;=10^6)啦。而你要告诉我你的答案的话，只要将你计算出的最长回文子串的长度按照我给你的顺序依次输出到标准输出就可以了！你看这就是一个例子。”</p>
+<p><strong>输入</strong><br>第一行一个整数N，表示测试数据组数。</p>
+<p>接下来的N行，每一行表示一个测试数据。数据为一个只由大写字母构成的字符串，字符串长度&lt;=10^6。</p>
+<p>其中N&lt;=30</p>
+<p><strong>输出</strong><br>对于每一个测试数据，按照它们在输入中出现的顺序输出一行Ans，表示字符串中最长回文子串的长度。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>3<br>abababa<br>aaaabaa<br>acacdas</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>7<br>5<br>3</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>这个算法很诧异的是我手头的若干本算法书都没有提及，包括大名鼎鼎的《算法导论》、《算法（第四版）》，还有《算法竞赛入门经典》。<br>提示有四个，但是第三个写的不是很明晰，我在网上找到了一个说明<a href="http://blog.163.com/zhaohai_1988/blog/static/2095100852012716105847112/" target="_blank" rel="external">最长回文子串-鼻子很帅的猪</a>。他讲的很明晰，但是有个地方是错的。<br>还是那句话，做过的事情不要再做一遍。做过的事情不要再做一遍。做过的事情不要再做一遍。重要的话说三遍。<br>什么做过的事情呢？假设我们发现[3-100]是回文的，又发现[5-10]也是回文的，那有个直接的结论就是[93-98]必然是回文的。否则就与回文的定义冲突。<br>假设pd[i]表示以i为中心的回文子串从它右边一个开始往右数到子串的最右端的字符的个数。假设id表示当前延伸到最右的回文子串的对称中心的坐标，<br>同时令mx=id+pd[i]，那么mx就是当前能延伸到最右边的回文子串的最右的字符所在的位置。<br>对于任意满足id<i<=mx的i，令j=2*id-i，也就是它关于id的对称字符的位置，因为i是在这个回文子串里的，那么j也肯定在这个回文子串里。 如果i+pd[j]<mx，显而易见，以i为对称中心的回文子串全部在以id为中心的回文子串内部，且pd[i]="pd[j]，否则与回文的定义矛盾。" 如果i+pd[j]="">=mx，那么说明以i为对称中心的回文子串至少可以“蔓延”到mx位置，但是至于mx之后的位置还能不能满足回文，只能一个一个对比了。所以先赋初值pd[i]=mx-i，然后开始搜索。得到pd[i]的终值。<br>如果i&gt;mx怎么办呢？就好像我们对未来一无所知一样，我们只好摸着石头过河，去傻不拉几地试了。</i<=mx的i，令j=2*id-i，也就是它关于id的对称字符的位置，因为i是在这个回文子串里的，那么j也肯定在这个回文子串里。></p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> manacher(<span class="keyword">int</span> *pdlist,<span class="keyword">char</span> *charlist,<span class="keyword">int</span> len)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> id = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> mx = id + pdlist[id];</div><div class="line">	<span class="keyword">int</span> endoftry = <span class="number">2</span> * len + <span class="number">2</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; endoftry; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">if</span> (i &gt; mx)</div><div class="line">		{</div><div class="line">			;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> j = <span class="number">2</span> * id - i;</div><div class="line">			<span class="keyword">if</span> (i + pdlist[j] &gt;= mx)</div><div class="line">			{</div><div class="line">				pdlist[i] = mx - i;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				pdlist[i] = pdlist[j];</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">while</span> ((charlist[i+pdlist[i]+<span class="number">1</span>]!=<span class="string">'$'</span>&&charlist[i-pdlist[i]-<span class="number">1</span>]!=<span class="string">'$'</span>)&&charlist[i + pdlist[i]+<span class="number">1</span>] == charlist[i - pdlist[i]-<span class="number">1</span>])</div><div class="line">			pdlist[i]++;</div><div class="line">		<span class="keyword">if</span> (i + pdlist[i] &gt; mx)</div><div class="line">		{</div><div class="line">			mx = i + pdlist[i];</div><div class="line">			id = i;</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">char</span> * string2charlist(<span class="keyword">const</span> <span class="built_in">string</span> & s)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> len = s.length();</div><div class="line">	<span class="keyword">char</span> * templist = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span> * len + <span class="number">5</span>];</div><div class="line">	templist[<span class="number">0</span>] = <span class="string">'$'</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">	{</div><div class="line">		templist[<span class="number">2</span> * i + <span class="number">1</span>] = <span class="string">'#'</span>;</div><div class="line">		templist[<span class="number">2</span> * i + <span class="number">2</span>] = s[i];</div><div class="line">	}</div><div class="line">	templist[<span class="number">2</span> * len + <span class="number">1</span>] = <span class="string">'#'</span>;</div><div class="line">	templist[<span class="number">2</span> * len + <span class="number">2</span>] = <span class="string">'$'</span>;</div><div class="line">	<span class="keyword">return</span> templist;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> initpdlist(<span class="keyword">int</span> * pdlist,<span class="keyword">int</span> len)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">		pdlist[i] = <span class="number">0</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">while</span> (n &gt; <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> s;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; s;</div><div class="line">		<span class="keyword">char</span> *charlist = string2charlist(s);</div><div class="line">		<span class="keyword">int</span> *pdlist = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span> * s.length() + <span class="number">5</span>];</div><div class="line">		initpdlist(pdlist, <span class="number">2</span> * s.length() + <span class="number">5</span>);</div><div class="line">		manacher(pdlist,charlist,s.length());</div><div class="line">		<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * s.length() + <span class="number">5</span>; i++)</div><div class="line">			<span class="keyword">if</span> (ans &lt; pdlist[i])</div><div class="line">				ans = pdlist[i];</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">		<span class="keyword">delete</span>[] charlist;</div><div class="line">		<span class="keyword">delete</span>[] pdlist;</div><div class="line">		n--;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1032_:_最长回文子串">1032 : 最长回文子串</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[hiho1015]]></title>
     <link href="http://youngyangyang.com/2015/04/29/hiho1015/"/>
     <id>http://youngyangyang.com/2015/04/29/hiho1015/</id>
     <published>2015-04-29T13:28:27.000Z</published>
-    <updated>2015-04-29T13:30:05.000Z</updated>
+    <updated>2015-04-30T07:38:00.000Z</updated>
     <content type="html"><![CDATA[<h2 id="1015_:_KMP算法">1015 : KMP算法</h2>
 <hr>
 <p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho是一对好朋友，出生在信息化社会的他们对编程产生了莫大的兴趣，他们约定好互相帮助，在编程的学习道路上一同前进。</p>
@@ -35,13 +79,18 @@
 <p><strong>输出</strong><br>对于每一个测试数据，按照它们在输入中出现的顺序输出一行Ans，表示模式串在原串中出现的次数。</p>
 <p><strong>样例输入</strong></p>
 <blockquote>
-<p>5<br>HA<br>HAHAHA<br>WQN<br>WQN<br>ADA<br>ADADADA<br>BABABB<br>BABABABABABABABABB<br>DAD<br>ADDAADAADDAAADAAD<br><strong>样例输出</strong><br>3<br>1<br>3<br>1<br>0</p>
+<p>5<br>HA<br>HAHAHA<br>WQN<br>WQN<br>ADA<br>ADADADA<br>BABABB<br>BABABABABABABABABB<br>DAD<br>ADDAADAADDAAADAAD</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>3<br>1<br>3<br>1<br>0</p>
 </blockquote>
 <h2 id="分析">分析</h2>
 <p>kmp算法是一个比较经典的模式匹配算法，参考了hiho的提示= =（跟没提示一样，下标什么的都错的），算法导论的内容，july博客的内容，算法第四版的内容。<br>我终于理解了。。。。。。。<br>其实kmp算法的实质很简单，就是计算模式串P的前k个字符所构成的子串的最长前缀和后缀，使得前缀后缀相等（长度小于k）。<br>什么意思呢？就是比如字符串abcabcabc的的最长的相等的前缀和后缀肯定就是abc，abcab的就是ab。<br>这样可以用数组表示将这个字符串表示出来比如ada就是-1，-1,0（用-1表示没有匹配的，数组下标从0开始）<br>那我们在匹配模式串P和原串S的时候：</p>
 <blockquote>
-<p> 0 1 2 3 4 5 6 7<br>S A D A D A D A D<br>P A D A D C<br>我们发现4这个位置出现了不匹配的情况，那么我们就要把P往后移动或者把S往前移动（这是等价的）。暴力破解的方法就是移动一位。<br>但可不可以移动多位呢？<br>当然可以，假设移动了某个位数，发现可以匹配，且模式串P的首位并没有超过3。那么模式串肯定有一部分和原串在4之前匹配起来了。显而易见这一部分是模式串的“头”，也就是前缀。<br>也就是说P的前四个元素组成的子串的某个后缀和它的某个前缀能够成功匹配。这是整个模式串全部匹配的一个必要而不充分条件。根据宁可错杀三千不能放过一个的原则，我们要从最长的前缀开始比，一直比到最短的前缀。<br>假如没有前缀和后缀匹配怎么办捏？那就说明如果P的首位不越过原本不匹配的那个位置，根本就没有匹配的可能，所以我们直接把模式串移到不匹配的位置的后面继续比就行啦。<br>那怎么计算要移几位呢？算法导论给了一个方法，假设我们可以得到某个数组next。next[p]=q，表示P模式串的前p个字符构成的子串最长的匹配前缀和后缀的长度为q，且q&lt;p。<br>那么我们计算next数组要怎么算呢？枚举？显然不会这么傻，要记住算法导论里面的一句重要的话：不要重复计算。<br>假设我们已经知道了i&lt;k的next数组值，我们计算next[i]。我们会发现如果P[i]==P[next[i-1]+1]的话，那么正好是接在前i-1个字符串的后缀的后面，那么next[i]=next[i-1]+1。<br>如果不等呢？那么就说明这么长的前缀不能匹配，那么我们换个短一点的试试看，就可以再试一下P[next[next[i-1]]+1]==P[i]。我们可以继续这么试下去，直到发现可以匹配的前缀，或者发现根本不能匹配。<br>如果不能匹配那么next[i]=-1。<br>得到next数组怎么用呢？举个栗子，还是上例，ADADC，到4这个位置不匹配了，我们发现next[3]=1，于是我们把P往后移动3-next[3]=2个位置，我们就可以继续从头开始匹配了。</p>
+<p> 0 1 2 3 4 5 6 7<br>S A D A D A D A D<br>P A D A D C</p>
 </blockquote>
+<p>我们发现4这个位置出现了不匹配的情况，那么我们就要把P往后移动或者把S往前移动（这是等价的）。暴力破解的方法就是移动一位。<br>但可不可以移动多位呢？<br>当然可以，假设移动了某个位数，发现可以匹配，且模式串P的首位并没有超过3。那么模式串肯定有一部分和原串在4之前匹配起来了。显而易见这一部分是模式串的“头”，也就是前缀。<br>也就是说P的前四个元素组成的子串的某个后缀和它的某个前缀能够成功匹配。这是整个模式串全部匹配的一个必要而不充分条件。根据宁可错杀三千不能放过一个的原则，我们要从最长的前缀开始比，一直比到最短的前缀。<br>假如没有前缀和后缀匹配怎么办捏？那就说明如果P的首位不越过原本不匹配的那个位置，根本就没有匹配的可能，所以我们直接把模式串移到不匹配的位置的后面继续比就行啦。<br>那怎么计算要移几位呢？算法导论给了一个方法，假设我们可以得到某个数组next。next[p]=q，表示P模式串的前p个字符构成的子串最长的匹配前缀和后缀的长度为q，且q&lt;p。<br>那么我们计算next数组要怎么算呢？枚举？显然不会这么傻，要记住算法导论里面的一句重要的话：不要重复计算。<br>假设我们已经知道了i&lt;k的next数组值，我们计算next[i]。我们会发现如果P[i]==P[next[i-1]+1]的话，那么正好是接在前i-1个字符串的后缀的后面，那么next[i]=next[i-1]+1。<br>如果不等呢？那么就说明这么长的前缀不能匹配，那么我们换个短一点的试试看，就可以再试一下P[next[next[i-1]]+1]==P[i]。我们可以继续这么试下去，直到发现可以匹配的前缀，或者发现根本不能匹配。<br>如果不能匹配那么next[i]=-1。<br>得到next数组怎么用呢？举个栗子，还是上例，ADADC，到4这个位置不匹配了，我们发现next[3]=1，于是我们把P往后移动3-next[3]=2个位置，我们就可以继续从头开始匹配了。</p>
 <p>根据这个思路可以得到以下的代码</p>
 <figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> * generateNext(<span class="keyword">const</span> <span class="built_in">string</span> & moshichuan)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> len = moshichuan.length();</div><div class="line">	<span class="keyword">if</span> (len &lt;= <span class="number">0</span>) <span class="keyword">return</span> NULL;</div><div class="line">	<span class="keyword">int</span> *next = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">	next[<span class="number">0</span>] = -<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> p = next[i-<span class="number">1</span>];</div><div class="line">		<span class="keyword">while</span> (p &gt;= <span class="number">0</span> && moshichuan[p + <span class="number">1</span>] != moshichuan[i])</div><div class="line">			p = next[p];</div><div class="line">		<span class="keyword">if</span> (moshichuan[p + <span class="number">1</span>] == moshichuan[i])</div><div class="line">			p++;</div><div class="line">		next[i] = p;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> next;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">while</span> (n &gt; <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> moshichuan, yuanchuan;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; moshichuan &gt;&gt; yuanchuan;</div><div class="line">		<span class="keyword">int</span>*next = generateNext(moshichuan);</div><div class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> endoftry = yuanchuan.length() - moshichuan.length();</div><div class="line">		<span class="keyword">while</span> (i &lt;= endoftry)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> k = i;</div><div class="line">			j = <span class="number">0</span>;</div><div class="line">			<span class="keyword">while</span> (j &lt; moshichuan.length() && yuanchuan[k] == moshichuan[j])</div><div class="line">			{</div><div class="line">				k++;</div><div class="line">				j++;</div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (j == moshichuan.length())</div><div class="line">				count++;</div><div class="line">			j--;</div><div class="line">			i += j - next[j];</div><div class="line">		}</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; count &lt;&lt; endl;</div><div class="line">		<span class="keyword">delete</span>[] next;</div><div class="line">		n--;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
@@ -845,30 +894,6 @@
       <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
     
       <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[我的第一篇文章]]></title>
-    <link href="http://youngyangyang.com/2014/12/30/my-new-post/"/>
-    <id>http://youngyangyang.com/2014/12/30/my-new-post/</id>
-    <published>2014-12-30T10:42:20.000Z</published>
-    <updated>2015-01-07T12:45:33.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="这是我的第一篇文章">这是我的第一篇文章</h1>
-<p>markdown的语法怎么这么别扭，看起来一点都不舒服</p>
-<h2 id="要不来总结一下2014年吧">要不来总结一下2014年吧</h2>
-<h3 id="我才没那么无聊呢">我才没那么无聊呢</h3>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="这是我的第一篇文章">这是我的第一篇文章</h1>
-<p>markdown的语法怎么这么别扭，看起来一点都不舒服</p>
-<h2 id="要不来总结一下2014年吧">要不来总结一下2014年吧</h2>
-<h3 id="我才没那么无聊呢">我才没那么无聊呢</h]]>
-    </summary>
-    
-      <category term="生活记录" scheme="http://youngyangyang.com/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/"/>
-    
-      <category term="blog" scheme="http://youngyangyang.com/categories/blog/"/>
     
   </entry>
   
