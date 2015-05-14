@@ -84,6 +84,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1127" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/23/hiho1127/" class="article-date">
+  <time datetime="2015-04-23T15:08:55.000Z" itemprop="datePublished">4月 23 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/23/hiho1127/">hiho1127</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1127_:_二分图三·二分图最小点覆盖和最大独立集">1127 : 二分图三·二分图最小点覆盖和最大独立集</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上次安排完相亲之后又过了挺长时间，大家好像都差不多见过面了。不过相亲这个事不是说那么容易的，所以Nettle的姑姑打算收集一下之前的情况并再安排一次相亲。所以现在摆在Nettle面前的有2个问题：</p>
+<p>1.姑姑想要了解之前所有相亲的情况。对于任一个一次相亲，只要跟参与相亲的两人交流就可以得到这次相亲的情况。如果一个人参加了多次相亲，那么跟他交流就可以知道这几次相亲的情况。那么问题来了，挖掘技术到底哪家强姑姑最少需要跟多少人进行交流可以了解到所有相亲的情况。</p>
+<blockquote>
+<p>同样的转化为图G=(V,E)，则问题转化为：在图G中选取尽可能少的点，使得图中每一条边至少有一个端点被选中。这个问题在二分图问题中被称为最小点覆盖问题。即用最少的点去覆盖所有的边。结论：<strong>由König定理可知最小点覆盖的点数 = 二分图最大匹配</strong><br>本结论的证明见<a href="http://www.matrix67.com/blog/archives/116" target="_blank" rel="external">二分图最大匹配的König定理及其证明</a></p>
+</blockquote>
+<p>2.因为春节快要结束了，姑姑打算给这些人再安排一次集体相亲。集体相亲也就是所有人在一起相亲，不再安排一对一对的进行相亲。但是姑姑有个条件，要求所有参与相亲的人之前都没有见过。也就是说在之前的每一次相亲中的两人不会被同时邀请来参加这次集体相亲。那么问题又来了，姑姑最多可以让多少人参与这个集体相亲。</p>
+<blockquote>
+<p>依旧转化为图G=(V,E)，则问题转化为：在图G中选取尽可能多的点，使得任意两个点之间没有连边。这个问题在二分图问题中被称为最大独立集问题。结论：<strong>最大独立集的点数 = 总点数 - 二分图最大匹配</strong><br>证明：<br>假设最大独立集的点数为|U|，二分图最大匹配的匹配数为|M|，最大匹配中所有顶点集合为EM<br>先证明 |U|≤|V|-|M|<br>M中任意一条边的两个端点是连接的，所有对于M中的边必有一个端点不在|U|集合中，所以|M|≤|V|-|U|<br>再证明|U|≥|V|-|M|<br>首先我们知道一定有|U|≥|V|-|EM|，即将最大匹配的点删除之后，剩下的点一定都不相连。接下来我们考虑能否将M集合中的一个端点放入U中：假设(x,y)属于M，存在(a,x),(b,y)，且a,b都在U中，则会出现两种情况：<br>•如果(a,b)连接，则有一个更大的匹配存在，矛盾<br>•如果(a,b)不连接，a-&gt;x-&gt;y-&gt;b有一个新的增广路，因此有一个更大的匹配，矛盾<br>故有a,b两点中至多只有1个点属于U，则我们总是可以选取x,y中一个点放入集合U。所以|U|≥|V|-|EM|+|M|=|V|-|M|<br>综上有|U|=|V|-|M|</p>
+</blockquote>
+<p><strong>输入</strong><br>第1行：2个正整数，N,M(N表示点数 2≤N≤1,000，M表示边数1≤M≤5,000)<br>第2..M+1行：每行两个整数u,v，表示一条无向边(u,v)<br><strong>输出</strong><br>第1行：1个整数，表示最大匹配数</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>5 4<br>3 2<br>1 3<br>5 4<br>1 5</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>2<br>3</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>原题的分析已经很清楚了。。。我就不多废话了。。</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjlist[<span class="number">1001</span>];</div><div class="line"><span class="keyword">int</span> *connected;</div><div class="line"><span class="keyword">void</span> decide(<span class="keyword">int</span> cur, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> & myset, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set2)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (myset.find(iter-&gt;first) != myset.end())</div><div class="line">		{</div><div class="line">			myset.erase(myset.find(iter-&gt;first));</div><div class="line">			set2-&gt;insert(iter-&gt;first);</div><div class="line">			decide(iter-&gt;first, myset, set2, set1);</div><div class="line">		}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> findvacant(<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (connected[iter-&gt;first] == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">return</span> iter-&gt;first;</div><div class="line">		}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> choosematch(<span class="keyword">int</span> cur,<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> &searched)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> next = findvacant(cur);</div><div class="line">	<span class="keyword">if</span> (next != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		connected[cur] = next;</div><div class="line">		connected[next] = cur;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">			<span class="keyword">if</span> (searched.find(iter-&gt;first) == searched.end())</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> mid = iter-&gt;first;</div><div class="line">				<span class="keyword">int</span> next = connected[mid];</div><div class="line">				searched.insert(mid);</div><div class="line">				<span class="keyword">if</span> (choosematch(next, searched))</div><div class="line">				{</div><div class="line">					connected[cur] = iter-&gt;first;</div><div class="line">					connected[iter-&gt;first] = cur;</div><div class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>, *set2=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>;</div><div class="line">	set1-&gt;clear(); set2-&gt;clear();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjlist[u][v] = <span class="number">1</span>;</div><div class="line">		adjlist[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> myset;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		myset.insert(i);</div><div class="line">	<span class="keyword">while</span> (myset.size()&gt;<span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *(myset.begin());</div><div class="line">		myset.erase(myset.begin());</div><div class="line">		set1-&gt;insert(cur);</div><div class="line">		decide(cur, myset, set1, set2);</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> * finalset;</div><div class="line">	<span class="keyword">if</span> (set1-&gt;size() &lt; set2-&gt;size())</div><div class="line">	{</div><div class="line">		finalset = set1;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		finalset = set2;</div><div class="line">	}</div><div class="line">	connected = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		connected[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter = finalset-&gt;begin(); iter != finalset-&gt;end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *iter;</div><div class="line">		<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> searched;</div><div class="line">		searched.clear();</div><div class="line">		choosematch(cur,searched);</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (connected[i] != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			ans++;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; n - (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/23/hiho1127/" data-id="hrxwrbzu7f2gn44n" data-title="hiho1127 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/23/hiho1127/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1122" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/22/hiho1122/" class="article-date">
@@ -448,93 +526,6 @@
 
 
   
-    <article id="post-hihoartpro1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/21/hihoartpro1/" class="article-date">
-  <time datetime="2015-04-21T06:32:59.000Z" itemprop="datePublished">4月 21 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/21/hihoartpro1/">编程之美挑战赛2015资格赛第一题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="微软编程之美2015资格赛：2月29日">微软编程之美2015资格赛：2月29日</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>给定两个日期，计算这两个日期之间有多少个2月29日（包括起始日期）。</p>
-<p>只有闰年有2月29日，满足以下一个条件的年份为闰年：</p>
-<ol>
-<li><p>年份能被4整除但不能被100整除</p>
-</li>
-<li><p>年份能被400整除</p>
-</li>
-</ol>
-<p><strong>输入</strong><br>第一行为一个整数T，表示数据组数。</p>
-<p>之后每组数据包含两行。每一行格式为”month day, year”，表示一个日期。month为{“January”, “February”, “March”, “April”, “May”, “June”, “July”, “August”, “September”, “October”, “November” , “December”}中的一个字符串。day与year为两个数字。</p>
-<p>数据保证给定的日期合法且第一个日期早于或等于第二个日期。</p>
-<p><strong>输出</strong><br>对于每组数据输出一行，形如”Case #X: Y”。X为数据组数，从1开始，Y为答案。</p>
-<p><strong>数据范围</strong><br>1 ≤ T ≤ 550</p>
-<p>小数据：</p>
-<p>2000 ≤ year ≤ 3000</p>
-<p>大数据：</p>
-<p>2000 ≤ year ≤ 2×109</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>4<br>January 12, 2012<br>March 19, 2012<br>August 12, 2899<br>August 12, 2901<br>August 12, 2000<br>August 12, 2005<br>February 29, 2004<br>February 29, 2012</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>Case #1: 1<br>Case #2: 0<br>Case #3: 1<br>Case #4: 3</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>本题乍看不难，所以我就被迷惑了开始做了。事实上确实不难。<br>我的思路很简单，就是找到起始点开始向后（包括当天）最近的一个2月29日，把年份保存下来。<br>再找到结束点向前（包括当天）最近的一个2月29日，把年份保存下来。<br>这样就不用考虑月和日了，只要考虑两个闰年之间还有多少个闰年。<br>对于小数据最简单的方法就是暴力搜索，枚举之间每四年（闰年最多每四年一次）的年份，然后判断是否为闰年。<br>对于大数据来说，就可以考虑小学数学里面有关重复了怎么加怎么减的那个东西（忘了叫什么名字了）。<br>就是把被四整除的年份找出来year4，再把被100整除的找出来year100，最后找出被400整除的。<br>结果就是year4-year100+year400。<br>有一个小trick：</p>
-<blockquote>
-<p>本来想用enum来记录一年十二个月份的英文，后来发现不太好用，就改成了switch，最后决定还是用数组。没错，数组可简单了，推荐在数组首位放一个空字符串，这样省得麻烦<br>以下是我的代码</p>
-</blockquote>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="built_in">string</span> months[<span class="number">13</span>] = { <span class="string">""</span>, <span class="string">"January"</span>, <span class="string">"February"</span>, <span class="string">"March"</span>, <span class="string">"April"</span>, <span class="string">"May"</span>, <span class="string">"June"</span>, <span class="string">"July"</span>, <span class="string">"August"</span>, <span class="string">"September"</span>, <span class="string">"October"</span>, <span class="string">"November"</span>, <span class="string">"December"</span> };</div><div class="line"><span class="keyword">int</span> decideMonth(<span class="keyword">const</span> <span class="built_in">string</span> & s1)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (months[ans] != s1)</div><div class="line">		ans++;</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> leapYear(<span class="keyword">int</span> year)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (year % <span class="number">400</span> == <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	<span class="keyword">if</span> (year % <span class="number">4</span> == <span class="number">0</span> && (year % <span class="number">100</span> != <span class="number">0</span>))</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> transdate2int(<span class="built_in">string</span> datestr)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> date = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (datestr[index] != <span class="string">','</span>)</div><div class="line">	{</div><div class="line">		date = date * <span class="number">10</span> + (datestr[index] - <span class="string">'0'</span>);</div><div class="line">		index++;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> date;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t = <span class="number">0</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> monthstr, datestr;</div><div class="line">		<span class="keyword">int</span> yearbeg;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; monthstr &gt;&gt; datestr&gt;&gt;yearbeg;</div><div class="line">		<span class="keyword">int</span> month = decideMonth(monthstr);</div><div class="line">		<span class="keyword">int</span> date = transdate2int(datestr);</div><div class="line">		<span class="keyword">if</span> (leapYear(yearbeg) && (month == <span class="number">1</span> || (month == <span class="number">2</span> && date &lt;= <span class="number">29</span>)))</div><div class="line">		{</div><div class="line">			<span class="comment">//如果本身就是闰年，而且日期早于2月29日，那么起始年份就是本年</span></div><div class="line">			;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="comment">//否则往后推</span></div><div class="line">			yearbeg++;</div><div class="line">			<span class="keyword">while</span> (!leapYear(yearbeg))</div><div class="line">				yearbeg++;</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> yearend;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; monthstr &gt;&gt; datestr &gt;&gt; yearend;</div><div class="line">		month = decideMonth(monthstr);</div><div class="line">		date = transdate2int(datestr);</div><div class="line">		<span class="keyword">if</span> (leapYear(yearend) && (month &gt;= <span class="number">3</span> || (month == <span class="number">2</span> && date == <span class="number">29</span>)))</div><div class="line">		{</div><div class="line">			<span class="comment">//如果本身是闰年，而且，日期在2月29日之后，那么截止年份就是yearend</span></div><div class="line">			;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			yearend--;</div><div class="line">			<span class="keyword">while</span> (!leapYear(yearend))</div><div class="line">				yearend--;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (yearend &lt; yearbeg)</div><div class="line">		{</div><div class="line">			<span class="comment">//肯定是没有的啦</span></div><div class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"Case #"</span>&lt;&lt;(i+<span class="number">1</span>)&lt;&lt;<span class="string">": "</span>&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> ans = (yearend - yearbeg) / <span class="number">4</span> + <span class="number">1</span>;</div><div class="line">			<span class="keyword">int</span> year100beg = yearbeg, year400beg = yearbeg;</div><div class="line">			<span class="keyword">int</span> year100end = yearend, year400end = yearend;</div><div class="line">			<span class="keyword">while</span> (year100beg % <span class="number">100</span> != <span class="number">0</span>)</div><div class="line">				year100beg +=<span class="number">4</span>;</div><div class="line">			<span class="keyword">while</span> (year400beg % <span class="number">400</span> != <span class="number">0</span>)</div><div class="line">				year400beg += <span class="number">4</span>;</div><div class="line">			<span class="keyword">while</span> (year100end % <span class="number">100</span> != <span class="number">0</span>)</div><div class="line">				year100end -= <span class="number">4</span>;</div><div class="line">			<span class="keyword">while</span> (year400end % <span class="number">400</span> != <span class="number">0</span>)</div><div class="line">				year400end -= <span class="number">4</span>;</div><div class="line">			<span class="keyword">int</span> ans100 = <span class="number">0</span>, ans400 = <span class="number">0</span>;</div><div class="line">			<span class="keyword">if</span> (year100beg &lt;= year100end)</div><div class="line">			{</div><div class="line">				ans100 = (year100end - year100beg) / <span class="number">100</span> + <span class="number">1</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (year400beg &lt;= year400end)</div><div class="line">			{</div><div class="line">				ans400 = (year400end - year400beg) / <span class="number">400</span> + <span class="number">1</span>;</div><div class="line">			}</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; (i + <span class="number">1</span>) &lt;&lt; <span class="string">": "</span> &lt;&lt; (ans-ans100+ans400)&lt;&lt;endl;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/21/hihoartpro1/" data-id="23vgbdskhahs4np7" data-title="编程之美挑战赛2015资格赛第一题 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/21/hihoartpro1/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -548,7 +539,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -557,7 +548,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -575,7 +566,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -585,6 +576,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/14/hiho1036/">hiho1036</a>
+          </li>
         
           <li>
             <a href="/2015/04/30/hiho1032/">hiho1032</a>
@@ -600,10 +595,6 @@
         
           <li>
             <a href="/2015/04/24/hiho1014/">hiho1014</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/23/hiho1127/">hiho1127</a>
           </li>
         
       </ul>
