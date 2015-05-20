@@ -84,6 +84,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1122" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/22/hiho1122/" class="article-date">
+  <time datetime="2015-04-22T14:09:22.000Z" itemprop="datePublished">4月 22 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/22/hiho1122/">hiho1122</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1122_:_二分图二•二分图最大匹配之匈牙利算法">1122 : 二分图二•二分图最大匹配之匈牙利算法</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上一回我们已经将所有有问题的相亲情况表剔除了，那么接下来要做的就是安排相亲了。<br>因为过年时间并不是很长，所以姑姑希望能够尽可能在一天安排比较多的相亲。由于一个人同一天只能和一个人相亲，所以要<strong>从当前的相亲情况表里选择尽可能多的组合，且每个人不会出现两次</strong>。<br>不知道有没有什么好办法，对于当前给定的相亲情况表，能够算出最多能同时安排多少组相亲呢？<br>同样的，我们先将给定的情况表转换成图G=(V,E)。在上一回中我们已经知道这个图可以被染成黑白两色。不妨将所有表示女性的节点记为点集A，表示男性的节点记为点集B。<br>则有A∪B=V。由问题可知所有边e的两个端点分别属于AB两个集合。则可以表示成如下的图：<br><img title="hiho34_00.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245073889563.png"><br>同样的，我们将所有的边分为两个集合。集合S和集合M，同样有S∪M=E。边集S表示在这一轮相亲会中将要进行的相亲，边集M表示在不在这一次进行。<br>对于任意边(u,v) ∈ S，我们称u和v为一组匹配，它们之间相互匹配。在图G，我们将边集S用实线表示，边集M用虚线表示。得到下图：<br><img title="hiho34_01.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/1424507533697.png"><br>则原问题转化为，最多能选择多少条边到集合S，使得S集合中任何两条边不相邻(即有共同的顶点)。显然的，|S|&lt;=Min{|A|, |B|}。<br>那么能不能找到一个算法，使得能够很容易计算出尽可能多的边能够放入集合S？我们不妨来看一个例子：<br><img title="hiho34_01.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/1424507533697.png"><br>对于已经匹配的点我们先不考虑，我们从未匹配的点来做。这里我们选择A集合中尚未匹配的点(A3和A4)考虑：<br>对于A3点，我们可以发现A3与B4右边相连，且都未匹配。则直接将(A3,B4)边加入集合S即可。<br><img title="hiho34_02.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076439118.png"><br>对于A4点，我们发现和A4相连的B3，B4点都已经匹配了。但是再观察可以发现，如果我们将A2和B2相连，则可以将B3点空出来。那么就可以同时将(A2,B2)，(A4,B3)相连。<br>将原来的一个匹配变成了两个匹配。<br>让我们来仔细看看这一步：我们将这次变换中相关联的边标记出来，如下图所示紫色的3条边(A2,B2),(A2,B3),(A4,B3)。<br><img title="hiho34_03.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076642615.png"><br>这三条边构成了一条路径，可以发现这条路径有个非常特殊的性质。<br><strong>虚线和实线相互交错，并且起点和终点都是尚未匹配的点，且属于两个不同的集合。我们称这样的路径为交错路径。 </strong><br>再进一步分析，对于任意一条交错路径，虚线的数量一定比实线的数量多1。我们将虚线和实线交换一下，就变成了下面的图：<br><img title="hiho34_04.png" style="width:20%;" src="http://media.hihocoder.com//problem_images/20150221/14245076816061.png"><br>在原来1个匹配的基础上，我们得到了2个新的匹配，S集合边的数量也增加了1。并且原来在已经匹配的点仍然是已经匹配的状态。<br>再回头看看A3点匹配时的情况：对于(A3,B4)这一条路径，同样满足了交错路径的性质。至此我们得到了一个找新匹配的有效算法：<br>选取一个未匹配的点，查找是否存在一条以它为起点的交错路径。<br>若存在，将该交错路径的边虚实交换。否则在当前的情况下，该点找不到可以匹配的点。<br>又有对于已经匹配的点，该算法并不会改变一个点的匹配状态。所以当我们对所有未匹配的点都计算过后，仍然没有交错路径，则不可能找到更多的匹配。<br>此时S集合中的边数即为最大边数，我们称为最大匹配数。<br>那么我们再一次梳理整个算法： </p>
+<blockquote>
+<ol>
+<li>依次枚举每一个点i；</li>
+<li>若点i尚未匹配，则以此点为起点查询一次交错路径。<br>最后即可得到最大匹配数。在这个基础上仍然有两个可以优化的地方：<br>1.对于点的枚举：当我们枚举了所有A中的点后，无需再枚举B中的点，就已经得到了最大匹配。<br>2.在查询交错路径的过程中，有可能出现Ai与Bj直接相连，其中Bj为已经匹配的点，且Bj之后找不到交错路径。之后又通过Ai查找到了一条交错路径{Ai,Bx,Ay,…,Az,Bj}延伸到Bj。由于之前已经计算过Bj没有交错路径，若此时再计算一次就有了额外的冗余。所以我们需要枚举每个Ai时记录B集合中的点是否已经查询过，起点不同时需要清空记录。 </li>
+</ol>
+</blockquote>
+<p><strong>输入</strong><br>第1行：2个正整数，N,M(N表示点数 2≤N≤1,000，M表示边数1≤M≤5,000)<br>第2..M+1行：每行两个整数u,v，表示一条无向边(u,v)<br><strong>输出</strong><br>第1行：1个整数，表示最大匹配数</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>5 4<br>3 2<br>1 3<br>5 4<br>1 5</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>2</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>原题的分析已经很清楚了。。。我就不多废话了。。</p>
+<p>以下是我的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjlist[<span class="number">1001</span>];</div><div class="line"><span class="keyword">int</span> *connected;</div><div class="line"><span class="keyword">void</span> decide(<span class="keyword">int</span> cur, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> & myset, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1, <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set2)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (myset.find(iter-&gt;first) != myset.end())</div><div class="line">		{</div><div class="line">			myset.erase(myset.find(iter-&gt;first));</div><div class="line">			set2-&gt;insert(iter-&gt;first);</div><div class="line">			decide(iter-&gt;first, myset, set2, set1);</div><div class="line">		}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> findvacant(<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (connected[iter-&gt;first] == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">return</span> iter-&gt;first;</div><div class="line">		}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> choosematch(<span class="keyword">int</span> cur,<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> &searched)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> next = findvacant(cur);</div><div class="line">	<span class="keyword">if</span> (next != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		connected[cur] = next;</div><div class="line">		connected[next] = cur;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjlist[cur].begin(); iter != adjlist[cur].end();iter++)</div><div class="line">			<span class="keyword">if</span> (searched.find(iter-&gt;first) == searched.end())</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> mid = iter-&gt;first;</div><div class="line">				<span class="keyword">int</span> next = connected[mid];</div><div class="line">				searched.insert(mid);</div><div class="line">				<span class="keyword">if</span> (choosematch(next, searched))</div><div class="line">				{</div><div class="line">					connected[cur] = iter-&gt;first;</div><div class="line">					connected[iter-&gt;first] = cur;</div><div class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> *set1=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>, *set2=<span class="keyword">new</span> <span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>;</div><div class="line">	set1-&gt;clear(); set2-&gt;clear();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjlist[u][v] = <span class="number">1</span>;</div><div class="line">		adjlist[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> myset;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		myset.insert(i);</div><div class="line">	<span class="keyword">while</span> (myset.size()&gt;<span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *(myset.begin());</div><div class="line">		myset.erase(myset.begin());</div><div class="line">		set1-&gt;insert(cur);</div><div class="line">		decide(cur, myset, set1, set2);</div><div class="line">	}</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> * finalset;</div><div class="line">	<span class="keyword">if</span> (set1-&gt;size() &lt; set2-&gt;size())</div><div class="line">	{</div><div class="line">		finalset = set1;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		finalset = set2;</div><div class="line">	}</div><div class="line">	connected = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		connected[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span>::iterator iter = finalset-&gt;begin(); iter != finalset-&gt;end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = *iter;</div><div class="line">		<span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> searched;</div><div class="line">		searched.clear();</div><div class="line">		choosematch(cur,searched);</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (connected[i] != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			ans++;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (ans / <span class="number">2</span>) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/04/22/hiho1122/" data-id="rdyl5wi88mnarlv1" data-title="hiho1122 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/04/22/hiho1122/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1148" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/21/hiho1148/" class="article-date">
@@ -459,95 +535,9 @@
 
 
   
-    <article id="post-hiho1121" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/15/hiho1121/" class="article-date">
-  <time datetime="2015-04-15T06:03:03.000Z" itemprop="datePublished">4月 15 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/15/hiho1121/">hiho1121</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目1121：二分图一•二分图判定">题目1121：二分图一•二分图判定</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>大家好，我是小Hi和小Ho的小伙伴Nettle，从这个星期开始由我来完成我们的Weekly。<br>新年回家，又到了一年一度大龄剩男剩女的相亲时间。Nettle去姑姑家玩的时候看到了一张姑姑写的相亲情况表，上面都是姑姑介绍相亲的剩男剩女们。每行有2个名字，表示这两个人有一场相亲。由于姑姑年龄比较大了记性不是太好，加上相亲的人很多，所以姑姑一时也想不起来其中有些人的性别。因此她拜托我检查一下相亲表里面有没有错误的记录，即是否把两个同性安排了相亲。<br>OK，让我们愉快的暴力搜索吧！</p>
-<p>才怪咧。//题目真傲娇</p>
-<p>对于拿到的相亲情况表，我们不妨将其转化成一个图。将每一个人作为一个点(编号1..N)，若两个人之间有一场相亲，则在对应的点之间连接一条无向边。(如下图)<br><img src="http://media.hihocoder.com/problem_images/20150214/14238947716934.png" style="width:25%;margin-bottom:10px;" title="img1.png"><br>因为相亲总是在男女之间进行的，所以每一条边的两边对应的人总是不同性别。假设表示男性的节点染成白色，女性的节点染色黑色。对于得到的无向图来说，即每一条边的两端一定是一白一黑。如果存在一条边两端同为白色或者黑色，则表示这一条边所表示的记录有误。</p>
-<p>由于我们并不知道每个人的性别，我们的问题就转化为判定是否存在一个合理的染色方案，使得我们所建立的无向图满足每一条边两端的顶点颜色都不相同。</p>
-<p>那么，我们不妨将所有的点初始为未染色的状态。随机选择一个点，将其染成白色。再以它为起点，将所有相邻的点染成黑色。再以这些黑色的点为起点，将所有与其相邻未染色的点染成白色。不断重复直到整个图都染色完成。(如下图)<br><img src="http://media.hihocoder.com/problem_images/20150214/img2.png" style="width:100%;margin-bottom:10px;" title="img2.png"><br>在染色的过程中，我们应该怎样发现错误的记录呢？相信你一定发现了吧。对于一个已经染色的点，如果存在一个与它相邻的已染色点和它的颜色相同，那么就一定存在一条错误的记录。(如上图的4，5节点)</p>
-<p>到此我们就得到了整个图的算法：</p>
-<p>1.选取一个未染色的点u进行染色<br>2.遍历u的相邻节点v：若v未染色，则染色成与u不同的颜色，并对v重复第2步；若v已经染色，如果 u和v颜色相同，判定不可行退出遍历。<br>3.若所有节点均已染色，则判定可行。</p>
-<p>接下来就动手写写吧！</p>
-<p><strong>输入</strong><br>第1行：1个正整数T(1≤T≤10)</p>
-<p>接下来T组数据，每组数据按照以下格式给出：</p>
-<p>第1行：2个正整数N,M(1≤N≤10,000，1≤M≤40,000)</p>
-<p>第2..M+1行：每行两个整数u,v表示u和v之间有一条边</p>
-<p><strong>输出</strong><br>第1..T行：第i行表示第i组数据是否有误。如果是正确的数据输出”Correct”，否则输出”Wrong”<br><strong>样例输入</strong></p>
-<blockquote>
-<p>2<br>5 5<br>1 2<br>1 3<br>3 4<br>5 2<br>1 5<br>5 5<br>1 2<br>1 3<br>3 4<br>5 2<br>3 5</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>Wrong<br>Correct</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>这道题以前AC过，不过以前用的是bfs，今天想用dfs再实现一次，于是就出现了WA了。我的连续一次AC的记录就此作古。<br>也是好久不写DFS了，哪里该return都忘了。开始还担心会不会出现堆栈溢出的情况，后来估计DFS的层数也不高，也就AC了。<br>所以关于本题，有几个注意点：</p>
-<blockquote>
-<p>第一个就是，样例虽然是图像是连在一起的，但是测试数据不一定图像是连着的，也就是说，可能存在若干个连通图的情况，于是，要有个东西记录是否还有没有搜索过的点。<br>第二个就是，将一个点上色（黑或白）之后，要检查它和所有连接点是否冲突，尤其是对最后一个上色的点，不能一上了之（好邪恶- -），要记得验证，如果不对就得return false</p>
-</blockquote>
-<p>以下是我的DFS代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjlist[<span class="number">10001</span>];</div><div class="line"><span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> unprobed;</div><div class="line"><span class="keyword">bool</span> dfs(<span class="keyword">int</span> *borw,<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator it = adjlist[cur].begin(); it != adjlist[cur].end(); it++)</div><div class="line">	{</div><div class="line">		<span class="keyword">if</span> (borw[cur] == borw[it-&gt;first])</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		<span class="keyword">if</span> (borw[it-&gt;first] == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			borw[it-&gt;first] = -borw[cur];</div><div class="line">			<span class="keyword">if</span> (!dfs(borw, it-&gt;first))</div><div class="line">			{</div><div class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span>{</div><div class="line">				;</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	unprobed.erase(unprobed.find(cur));</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> n, m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">		unprobed.clear();</div><div class="line">		<span class="keyword">int</span> *borw = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">		{</div><div class="line">			adjlist[j].clear();</div><div class="line">			borw[j] = <span class="number">0</span>;</div><div class="line">			unprobed.insert(j);</div><div class="line">		}</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u, v;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">			adjlist[u][v] = <span class="number">1</span>;</div><div class="line">			adjlist[v][u] = <span class="number">1</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">bool</span> flag = <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">while</span> (flag && (!unprobed.empty()))</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u = *(unprobed.begin());</div><div class="line">			<span class="comment">//unprobed.erase(unprobed.begin());</span></div><div class="line">			borw[u] = <span class="number">1</span>;</div><div class="line">			flag = dfs(borw, u);</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (flag)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>以下是我BFS的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cassert&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span>&gt;</span> adjTab;</div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> myQueue;</div><div class="line"><span class="stl_container"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;</span> unprobed;</div><div class="line"><span class="keyword">int</span> myColor[<span class="number">10001</span>];</div><div class="line"><span class="keyword">void</span> initialize(<span class="keyword">int</span> n)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> tempVec;</div><div class="line">		adjTab.push_back(tempVec);</div><div class="line">		myColor[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		unprobed.insert(i);</div><div class="line">}</div><div class="line"><span class="keyword">void</span> construnctAdjTab(<span class="keyword">int</span> m)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> end1, end2;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; end1 &gt;&gt; end2;</div><div class="line">		adjTab[end1].push_back(end2);</div><div class="line">		adjTab[end2].push_back(end1);</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">bool</span> BFS()</div><div class="line">{</div><div class="line">	<span class="keyword">while</span> (!myQueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u = *(myQueue.begin());</div><div class="line">		myQueue.erase(myQueue.begin());</div><div class="line">		<span class="comment">//if (myColor[u] == 0) myColor[u] = 1;</span></div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span>::size_type i = <span class="number">0</span>; i &lt; adjTab[u].size(); i++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> v = adjTab[u][i];</div><div class="line">			<span class="keyword">if</span> (myColor[v] == myColor[u]) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">			<span class="keyword">if</span> (myColor[v] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myQueue.push_back(v);</div><div class="line">				unprobed.erase(unprobed.find(v));</div><div class="line">				myColor[v] = -myColor[u];</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		adjTab.clear();</div><div class="line">		myQueue.clear();</div><div class="line">		unprobed.clear();</div><div class="line">		<span class="keyword">int</span> n, m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">		initialize(n);</div><div class="line">		construnctAdjTab(m);</div><div class="line">		<span class="keyword">bool</span> flag = <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">while</span> (flag && (!unprobed.empty()))</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u = *(unprobed.begin());</div><div class="line">			unprobed.erase(unprobed.begin());</div><div class="line">			myColor[u] = <span class="number">1</span>;</div><div class="line">			myQueue.push_back(u);</div><div class="line">			flag=BFS();</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (flag)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/04/15/hiho1121/" data-id="s40k2af51xkasrtc" data-title="hiho1121 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/04/15/hiho1121/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -558,7 +548,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -567,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -585,7 +575,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -595,6 +585,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/20/hiho1044/">hiho1044</a>
+          </li>
         
           <li>
             <a href="/2015/05/19/hiho1043/">hiho1043</a>
@@ -610,10 +604,6 @@
         
           <li>
             <a href="/2015/05/14/hiho1036/">hiho1036</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/30/hiho1032/">hiho1032</a>
           </li>
         
       </ul>
