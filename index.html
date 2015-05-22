@@ -84,6 +84,91 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1049" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/22/hiho1049/" class="article-date">
+  <time datetime="2015-05-22T07:36:34.000Z" itemprop="datePublished">5月 22 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/22/hiho1049/">hiho1049</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1049_:_后序遍历">1049 : 后序遍历</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在参与过了美食节之后，小Hi和小Ho在别的地方又玩耍了一阵子，在这个过程中，小Ho得到了一个非常有意思的玩具——一棵由小球和木棍连接起来的二叉树！</p>
+<p>小Ho对这棵二叉树爱不释手，于是给它的每一个节点都标记了一个标号——一个属于A..Z的大写字母，并且没有任意两个节点的标号是一样的。小Hi也瞅准了这个机会，重新巩固了一下小Ho关于二叉树遍历的基础知识~就这样，日子安稳的过了两天。</p>
+<p>这天，小Ho正好在求解这棵二叉树的前序、中序和后序遍历的结果，但是却在求出前序遍历和中序遍历之后不小心把二叉树摔到了地上，小球和木棍等零件散落了一地！</p>
+<p>小Ho损失了心爱的玩具，正要嚎啕大哭起来，所幸被小Hi发现了，劝说道：“别着急，这不是零件都还在么？拼起来不就是了？”</p>
+<p>“可是我忘记了二叉树长什么样子了！”小Ho沮丧道。</p>
+<p>“这个简单，你不是刚刚求出了这棵二叉树的前序和中序遍历的结果么，利用这两个信息就可以还原出整棵二叉树来哦！”</p>
+<p>“这样么？！！”小Ho止住了泪水，问道：“那要怎么做呢？”</p>
+<p>没错！小Ho在这一周遇到的问题便是：<strong>给出一棵二叉树的前序和中序遍历的结果，还原这棵二叉树并输出其后序遍历的结果</strong>。</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第一行为一个由大写英文字母组成的字符串，表示该二叉树的前序遍历的结果。</p>
+<p>每组测试数据的第二行为一个由大写英文字母组成的字符串，表示该二叉树的中序遍历的结果。</p>
+<p>对于100%的数据，满足二叉树的节点数小于等于26。</p>
+<p><strong>输出</strong><br>对于每组测试数据，输出一个由大写英文字母组成的字符串，表示还原出的二叉树的后序遍历的结果。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>AB<br>BA</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>BA</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC<br>这道题高中的时候遇到过，简直是初赛和各种数据结构考试的必考试题。方法就是分治。<br>对于每一棵树（子树）来讲，其根节点在前序输出中排在第一位，而在中序遍历里它所在的位置可以把输出分成左右不相连的两块，左边是左子树的中序输出，右边是右子树的中序输出。<br>原理就是前序遍历，中序遍历的定义。</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node{</div><div class="line">	<span class="keyword">char</span> c;</div><div class="line">	node * leftchild;</div><div class="line">	node * rightchild;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">void</span> houxu(node *cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (cur == NULL)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	houxu(cur-&gt;leftchild);</div><div class="line">	houxu(cur-&gt;rightchild);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; cur-&gt;c;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> destructTree(node *cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (cur == NULL)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	destructTree(cur-&gt;leftchild);</div><div class="line">	destructTree(cur-&gt;rightchild);</div><div class="line">	<span class="keyword">delete</span> cur;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">void</span> constructtree(<span class="built_in">string</span> qianxu, <span class="built_in">string</span> zhongxu, node *&cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (qianxu.size() == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		cur = NULL;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">char</span> c = qianxu[<span class="number">0</span>];</div><div class="line">	<span class="keyword">int</span> index = zhongxu.find(c);</div><div class="line">	cur = <span class="keyword">new</span> node;</div><div class="line">	cur-&gt;c = c;</div><div class="line">	<span class="built_in">string</span> leftqianxu, leftzhongxu, rightqianxu, rightzhongxu;</div><div class="line">	leftqianxu = qianxu.substr(<span class="number">1</span>, index);</div><div class="line">	leftzhongxu = zhongxu.substr(<span class="number">0</span>, index);</div><div class="line">	rightqianxu = qianxu.substr(index + <span class="number">1</span>, qianxu.size() - index);</div><div class="line">	rightzhongxu = zhongxu.substr(index + <span class="number">1</span>, zhongxu.size() - index);</div><div class="line">	constructtree(leftqianxu, leftzhongxu, cur-&gt;leftchild);</div><div class="line">	constructtree(rightqianxu, rightzhongxu, cur-&gt;rightchild);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="built_in">string</span> qianxu, zhongxu;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; qianxu &gt;&gt; zhongxu;</div><div class="line">	node *head = NULL;</div><div class="line">	<span class="keyword">if</span> (qianxu.size() == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	constructtree(qianxu, zhongxu, head);</div><div class="line">	houxu(head);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; endl;</div><div class="line">	destructTree(head);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>一开始我写完之后进行测试发现总是只输出一个回车符号。一直感到奇怪，单步跟踪发现constructtree函数无误，但是head指针的值没有变化。<br>于是我在constructtree函数的形参第三个加了一下引用符号，也算是重新理解了一下指针传递的意思。<br>如果用的是不是引用传递而是值传递。那么head相当于在某个内存空间申请了个位置，位置里面放的值是NULL也就是全零。<br>值传递则是一个复制的过程，重新申请一个空间，里面也放了NULL也就是全零。在constructtree函数里面new node的时候只是将新申请的空间里面放的位置指针的值改掉了。<br>实质上head原有位置的值还是NULL全零。所以并未改变head的指向。<br>所以如果我们要用引用传递。</p>
+<p>这道题我以前做过，把以前的代码也贴上来对比一下,好像也没什么区别，但看起来清爽一点。</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">struct</span> Node</div><div class="line">{</div><div class="line">	<span class="keyword">char</span> element;</div><div class="line">	Node * left,* right;</div><div class="line">	Node(<span class="keyword">char</span> a):element(a){left=NULL;right=NULL;}</div><div class="line">};</div><div class="line"></div><div class="line">Node * dc(<span class="keyword">const</span> <span class="built_in">string</span> & s1,<span class="keyword">const</span> <span class="built_in">string</span> & s2)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (s1.length()==<span class="number">0</span>) <span class="keyword">return</span> NULL;</div><div class="line">	<span class="keyword">if</span> (s1.length()==<span class="number">1</span>)</div><div class="line">	{</div><div class="line">		Node *temp=<span class="keyword">new</span> Node(s1[<span class="number">0</span>]);</div><div class="line">		<span class="keyword">return</span> temp;</div><div class="line">	}</div><div class="line">	<span class="keyword">char</span> root=s1[<span class="number">0</span>];</div><div class="line">	<span class="keyword">int</span> index=s2.find(s1[<span class="number">0</span>]);</div><div class="line">	Node *temp=<span class="keyword">new</span> Node(s1[<span class="number">0</span>]);</div><div class="line">	temp-&gt;left=dc(s1.substr(<span class="number">1</span>,index),s2.substr(<span class="number">0</span>,index));</div><div class="line">	temp-&gt;right=dc(s1.substr(<span class="number">1</span>+index,s1.size()-<span class="number">1</span>-index),s2.substr(index+<span class="number">1</span>,s2.size()-<span class="number">1</span>-index));</div><div class="line">	<span class="keyword">return</span> temp;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> deletetree(Node * temp)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (temp==NULL) <span class="keyword">return</span> ;</div><div class="line">	<span class="keyword">if</span> (temp-&gt;left !=NULL) deletetree(temp-&gt;left);</div><div class="line">	<span class="keyword">if</span> (temp-&gt;right !=NULL) deletetree(temp-&gt;right);</div><div class="line">	<span class="keyword">delete</span> temp;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> printback(Node * temp)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (temp==NULL) <span class="keyword">return</span>;</div><div class="line">	printback(temp-&gt;left);</div><div class="line">	printback(temp-&gt;right);</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;temp-&gt;element;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="built_in">string</span> s1,s2;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;s1&gt;&gt;s2;</div><div class="line">	Node *root=dc(s1,s2);</div><div class="line">	printback(root);</div><div class="line">	deletetree(root);</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/22/hiho1049/" data-id="hwf03f3u6seya9r7" data-title="hiho1049 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/22/hiho1049/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1048" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/21/hiho1048/" class="article-date">
@@ -408,89 +493,6 @@
 
 
   
-    <article id="post-hiho1037" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/15/hiho1037/" class="article-date">
-  <time datetime="2015-05-15T03:02:17.000Z" itemprop="datePublished">5月 15 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/15/hiho1037/">hiho1037</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1037_:_数字三角形">1037 : 数字三角形</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho在经历了螃蟹先生的任务之后被奖励了一次出国旅游的机会，于是他们来到了大洋彼岸的美国。美国人民的生活非常有意思，经常会有形形色色、奇奇怪怪的活动举办，这不，小Hi和小Ho刚刚下飞机，就赶上了当地的迷宫节活动。迷宫节里展览出来的迷宫都特别的有意思，但是小Ho却相中了一个其实并不怎么像迷宫的迷宫——因为这个迷宫的奖励非常丰富~</p>
-<p>于是小Ho找到了小Hi，让小Hi帮助他获取尽可能多的奖品，小Hi把手一伸道：“迷宫的介绍拿来！”</p>
-<p>小Ho选择的迷宫是一个被称为“数字三角形”的n(n不超过200)层迷宫，这个迷宫的第i层有i个房间，分别编号为1..i。除去最后一层的房间，每一个房间都会有一些通往下一层的房间的楼梯，用符号来表示的话，就是从第i层的编号为j的房间出发会有两条路，一条通向第i+1层的编号为j的房间，另一条会通向第i+1层的编号为j+1的房间，而最后一层的所有房间都只有一条离开迷宫的道路。这样的道路都是单向的，也就是说当沿着这些道路前往下一层的房间或者离开迷宫之后，小Ho没有办法再次回到这个房间。迷宫里同时只会有一个参与者，而在每个参与者进入这个迷宫的时候，每个房间里都会生成一定数量的奖券，这些奖券可以在通过迷宫之后兑换各种奖品。小Ho的起点在第1层的编号为1的房间，现在小Ho悄悄向其他参与者弄清楚了每个房间里的奖券数量，希望小Hi帮他计算出他最多能获得多少奖券。</p>
-<p><strong>输入</strong></p>
-<p>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第一行为一个正整数n,表示这个迷宫的层数。</p>
-<p>接下来的n行描述这个迷宫中每个房间的奖券数，其中第i行的第j个数代表着迷宫第i层的编号为j的房间中的奖券数量。</p>
-<p>测试数据保证，有100%的数据满足n不超过100</p>
-<p>对于100%的数据，迷宫的层数n不超过100</p>
-<p>对于100%的数据，每个房间中的奖券数不超过1000</p>
-<p>对于50%的数据，迷宫的层数不超过15（小Ho表示2^15才3万多呢，也就是说……）</p>
-<p>对于10%的数据，迷宫的层数不超过1（小Hi很好奇你的边界情况处理的如何？~）</p>
-<p>对于10%的数据，迷宫的构造满足：对于90%以上的结点，左边道路通向的房间中的奖券数比右边道路通向的房间中的奖券数要多。</p>
-<p>对于10%的数据，迷宫的构造满足：对于90%以上的结点，左边道路通向的房间中的奖券数比右边道路通向的房间中的奖券数要少。</p>
-<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示小Ho可以获得的最多奖券数。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5<br>2<br>6 4<br>1 2 8<br>4 0 9 6<br>6 5 5 3 6</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>28</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>又一次一遍AC，好开心，很多天没遇到了。<br>当然因为这道题是一道最基础的dp题目，提示给的很充足了，我就不多说了</p>
-<p>根据这个思路可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> mymax(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">{</div><div class="line">	<span class="keyword">return</span> (a &gt; b ? a : b);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> *tt = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++)</div><div class="line">		tt[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> *weight = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; weight[j];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= <span class="number">1</span>; j--)</div><div class="line">			tt[j] = mymax(tt[j], tt[j - <span class="number">1</span>]) + weight[j];</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="keyword">if</span> (ans &lt; tt[i])</div><div class="line">			ans = tt[i];</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/15/hiho1037/" data-id="5h8yqq3i67jx3aru" data-title="hiho1037 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/15/hiho1037/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -504,7 +506,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -513,7 +515,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -531,7 +533,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -541,6 +543,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/22/hiho1049/">hiho1049</a>
+          </li>
         
           <li>
             <a href="/2015/05/21/hiho1048/">hiho1048</a>
@@ -556,10 +562,6 @@
         
           <li>
             <a href="/2015/05/18/hiho1038/">hiho1038</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/15/hiho1037/">hiho1037</a>
           </li>
         
       </ul>
