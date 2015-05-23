@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-05-22T07:38:50.684Z</updated>
+  <updated>2015-05-23T05:15:22.353Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,57 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1050]]></title>
+    <link href="http://youngyangyang.com/2015/05/23/hiho1050/"/>
+    <id>http://youngyangyang.com/2015/05/23/hiho1050/</id>
+    <published>2015-05-23T05:14:28.000Z</published>
+    <updated>2015-05-23T05:15:14.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1050_:_树中的最长路">1050 : 树中的最长路</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上回说到，小Ho得到了一棵二叉树玩具，这个玩具是由小球和木棍连接起来的，而在拆拼它的过程中，小Ho发现他不仅仅可以拼凑成一棵二叉树！还可以拼凑成一棵多叉树——好吧，其实就是更为平常的树而已。</p>
+<p>但是不管怎么说，小Ho喜爱的玩具又升级换代了，于是他更加爱不释手（其实说起来小球和木棍有什么好玩的是吧= =）。小Ho手中的这棵玩具树现在由N个小球和N-1根木棍拼凑而成，这N个小球都被小Ho标上了不同的数字，并且这些数字都是出于1..N的范围之内，每根木棍都连接着两个不同的小球，并且保证任意两个小球间都不存在两条不同的路径可以互相到达。总而言之，是一个相当好玩的玩具啦！</p>
+<p>但是小Hi瞧见小Ho这个样子，觉得他这样沉迷其中并不是一件好事，于是寻思着再找点问题让他来思考思考——不过以小Hi的水准，自然是手到擒来啦！</p>
+<p>于是这天食过早饭后，小Hi便对着又拿着树玩具玩的不亦乐乎的小Ho道：“你说你天天玩这个东西，我就问你一个问题，看看你可否知道？”</p>
+<p>“不好！”小Ho想都不想的拒绝了。</p>
+<p>“那你就继续玩吧，一会回国的时候我不叫上你了~”小Hi严肃道。</p>
+<p>“诶！别别别，你说你说，我听着呢。”一向习惯于开启跟随模式的小Ho忍不住了，马上喊道。</p>
+<p>小Hi满意的点了点头，随即说道：“这才对嘛，我的问题很简单，就是——<strong>你这棵树中哪两个结点之间的距离最长？当然，这里的距离是指从一个结点走到另一个结点经过的木棍数</strong>。”。 </p>
+<p>“啊？”小Ho低头看了看手里的玩具树，困惑了。</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第一行为一个整数N，意义如前文所述。</p>
+<p>每组测试数据的第2~N行，每行分别描述一根木棍，其中第i+1行为两个整数Ai，Bi，表示第i根木棍连接的两个小球的编号。</p>
+<p>对于20%的数据，满足N&lt;=10。</p>
+<p>对于50%的数据，满足N&lt;=10^3。</p>
+<p>对于100%的数据，满足N&lt;=10^5，1&lt;=Ai&lt;=N, 1&lt;=Bi&lt;=N</p>
+<p><strong>小Hi的Tip：那些用数组存储树边的记得要开两倍大小哦！</strong></p>
+<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示给出的这棵树中距离最远的两个结点之间相隔的距离。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>8<br>1 2<br>1 3<br>1 4<br>4 5<br>3 6<br>6 7<br>7 8</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>6</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC<br>这道题写了好久，原因是写着写着就觉得当时的想法好复杂，要修改，然后就修改到现在。<br>首先是因为输入的数据未必是可以直接构造树的，所以需要用邻接表保存起来，当然最佳经验就是map了。<br>然后是构造树，刚开始的时候我考虑把完整的树用struct构造出来，后来发现没有必要真的构造出一棵树来。<br>原因很简单，因为我们用提示的方法做的话，其实我们只要知道父亲节点是谁就行，这用一个数组就ok了，根本不需要用完整的树。<br>于是我用数组把每个节点的父亲信息保存了起来。<br>下面就是如何搜索的问题了。为了方便我把根节点设为0,0唯一连接了某个节点，其边数最多。当然有个特殊情况，如果整棵树里面每个节点最多只有2条边，说明整棵树其实是个链状的，那么最长路径也就是n-1。<br>首先把叶子节点入队，然后依次出队，出队的时候更新父节点的信息（父节点连接的最长和次长边的长度，以及父节点已经有几个子节点入队了）。当父节点的子节点的入队数等于父节点所有边数-1。那么父节点入队。<br>这里可以发现用0作为根节点的好处：如果不这样的话，任意其他的点作为根节点，那么我们就要单独讨论是不是父节点是这个点。</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> first, second,queuechildren;</div><div class="line">	node(){ first = second = queuechildren = <span class="number">0</span>; }</div><div class="line">};</div><div class="line">node ans[<span class="number">100001</span>];</div><div class="line"><span class="keyword">void</span> constructTree(<span class="keyword">int</span> *father, <span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> curfather = father[cur];</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> child = iter-&gt;first;</div><div class="line">		<span class="keyword">if</span> (child != curfather)</div><div class="line">		{</div><div class="line">			father[child] = cur;</div><div class="line">			constructTree(father, child);</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		adjmap[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> maxchildren = <span class="number">0</span>, index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (maxchildren &lt; adjmap[i].size())</div><div class="line">		{</div><div class="line">			maxchildren = adjmap[i].size();</div><div class="line">			index = i;</div><div class="line">		}</div><div class="line">	<span class="keyword">if</span> (maxchildren == <span class="number">2</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; n - <span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	adjmap[<span class="number">0</span>][index] = <span class="number">1</span>; adjmap[index][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	adjmap[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> *father = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	father[<span class="number">0</span>] = -<span class="number">1</span>; father[index] = <span class="number">0</span>;</div><div class="line">	constructTree(father, index);</div><div class="line">	<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (adjmap[i].size() == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			myqueue.push(i);</div><div class="line">		}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">int</span> curfather = father[cur];</div><div class="line">		<span class="keyword">if</span> (curfather == <span class="number">0</span>)</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		ans[curfather].queuechildren++;</div><div class="line">		<span class="keyword">if</span> (ans[curfather].queuechildren == adjmap[curfather].size() - <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			myqueue.push(curfather);</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (ans[cur].first + <span class="number">1</span> &gt; ans[curfather].first)</div><div class="line">		{</div><div class="line">			ans[curfather].second = ans[curfather].first;</div><div class="line">			ans[curfather].first = ans[cur].first + <span class="number">1</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (ans[cur].first + <span class="number">1</span>&gt;ans[curfather].second)</div><div class="line">		{</div><div class="line">			ans[curfather].second = ans[cur].first + <span class="number">1</span>;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (count &lt; ans[i].first + ans[i].second)</div><div class="line">		{</div><div class="line">			count = ans[i].first + ans[i].second;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; count &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1050_:_树中的最长路">1050 : 树中的最长路</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上回说到，小Ho得到了一棵二叉树玩具，这个玩]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1049]]></title>
@@ -971,47 +1022,6 @@
     <![CDATA[<h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
 <hr>
 <p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Ne]]>
-    </summary>
-    
-      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
-    
-      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hiho1133]]></title>
-    <link href="http://youngyangyang.com/2015/04/13/hiho1133/"/>
-    <id>http://youngyangyang.com/2015/04/13/hiho1133/</id>
-    <published>2015-04-13T07:21:41.000Z</published>
-    <updated>2015-04-13T07:23:09.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Nettle在玩《艦これ》，Nettle的镇守府有很多船位，但船位再多也是有限的。Nettle通过捞船又出了一艘稀有的船，但是已有的N(1≤N≤1,000,000)个船位都已经有船了。所以Nettle不得不把其中一艘船拆掉来让位给新的船。Nettle思考了很久，决定随机选择一个k，然后拆掉稀有度第k小的船。 已知每一艘船都有自己的稀有度，Nettle现在把所有船的稀有度值告诉你，希望你能帮他找出目标船。<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示t在数组中是第k小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
-<blockquote>
-<p>10 4<br>1732 4176 2602 6176 1303 6207 3125 1 1011 6600</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>1732</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>这道题应该可以用两种方法来做：</p>
-<blockquote>
-<p>第一种是堆排序，先将前k个数构建成一个最大堆，然后每次读入一个新的数就进行上滤，直到读完，最后将堆顶的数输出，这就是第k小的数了。<br>第二种是二分查找，思想是采用类似于快速排序的方法，将数组分为三段，第一段为小于a的数，第二段为a，第三段为大于d的数，那么如果a是第k小的数，就输出，如果不是就在两侧找。</p>
-</blockquote>
-<p>我在这道题里用了几个trick:</p>
-<blockquote>
-<p>1、添加一个0项，因为要排序的数都大于0，所以可以用0来填补数组[0]的位置，减少逻辑上的问题<br>2、为了避免二分查找退化，我在找标志数的时候，是比较head，mid，tail处三个数的大小，然后将中间一个放在首位，最小的放在mid位，最大的放在tail位。这也可以实现一个防止数组越界的问题。<br>3、如果tail和head相差太小（我设为5），那么做二分的意义也就不大了，我直接做了一个冒泡排序，会更简单一点。</p>
-</blockquote>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[left];</div><div class="line">	shiparr[left] = shiparr[right];</div><div class="line">	shiparr[right] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsort(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">return</span> shiparr[k];</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail,<span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (head + <span class="number">5</span> &gt;= tail)</div><div class="line">		<span class="keyword">return</span> popsort(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid=(head+tail)/<span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail])swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);<span class="comment">//好像以前这个题目wa的时候就是因为没写这句话</span></div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (k == j) <span class="keyword">return</span> shiparr[j];</div><div class="line">	<span class="keyword">if</span> (k &lt; j)<span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr=<span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="keyword">if</span> (k &gt; n || k &lt; <span class="number">1</span>) </div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n,k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="题目1133：二分·二分查找之k小数">题目1133：二分·二分查找之k小数</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在上一回里我们知道Net]]>
     </summary>
     
       <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
