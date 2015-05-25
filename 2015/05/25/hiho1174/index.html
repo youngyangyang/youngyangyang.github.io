@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hiho1174 | Young&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1174 : 拓扑排序·一
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。
+小Ho：小Hi，你这学期有选什么课么？
+小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。
+小Ho：先修课程真是个麻烦的东西呢。
+小Hi：没错呢。好多课程都有先修课程，每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1174">
+<meta property="og:url" content="http://youngyangyang.com/2015/05/25/hiho1174/">
+<meta property="og:site_name" content="Young's blog">
+<meta property="og:description" content="1174 : 拓扑排序·一
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。
+小Ho：小Hi，你这学期有选什么课么？
+小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。
+小Ho：先修课程真是个麻烦的东西呢。
+小Hi：没错呢。好多课程都有先修课程，每">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiho1174">
+<meta name="twitter:description" content="1174 : 拓扑排序·一
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。
+小Ho：小Hi，你这学期有选什么课么？
+小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。
+小Ho：先修课程真是个麻烦的东西呢。
+小Hi：没错呢。好多课程都有先修课程，每">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Young&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">哀吾生之须臾，羡长江之无穷</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+	  
+	<!-- 使用swiftype自定义搜索 -->
+	  
+		<div id="search-form-wrap">
+		<form class="search-form">
+			<input type="text" id="st-search-input" class="search-form-input" placeholder="Search" />
+			<input type="submit" value="" class="search-form-submit"> 
+		</form>		
+	</div>
+	  	
+
+    </div>
+  </div>
+  
+<!-- 从Swiftype官网粘贴安装代码到下面，使用overlay的needs a search field类型 -->
+
+
+	<!-- 此处Swiftype搜索代码 -->
+          
+  
+
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hiho1174" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/25/hiho1174/" class="article-date">
+  <time datetime="2015-05-25T07:47:28.000Z" itemprop="datePublished">5月 25 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hiho1174
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1174_:_拓扑排序·一">1174 : 拓扑排序·一</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。</p>
+<p>小Ho：小Hi，你这学期有选什么课么？</p>
+<p>小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。</p>
+<p>小Ho：先修课程真是个麻烦的东西呢。</p>
+<p>小Hi：没错呢。好多课程都有先修课程，每次选课之前都得先查查有没有先修。教务公布的先修课程记录都是好多年前的，不但有重复的信息，好像很多都不正确了。</p>
+<p>小Ho：课程太多了，教务也没法整理吧。他们也没法一个一个确认有没有写错。</p>
+<p>小Hi：这不正是轮到小Ho你出马的时候了么！</p>
+<p>小Ho：哎？？</p>
+<p>我们都知道大学的课程是可以自己选择的，每一个学期可以自由选择打算学习的课程。唯一限制我们选课是一些课程之间的顺序关系：有的难度很大的课程可能会有一些前置课程的要求。比如课程A是课程B的前置课程，则要求先学习完A课程，才可以选择B课程。大学的教务收集了所有课程的顺序关系，但由于系统故障，可能有一些信息出现了错误。现在小Ho把信息都告诉你，请你帮小Ho判断一下这些信息是否有误。错误的信息主要是指出现了”课程A是课程B的前置课程，同时课程B也是课程A的前置课程”这样的情况。当然”课程A是课程B的前置课程，课程B是课程C的前置课程，课程C是课程A的前置课程”这类也是错误的。<br>。</p>
+<p><strong>输入</strong><br>第1行：1个整数T，表示数据的组数T(1 &lt;= T &lt;= 5)<br>接下来T组数据按照以下格式：<br>第1行：2个整数，N,M。N表示课程总数量，课程编号为1..N。M表示顺序关系的数量。1 &lt;= N &lt;= 100,000. 1 &lt;= M &lt;= 500,000<br>第2..M+1行：每行2个整数，A,B。表示课程A是课程B的前置课程。</p>
+<p><strong>输出</strong><br>第1..T行：每行1个字符串，若该组信息无误，输出”Correct”，若该组信息有误，输出”Wrong”。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>2<br>2 2<br>1 2<br>2 1<br>3 2<br>1 2<br>1 3</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>Wrong<br>Correct</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>没能一次AC，找不到错误之后发帖子问，后来在别人的提示下发现了自己的思维有漏洞，OJ题目真是到处都是陷阱啊。<br>根据提示，我们可以用将入度为0的点u依次入队，u入队时将与点u相连的v的入度全部减一。反复进行这一步，直到没有入度为0的点为止。如果还有点没有入队，则不能构成拓扑排序，否则可以。<br>但是输入数据的边可能会重复。。。。。我就栽在这个问题上。。。。。<br>所以在输入两组相同的有向边的时候，记得合并为一条。</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];<span class="comment">//邻接表</span></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> n, m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			adjmap[j].clear();</div><div class="line">		<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];<span class="comment">//记录入度</span></div><div class="line">		<span class="comment">//int indegree[3];</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			indegree[j] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u, v;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">			<span class="keyword">if</span> (adjmap[u].count(v)==<span class="number">0</span>)</div><div class="line">			{</div><div class="line">				adjmap[u][v] = <span class="number">1</span>;<span class="comment">//添加邻接表</span></div><div class="line">				indegree[v]++;<span class="comment">//入度加一</span></div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">			myqueue.pop();</div><div class="line">		<span class="keyword">int</span> remain = n;<span class="comment">//用来记录是不是所有的点都加入过队列</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n;j++)</div><div class="line">			<span class="keyword">if</span> (indegree[j] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(j);<span class="comment">//入度为0就加入队列</span></div><div class="line">				remain--;</div><div class="line">			}</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">			myqueue.pop();</div><div class="line">			<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">				indegree[next]--;</div><div class="line">				<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">				{</div><div class="line">					myqueue.push(next);</div><div class="line">					remain--;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (remain &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">delete</span>[]indegree;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>刘汝佳的《算法竞赛入门经典》里面也讲到拓扑排序，而且他的方法则更加直接，因为有向图里如果存在环则不能进行拓扑排序，否则可以，于是他就考虑对这些点进行dfs搜索。<br>但是考虑到我们这里的数据量,N可以达到100000，也就是说如果这个拓扑结构是一条线的话，那么dfs根本无法递归这么多层就会stackoverflow了，所以这个方法可以用作一点参考。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/25/hiho1174/" data-id="rv7tq8c48y9o0xvf" data-title="hiho1174 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/25/hiho1174/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/23/hiho1050/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1050</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/05/25/hiho1174/" data-title="hiho1174" data-url="http://youngyangyang.com/2015/05/25/hiho1174/"></div>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/tag1/" style="font-size: 10.00px;">tag1</a><a href="/tags/tag2/" style="font-size: 10.00px;">tag2</a><a href="/tags/tag3/" style="font-size: 10.00px;">tag3</a><a href="/tags/数据挖掘/" style="font-size: 13.33px;">数据挖掘</a><a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/翻译/" style="font-size: 13.33px;">翻译</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/05/25/hiho1174/">hiho1174</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/23/hiho1050/">hiho1050</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/22/hiho1049/">hiho1049</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/21/hiho1048/">hiho1048</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/20/hiho1044/">hiho1044</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://youngyangyang.github.io/" target="_blank">Youngyangyang</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2484873700&verifier=44959cf7&dpc=1"></iframe>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Young Kun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/Beeder/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+  
+  <!-- 隐藏CNZZ图标 -->
+  <div style="display:none">
+	<!-- 此处粘贴站长统计代码 -->
+  </div> 
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"youngyangyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+  </div>
+</body>
+</html>

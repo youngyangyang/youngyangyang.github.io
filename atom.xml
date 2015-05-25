@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-05-23T05:15:22.353Z</updated>
+  <updated>2015-05-25T07:48:08.222Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1174]]></title>
+    <link href="http://youngyangyang.com/2015/05/25/hiho1174/"/>
+    <id>http://youngyangyang.com/2015/05/25/hiho1174/</id>
+    <published>2015-05-25T07:47:28.000Z</published>
+    <updated>2015-05-25T07:48:00.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1174_:_拓扑排序·一">1174 : 拓扑排序·一</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。</p>
+<p>小Ho：小Hi，你这学期有选什么课么？</p>
+<p>小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。</p>
+<p>小Ho：先修课程真是个麻烦的东西呢。</p>
+<p>小Hi：没错呢。好多课程都有先修课程，每次选课之前都得先查查有没有先修。教务公布的先修课程记录都是好多年前的，不但有重复的信息，好像很多都不正确了。</p>
+<p>小Ho：课程太多了，教务也没法整理吧。他们也没法一个一个确认有没有写错。</p>
+<p>小Hi：这不正是轮到小Ho你出马的时候了么！</p>
+<p>小Ho：哎？？</p>
+<p>我们都知道大学的课程是可以自己选择的，每一个学期可以自由选择打算学习的课程。唯一限制我们选课是一些课程之间的顺序关系：有的难度很大的课程可能会有一些前置课程的要求。比如课程A是课程B的前置课程，则要求先学习完A课程，才可以选择B课程。大学的教务收集了所有课程的顺序关系，但由于系统故障，可能有一些信息出现了错误。现在小Ho把信息都告诉你，请你帮小Ho判断一下这些信息是否有误。错误的信息主要是指出现了”课程A是课程B的前置课程，同时课程B也是课程A的前置课程”这样的情况。当然”课程A是课程B的前置课程，课程B是课程C的前置课程，课程C是课程A的前置课程”这类也是错误的。<br>。</p>
+<p><strong>输入</strong><br>第1行：1个整数T，表示数据的组数T(1 &lt;= T &lt;= 5)<br>接下来T组数据按照以下格式：<br>第1行：2个整数，N,M。N表示课程总数量，课程编号为1..N。M表示顺序关系的数量。1 &lt;= N &lt;= 100,000. 1 &lt;= M &lt;= 500,000<br>第2..M+1行：每行2个整数，A,B。表示课程A是课程B的前置课程。</p>
+<p><strong>输出</strong><br>第1..T行：每行1个字符串，若该组信息无误，输出”Correct”，若该组信息有误，输出”Wrong”。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>2<br>2 2<br>1 2<br>2 1<br>3 2<br>1 2<br>1 3</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>Wrong<br>Correct</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>没能一次AC，找不到错误之后发帖子问，后来在别人的提示下发现了自己的思维有漏洞，OJ题目真是到处都是陷阱啊。<br>根据提示，我们可以用将入度为0的点u依次入队，u入队时将与点u相连的v的入度全部减一。反复进行这一步，直到没有入度为0的点为止。如果还有点没有入队，则不能构成拓扑排序，否则可以。<br>但是输入数据的边可能会重复。。。。。我就栽在这个问题上。。。。。<br>所以在输入两组相同的有向边的时候，记得合并为一条。</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];<span class="comment">//邻接表</span></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> n, m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			adjmap[j].clear();</div><div class="line">		<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];<span class="comment">//记录入度</span></div><div class="line">		<span class="comment">//int indegree[3];</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			indegree[j] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u, v;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">			<span class="keyword">if</span> (adjmap[u].count(v)==<span class="number">0</span>)</div><div class="line">			{</div><div class="line">				adjmap[u][v] = <span class="number">1</span>;<span class="comment">//添加邻接表</span></div><div class="line">				indegree[v]++;<span class="comment">//入度加一</span></div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">			myqueue.pop();</div><div class="line">		<span class="keyword">int</span> remain = n;<span class="comment">//用来记录是不是所有的点都加入过队列</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n;j++)</div><div class="line">			<span class="keyword">if</span> (indegree[j] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(j);<span class="comment">//入度为0就加入队列</span></div><div class="line">				remain--;</div><div class="line">			}</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">			myqueue.pop();</div><div class="line">			<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">				indegree[next]--;</div><div class="line">				<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">				{</div><div class="line">					myqueue.push(next);</div><div class="line">					remain--;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (remain &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">delete</span>[]indegree;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>刘汝佳的《算法竞赛入门经典》里面也讲到拓扑排序，而且他的方法则更加直接，因为有向图里如果存在环则不能进行拓扑排序，否则可以，于是他就考虑对这些点进行dfs搜索。<br>但是考虑到我们这里的数据量,N可以达到100000，也就是说如果这个拓扑结构是一条线的话，那么dfs根本无法递归这么多层就会stackoverflow了，所以这个方法可以用作一点参考。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1174_:_拓扑排序·一">1174 : 拓扑排序·一</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>由于今天上课的老师讲的特别无聊，小Hi和小H]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1050]]></title>
@@ -984,44 +1030,6 @@
     <![CDATA[<h2 id="题目1121：二分图一•二分图判定">题目1121：二分图一•二分图判定</h2>
 <hr>
 <p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>大家好，我是小Hi和小Ho的]]>
-    </summary>
-    
-      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
-    
-      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hiho1128]]></title>
-    <link href="http://youngyangyang.com/2015/04/14/hiho1128/"/>
-    <id>http://youngyangyang.com/2015/04/14/hiho1128/</id>
-    <published>2015-04-14T04:11:02.000Z</published>
-    <updated>2015-04-14T04:12:25.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Nettle收集了很多很多的船(这里我们假设Nettle氪了很多金，开了无数个船位)。去除掉重复的船之后，还剩下N(1≤N≤1,000,000)种不同的船。每一艘船有一个稀有值，任意两艘船的稀有值都不相同，稀有值越小的船越稀有，价值也就越高。<br>Nettle现在通过大建又造出了一艘船，他想知道这艘船是不是重复的。如果是重复的，那么这艘船在Nettle所有的船里面稀有值排多少位。<br>问题一<br>Nettle已经先把自己所有船按照稀有值从小到大排列好了(a[1..N])，我们要做的是看看新得到的船(假设稀有值为K)是否在这个序列中，且有对应的a[i]=K时，i为多少？<br>问题二<br>因为Nettle的船太多了，他不愿意去给所有船按照稀有值排序，而是直接告诉了我们每一艘船的稀有值。在这种情况下我们该如何解决这个问题呢？<br><strong>输入</strong><br>第1行：2个整数N,k。N表示数组长度，K表示需要查找的数；<br>第2行：N个整数，表示a[1..N]，保证不会出现重复的数，1≤a[i]≤2,000,000,000。<br><strong>输出</strong><br>第1行：一个整数t，表示K在数组中是第t小的数，若K不在数组中，输出-1。<br><strong>样例输入</strong></p>
-<blockquote>
-<p>10 5180<br>2970 663 5480 4192 4949 1 1387 4428 5180 2761</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>9</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>连续两天一次AC的感觉真是太好了。<br>现在分析问题：</p>
-<blockquote>
-<p>问题一，其实是一个排好序之后的二分查找问题<br>问题二，其实是在一的基础上，用类似于快速排序的思想将数组分成三段，然后找出其中的一段继续进行二分查找</p>
-</blockquote>
-<p>trick和昨天是一样的</p>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">void</span> swap(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = shiparr[i];</div><div class="line">	shiparr[i] = shiparr[j];</div><div class="line">	shiparr[j] = temp;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> popsearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = head; i &lt; tail; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= tail; j++)</div><div class="line">			<span class="keyword">if</span> (shiparr[i]&gt;shiparr[j])</div><div class="line">				swap(shiparr, i, j);</div><div class="line">	<span class="keyword">int</span> index = head;</div><div class="line">	<span class="keyword">while</span> (index &lt;= tail && shiparr[index] != k)</div><div class="line">		index++;</div><div class="line">	<span class="keyword">if</span> (index &lt;= tail) <span class="keyword">return</span> index;</div><div class="line">	<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> bisearch(<span class="keyword">int</span> *shiparr, <span class="keyword">int</span> head, <span class="keyword">int</span> tail, <span class="keyword">int</span> k)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (tail &lt;= head + <span class="number">5</span>) <span class="keyword">return</span> popsearch(shiparr, head, tail, k);</div><div class="line">	<span class="keyword">int</span> mid = (head + tail) / <span class="number">2</span>;</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[mid]) swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">if</span> (shiparr[head] &gt; shiparr[tail])swap(shiparr, head, tail);</div><div class="line">	<span class="keyword">if</span> (shiparr[mid] &gt; shiparr[tail]) swap(shiparr, mid, tail);</div><div class="line">	swap(shiparr, head, mid);</div><div class="line">	<span class="keyword">int</span> i = head + <span class="number">1</span>, j = tail - <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (i &lt; j)</div><div class="line">	{</div><div class="line">		<span class="keyword">while</span> (shiparr[j] &gt; shiparr[head]) j--;</div><div class="line">		<span class="keyword">while</span> (shiparr[i] &lt; shiparr[head]) i++;</div><div class="line">		<span class="keyword">if</span> (i &lt; j) swap(shiparr, i, j);</div><div class="line">	}</div><div class="line">	swap(shiparr, head, j);</div><div class="line">	<span class="keyword">if</span> (shiparr[j] == k) <span class="keyword">return</span> j;</div><div class="line">	<span class="keyword">if</span> (shiparr[j] &gt; k) <span class="keyword">return</span> bisearch(shiparr, head, j - <span class="number">1</span>, k);</div><div class="line">	<span class="keyword">return</span> bisearch(shiparr, j + <span class="number">1</span>, tail, k);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *shiparr = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	shiparr[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; shiparr[i];</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; bisearch(shiparr, <span class="number">0</span>, n, k) &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="题目1128：二分·二分查找">题目1128：二分·二分查找</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>Nettle最近在玩《艦これ》，因此Ne]]>
     </summary>
     
       <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
