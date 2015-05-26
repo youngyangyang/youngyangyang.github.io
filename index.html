@@ -84,6 +84,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1055" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/26/hiho1055/" class="article-date">
+  <time datetime="2015-05-26T06:47:38.000Z" itemprop="datePublished">5月 26 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/26/hiho1055/">hiho1055</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1055_:_刷油漆">1055 : 刷油漆</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上回说到，小Ho有着一棵灰常好玩的树玩具！这棵树玩具是由N个小球和N-1根木棍拼凑而成，这N个小球都被小Ho标上了不同的数字，并且这些数字都是处于1..N的范围之内，每根木棍都连接着两个不同的小球，并且保证任意两个小球间都不存在两条不同的路径可以互相到达。没错，这次说的还是这棵树玩具的故事！</p>
+<p>小Ho的树玩具的质量似乎不是很好，短短玩了几个星期，便掉漆了！</p>
+<p>“简直是一场噩梦！”小Ho拿着树玩具眼含热泪道。</p>
+<p>“这有什么好忧伤的，自己买点油漆刷一刷不就行了？”小Hi表示不能理解。</p>
+<p>“还可以这样？”小Ho顿时兴高采烈了起来，立马跑出去买回来了油漆，但是小Ho身上的钱却不够——于是他只买回了有限的油漆，这些油漆最多能给M个结点涂上颜色，这就意味着小Ho不能够将他心爱的树玩具中的每一个结点都涂上油漆！</p>
+<p>小Ho低头思索了半天——他既不想只选一部分结点补漆，也不想找小Hi借钱，但是很快，他想出了一个非常棒的主意：将包含1号结点的一部分连通的结点进行涂漆（这里的连通指的是这一些涂漆的结点可以互相到达并且不会经过没有涂漆的结点），然后将剩下的结点拆掉！</p>
+<p>那么究竟选择哪些结点进行涂漆呢？小Ho想了想给每个结点都评上了分——他希望最后留下来，也就是涂漆了的那些结点的评分之和可以尽可能的高！</p>
+<p>那么，小Ho该如何做呢？</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第一行为两个整数N、M，意义如前文所述。</p>
+<p>每组测试数据的第二行为N个整数，其中第i个整数Vi表示标号为i的结点的评分</p>
+<p>每组测试数据的第3~N+1行，每行分别描述一根木棍，其中第i+1行为两个整数Ai，Bi，表示第i根木棍连接的两个小球的编号。</p>
+<p>对于100%的数据，满足N&lt;=10^2，1&lt;=Ai&lt;=N, 1&lt;=Bi&lt;=N, 1&lt;=Vi&lt;=10^3, 1&lt;=M&lt;=N </p>
+<p>小Hi的Tip：那些用数组存储树边的记得要开两倍大小哦！</p>
+<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示使得涂漆结点的评分之和最高可能是多少。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>10 4<br>370 328 750 930 604 732 159 167 945 210<br>1 2<br>2 3<br>1 4<br>1 5<br>4 6<br>4 7<br>4 8<br>6 9<br>5 10</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>2977</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC<br>第一次做这种树形动态规划的题目，还糅合了无限背包的问题。所以乍一看还是有点吓人的。<br>认真分析题目：<br>首先是假设f(i,m)代表以i为根的子树最多取m个点（按题目要求取，也就是说取完之后还能成为一棵树）所能达到的最大的value值。<br>假设以i的子节点有k个，则f(i,m)=max{求和:f(i_child_n,m_n)}+value[i]。其中m_n的和为m-1。<br>那么转化为完全背包问题可以看做我有k种颜色的球，我可以随意拿不超过m-1个球，第n种颜色的球拿m个的价值可能都不尽相同，我要找出一种方法能够得到最多的价值。<br>显然是一种dp问题，我们把每个子节点能拿0~m-1个的价值全部都算出来并保存下来（因为N,M都不超过100，所以复杂度肯定没问题）。然后在计算时候反复利用。<br>那么还有一个问题就是如何确定计算顺序。因为只有每个节点在子节点全部都计算好之后才能计算本节点，因此考虑用bfs的方式进行搜索。于是就要用到队列了。<br>这个和上次做的拓扑排序其实有点相似的</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> value[<span class="number">101</span>];<span class="comment">//存放每个球的价值</span></div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">101</span>];<span class="comment">//存放邻接表</span></div><div class="line"><span class="keyword">int</span> record[<span class="number">101</span>][<span class="number">101</span>];<span class="comment">//记录以i为根节点的子树最多取j个球能达到的最大价值</span></div><div class="line"><span class="keyword">struct</span> node{</div><div class="line">	<span class="comment">//int index;</span></div><div class="line">	<span class="keyword">int</span> father;</div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> mychildren;</div><div class="line">	node(){ father = <span class="number">0</span>; mychildren.clear(); }</div><div class="line">};</div><div class="line">node tree[<span class="number">101</span>];<span class="comment">//构造树用，我们不一定要用链表来实现，数组也行，毕竟每个节点的编号都是不一样的</span></div><div class="line"><span class="keyword">int</span> readychildren[<span class="number">101</span>];<span class="comment">//用来进行搜索，确定下一个入队的节点</span></div><div class="line"><span class="keyword">void</span> constructtree(<span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> child = iter-&gt;first;</div><div class="line">		<span class="keyword">if</span> (child != tree[cur].father)</div><div class="line">		{</div><div class="line">			tree[child].father = cur;</div><div class="line">			tree[cur].mychildren.push_back(child);</div><div class="line">			constructtree(child);</div><div class="line">		}</div><div class="line">	}</div><div class="line"></div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; value[i];</div><div class="line">		readychildren[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		adjmap[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	tree[<span class="number">1</span>].father = <span class="number">0</span>;</div><div class="line">	constructtree(<span class="number">1</span>);</div><div class="line">	<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (tree[i].mychildren.size() == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			myqueue.push(i);</div><div class="line">		}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		<span class="comment">//cout &lt;&lt; cur &lt;&lt; endl;</span></div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">int</span> father = tree[cur].father;</div><div class="line">		readychildren[father]++;</div><div class="line">		<span class="keyword">if</span> (readychildren[father] == tree[father].mychildren.size())</div><div class="line">		{</div><div class="line">			myqueue.push(father);</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> temprecord[<span class="number">101</span>];<span class="comment">//这个用来记每个节点的dp的记录，相当于完全背包的问题了</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">			temprecord[i] = value[cur];<span class="comment">//初始化，可以当做是一个子节点都不取的时候能得到的最大价值，当然就是这个根节点的本身价值了</span></div><div class="line">		<span class="keyword">int</span> iter = tree[cur].mychildren.size();<span class="comment">//有几个子节点就要循环几次</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; iter; i++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> childindex = tree[cur].mychildren[i];</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = m - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> max1 = <span class="number">0</span>;</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= j;k++)</div><div class="line">					<span class="keyword">if</span> (record[childindex][k] + temprecord[j - k] &gt; max1)</div><div class="line">					{</div><div class="line">						max1 = record[childindex][k] + temprecord[j - k];</div><div class="line">					}</div><div class="line">				temprecord[j] = max1;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &gt;= <span class="number">1</span>; i--)</div><div class="line">			record[cur][i] =temprecord[i - <span class="number">1</span>];</div><div class="line">		record[cur][<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; record[<span class="number">1</span>][m] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/26/hiho1055/" data-id="xod50tpzc2x6ne9p" data-title="hiho1055 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/26/hiho1055/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1174" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/25/hiho1174/" class="article-date">
@@ -412,91 +495,9 @@
 
 
   
-    <article id="post-hiho1044" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/20/hiho1044/" class="article-date">
-  <time datetime="2015-05-20T10:18:22.000Z" itemprop="datePublished">5月 20 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/20/hiho1044/">hiho1044</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1044_:_状态压缩·一">1044 : 状态压缩·一</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho在兑换到了喜欢的奖品之后，便继续起了他们的美国之行，思来想去，他们决定乘坐火车前往下一座城市——那座城市即将举行美食节！</p>
-<p>但是不幸的是，小Hi和小Ho并没有能够买到很好的火车票——他们只能够乘坐最为破旧的火车进行他们的旅程。</p>
-<p>不仅如此，因为美食节的吸引，许多人纷纷踏上了和小Hi小Ho一样的旅程，于是有相当多的人遭遇到了和小Hi小Ho一样的情况——这导致这辆车上的人非常非常的多，以至于都没有足够的位置能让每一个人都有地方坐下来。</p>
-<p>小Hi和小Ho本着礼让他们的心情——当然还因为本来他们买的就是站票，老老实实的呆在两节车厢的结合处。他们本以为就能够这样安稳抵达目的地，但事与愿违，他们这节车厢的乘务员是一个强迫症，每隔一小会总是要清扫一次卫生，而时值深夜，大家都早已入睡，这种行为总是会惊醒一些人。而一旦相邻的一些乘客被惊醒了大多数的话，就会同乘务员吵起来，弄得大家都睡不好。</p>
-<p>将这一切看在眼里的小Hi与小Ho决定利用他们的算法知识，来帮助这个有着强迫症的乘务员——在不与乘客吵起来的前提下尽可能多的清扫垃圾。</p>
-<p>小Hi和小Ho所处的车厢可以被抽象成连成一列的N个位置，按顺序分别编号为1..N，每个位置上都有且仅有一名乘客在休息。同时每个位置上都有一些垃圾需要被清理，其中第i个位置的垃圾数量为Wi。乘务员可以选择其中一些位置进行清理，但是值得注意的是，一旦有编号连续的M个位置中有超过Q个的位置都在这一次清理中被选中的话（即这M个位置上的乘客有至少Q+1个被惊醒了），就会发生令人不愉快的口角。而小Hi和小Ho的任务是，计算选择哪些位置进行清理，在不发生口角的情况下，清扫尽可能多的垃圾。</p>
-<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第一行为三个正整数N、M和Q，意义如前文所述。</p>
-<p>每组测试数据的第二行为N个整数，分别为W1到WN，代表每一个位置上的垃圾数目。</p>
-<p>对于100%的数据，满足N&lt;=1000, 2&lt;=M&lt;=10,1&lt;=Q&lt;=M, Wi&lt;=100</p>
-<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示在不发生口角的情况下，乘务员最多可以清扫的垃圾数目。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5 2 1<br>36 9 80 69 85 </p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>201</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>继续dp，一次ac<br>状态压缩是一个很有用的工具，我5号在MSRA面试的过程中两次用到了状态压缩。看得出来，这个方法虽然对解题很有帮助。<br>我是这么分状态讨论的，n<m和n>=m。<br>前者，穷举一下就行啦，毕竟m的数量级不会超过10，怎么着枚举一遍也不是很高的复杂度。<br>后者，就要用到dp了。<br>首先我考虑一个优化方法，就是把实际的状态和压缩后的状态一一对应起来，这里我用到了刘汝佳大神的《算法竞赛入门经典》里面提到的方法。先是建立一个数组，用压缩后的状态索引实际状态。<br>再用map进行映射，将实际状态映射给压缩后的状态。因为还要知道每个状态对应的q值是多少，这也可以预先算好，我也是用了一个map来的，当然用数组也是很方便的。以上都可以在进行dp之前先算好。<br>第二就是dp了，dp需要初始状态，因为n&gt;=m，所以我直接将前m节列车的情况作了一个穷举，得到初始状态，这和n&lt;m的实质是一样的。<br>递推就很简单了，对于每个状态进行考虑，要满足</m和n></p>
-<blockquote>
-<p>本身这个状态是合法的<br>递推到这个状态的状态也要是合法的<br>从合法的状态里取最好的就ok啦</p>
-</blockquote>
-<p>根据这个思路可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> states[<span class="number">1024</span>];</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> mapstate2q;</div><div class="line"><span class="keyword">void</span> int2states()</div><div class="line">{</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1024</span>; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> num = i;</div><div class="line">		<span class="keyword">int</span> q = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (num != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			q += num % <span class="number">2</span>;</div><div class="line">			states[i].push_back(num % <span class="number">2</span>);</div><div class="line">			num /= <span class="number">2</span>;</div><div class="line">		}</div><div class="line">		mapstate2q[i] = q;</div><div class="line">		<span class="keyword">while</span> (states[i].size() &lt; <span class="number">10</span>)</div><div class="line">			states[i].push_back(<span class="number">0</span>);</div><div class="line"></div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> num2binary(<span class="keyword">int</span> *train, <span class="keyword">int</span> mi)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (mi != <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		train[index] = mi % <span class="number">2</span>;</div><div class="line">		mi /= <span class="number">2</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= index; i++)</div><div class="line">		ans += train[i];</div><div class="line">	<span class="keyword">return</span> ans;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m, q;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; q;</div><div class="line">	<span class="keyword">int</span> *waste = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; waste[i];</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span> (n &lt; m)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> mi = <span class="number">1</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">			mi *= <span class="number">2</span>;</div><div class="line">		<span class="keyword">int</span> *train = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mi; i++)</div><div class="line">		{</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</div><div class="line">				train[j] = <span class="number">0</span>;</div><div class="line">			<span class="keyword">if</span> (num2binary(train, mi) &lt;= q)</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</div><div class="line">					temp += waste[j] * train[j];</div><div class="line">				<span class="keyword">if</span> (temp &gt; ans)</div><div class="line">				{</div><div class="line">					ans = temp;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">delete</span>[] train;</div><div class="line">	}</div><div class="line">	<span class="keyword">else</span></div><div class="line">	{</div><div class="line">		int2states();</div><div class="line">		<span class="keyword">int</span> mi = <span class="number">1</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">			mi *= <span class="number">2</span>;</div><div class="line">		<span class="keyword">int</span> *mystate = <span class="keyword">new</span> <span class="keyword">int</span>[mi];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mi; i++)<span class="comment">//初始化</span></div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (mapstate2q[i] &lt;= q)</div><div class="line">			{</div><div class="line">				mystate[i] = <span class="number">0</span>;</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)</div><div class="line">					mystate[i] += states[i][j] * waste[j];</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				mystate[i] = <span class="number">0</span>;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> *tempstate = <span class="keyword">new</span> <span class="keyword">int</span>[mi];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt; n; i++)<span class="comment">//对每个位置开始递推</span></div><div class="line">		{</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mi;j++)</div><div class="line">				<span class="keyword">if</span> (mapstate2q[j] &lt;= q)</div><div class="line">				{</div><div class="line">					tempstate[j] = <span class="number">0</span>;</div><div class="line">					<span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">					<span class="keyword">if</span> (j &lt; mi / <span class="number">2</span>)</div><div class="line">					{</div><div class="line">						temp = j * <span class="number">2</span>;</div><div class="line">						<span class="keyword">int</span> ccc = <span class="number">0</span>;</div><div class="line">						<span class="keyword">if</span> (mapstate2q[temp] &lt;= q)</div><div class="line">						{</div><div class="line">							ccc = mystate[temp];</div><div class="line">						}</div><div class="line">						<span class="keyword">if</span> (mapstate2q[temp + <span class="number">1</span>] &lt;= q)</div><div class="line">						{</div><div class="line">							<span class="keyword">if</span> (mystate[temp + <span class="number">1</span>]&gt;ccc)</div><div class="line">								ccc = mystate[temp + <span class="number">1</span>];</div><div class="line">						}</div><div class="line">						tempstate[j] = ccc;</div><div class="line">					}</div><div class="line">					<span class="keyword">else</span></div><div class="line">					{</div><div class="line">						temp = j - mi / <span class="number">2</span>;</div><div class="line">						temp *= <span class="number">2</span>;</div><div class="line">						<span class="keyword">int</span> ccc = <span class="number">0</span>;</div><div class="line">						<span class="keyword">if</span> (mapstate2q[temp] &lt;= q)</div><div class="line">						{</div><div class="line">							ccc = mystate[temp];</div><div class="line">						}</div><div class="line">						<span class="keyword">if</span> (mapstate2q[temp + <span class="number">1</span>] &lt;= q)</div><div class="line">						{</div><div class="line">							<span class="keyword">if</span> (mystate[temp + <span class="number">1</span>]&gt;ccc)</div><div class="line">								ccc = mystate[temp + <span class="number">1</span>];</div><div class="line">						}</div><div class="line">						tempstate[j] = ccc+waste[i];</div><div class="line">					}</div><div class="line">					</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span></div><div class="line">				{</div><div class="line">					tempstate[j] = <span class="number">0</span>;</div><div class="line">				}</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mi; j++)</div><div class="line">				mystate[j] = tempstate[j];</div><div class="line">		}</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mi;i++)</div><div class="line">			<span class="keyword">if</span> (mystate[i]&gt;ans)</div><div class="line">			{</div><div class="line">				ans = mystate[i];</div><div class="line">			}</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/20/hiho1044/" data-id="wg3m81jbhi1tnjs6" data-title="hiho1044 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/20/hiho1044/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -507,7 +508,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -516,7 +517,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -534,7 +535,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -544,6 +545,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/26/hiho1055/">hiho1055</a>
+          </li>
         
           <li>
             <a href="/2015/05/25/hiho1174/">hiho1174</a>
@@ -559,10 +564,6 @@
         
           <li>
             <a href="/2015/05/21/hiho1048/">hiho1048</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/20/hiho1044/">hiho1044</a>
           </li>
         
       </ul>
