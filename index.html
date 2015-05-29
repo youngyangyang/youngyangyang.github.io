@@ -84,6 +84,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1066" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/29/hiho1066/" class="article-date">
+  <time datetime="2015-05-29T13:07:55.000Z" itemprop="datePublished">5月 29 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/29/hiho1066/">hiho1066</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1066_:_无间道之并查集">1066 : 无间道之并查集</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这天天气晴朗、阳光明媚、鸟语花香，空气中弥漫着春天的气息……额，说远了，总之，小Hi和小Ho决定趁着这朗朗春光出去玩。</p>
+<p>但是刚刚离开居住的宾馆不久，抄近道不小心走入了一条偏僻小道的小Hi和小Ho就发现自己的前方走来了几个彪形大汉，定睛一看还都是地地道道的黑人兄弟！小Hi和小Ho这下就慌了神，捡肥皂事小，这一身百把来斤别一不小心葬身他乡可就没处说去了。</p>
+<p>就在两人正举足无措之时，为首的黑叔叔从怀里掏出了一件东西——两张花花绿绿的纸，分别递给了小Hi和小Ho。</p>
+<p>小Hi和小Ho接过来，只见上面写道（译为中文）：“本地最大的帮派——青龙帮，诚邀您的加入！”下面还详细的列出了加入青龙帮的种种好处。</p>
+<p>于是两人略感心安，在同黑叔叔们交谈一番之后，已是均感相见恨晚。同时，在小Hi和小Ho表示自己不日便将回国之后，黑叔叔们也没有再提加入帮派之事，但是那为首的黑叔叔思索一会，开口道（译为中文）：“我现在有一个难题，思索了很久也没法子解决，既然你们俩都是高材生，不如来帮我看看。”</p>
+<p>小Hi和小Ho点了点头表示没问题，于是黑叔叔继续说道：“这个问题是这样的，我们帮派最近混进了许多警察的卧底，但是在我们的调查过程中只能够知道诸如‘某人和另一个人是同阵营的’这样的信息，虽然没有办法知道他们具体是哪个阵营的，但是这样的信息也是很重要的，因为我们经常会想要知道某两个人究竟是不是同一阵营的。”</p>
+<p>小Hi和小Ho赞同的点了点头，毕竟无间道也都是他们看过的。</p>
+<p>黑叔叔接着说道：“于是现在问题就来了，我希望你们能写出这样一个程序，我会有两种操作，一种是告诉它哪两个人是同一阵营的，而另一种是询问某两个人是不是同一阵营的……既然你们就要回国了，不如现在就去我们帮派的总部写好这个程序再走把。”</p>
+<p>为了生命安全与……小Hi和小Ho都不得不解决这个问题！那么他们究竟从何下手呢？</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第1行为一个整数N，表示黑叔叔总共进行的操作次数。</p>
+<p>每组测试数据的第2~N+1行，每行分别描述黑叔叔的一次操作，其中第i+1行为一个整数op_i和两个由大小写字母组成的字符串Name1_i, Name2_i，其中op_i只可能为0或1，当op_i=0时，表示黑叔叔判定Name1_i和Name2_i是同一阵营的，当op_i=1时，表示黑叔叔希望知道Name1_i和Name2_i是否为同一阵营的。</p>
+<p>对于100%的数据，满足N&lt;=10^5, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人），对于所有的i，满足Name1_i和Name2_i是不同的两个人。</p>
+<p><strong>输出</strong><br>对于每组测试数据，对于黑叔叔每次op_i=1的操作，输出一行，表示查询的结果：如果根据已知信息（即这次操作之前的所有op_i=0的操作），可以判定询问中的两个人是同一阵营的，则输出yes，否则输出no。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>10<br>0 Steven David<br>0 Lcch Dzx<br>1 Lcch Dzx<br>1 David Dzx<br>0 Lcch David<br>0 Frank Dzx<br>1 Steven Dzx<br>1 Frank David<br>0 Steven Dzx<br>0 Dzx Frank</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>yes<br>no<br>yes<br>yes</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC。<br>并查集的话最重要的事情就是知道这两个不同的点位于哪两个集合，可能是同一个集合，也可能是不同的集合。<br>我们可以对集合进行编号，当然不一定非要连续的，也不一定非要从0或者1开始，只要不同集合的编号不一样就ok。<br>第一，我用map将每个不同的名字都对应好一个编号，类似于我们的身份证号一样的id。<br>第二，初始化的时候我们认为每个人都只属于自己的集合，为了简单，我们认为每个人初始的集合编号就是自己的id编号。<br>第三，每次执行1操作就很简单了，因为只要查一下名字对应id所在的集合号码是不是相同就ok了。<br>第四，每次执行0操作有点复杂。但是仍然可以分情况讨论。若两个名字本来就是同一个集合，那什么都不用做。如果不是同一个集合，不失一般性，假设一个属于a集合，一个属于b集合。<br>那么我们可以把a集合里的所有id对应的集合都改为b，或者把b集合里所有id对应的集合都改为a。改的方法我们就用深搜就行了。从时间复杂度的角度考虑，最好的方法是把集合元素少的改。<br>但那样需要额外空间记录集合元素个数，并不断更新。所以为了方便我就采用了随机化的方法，用随机数进行选择到底是改哪个集合里的元素。</p>
+<p>根据以上分析可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;time.h&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> belongset[<span class="number">200001</span>];</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span> people;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">200001</span>];</div><div class="line"><span class="keyword">void</span> dfs(<span class="keyword">int</span> cur, <span class="keyword">int</span> ultraset)</div><div class="line">{</div><div class="line">	belongset[cur] = ultraset;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (belongset[iter-&gt;first] != ultraset)</div><div class="line">		{</div><div class="line">			belongset[iter-&gt;first] = ultraset;</div><div class="line">			dfs(iter-&gt;first, ultraset);</div><div class="line">		}</div><div class="line">	</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	srand((<span class="keyword">unsigned</span>)time(NULL));</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">200001</span>; i++)</div><div class="line">		belongset[i] = i;</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> id = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> operation; <span class="built_in">string</span> name_1, name_2;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; operation;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt;name_1 &gt;&gt; name_2;</div><div class="line">		<span class="keyword">if</span> (operation == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (people.count(name_1) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				people[name_1] = id;</div><div class="line">				id++;</div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (people.count(name_2) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				people[name_2] = id;</div><div class="line">				id++;</div><div class="line">			}</div><div class="line">			</div><div class="line">			<span class="keyword">if</span> (belongset[people[name_1]] == belongset[people[name_2]])</div><div class="line">			{</div><div class="line">				;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> choice = rand() % <span class="number">2</span>;</div><div class="line">				<span class="keyword">if</span> (choice == <span class="number">0</span>)</div><div class="line">				{</div><div class="line">					dfs(people[name_1], belongset[people[name_2]]);</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span></div><div class="line">				{</div><div class="line">					dfs(people[name_2], belongset[people[name_1]]);</div><div class="line">				}</div><div class="line">			}</div><div class="line">			adjmap[people[name_1]][people[name_2]] = <span class="number">1</span>;</div><div class="line">			adjmap[people[name_2]][people[name_1]] = <span class="number">1</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (operation == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (people.count(name_1) == <span class="number">0</span> || people.count(name_2) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"no"</span> &lt;&lt; endl;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				<span class="keyword">if</span> (belongset[people[name_1]] == belongset[people[name_2]])</div><div class="line">				{</div><div class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"yes"</span> &lt;&lt; endl;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span></div><div class="line">				{</div><div class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"no"</span> &lt;&lt; endl;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/29/hiho1066/" data-id="exw0472r76ftdun4" data-title="hiho1066 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/29/hiho1066/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1062" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/28/hiho1062/" class="article-date">
@@ -420,91 +502,6 @@
 
 
   
-    <article id="post-hiho1049" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/22/hiho1049/" class="article-date">
-  <time datetime="2015-05-22T07:36:34.000Z" itemprop="datePublished">5月 22 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/22/hiho1049/">hiho1049</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1049_:_后序遍历">1049 : 后序遍历</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>在参与过了美食节之后，小Hi和小Ho在别的地方又玩耍了一阵子，在这个过程中，小Ho得到了一个非常有意思的玩具——一棵由小球和木棍连接起来的二叉树！</p>
-<p>小Ho对这棵二叉树爱不释手，于是给它的每一个节点都标记了一个标号——一个属于A..Z的大写字母，并且没有任意两个节点的标号是一样的。小Hi也瞅准了这个机会，重新巩固了一下小Ho关于二叉树遍历的基础知识~就这样，日子安稳的过了两天。</p>
-<p>这天，小Ho正好在求解这棵二叉树的前序、中序和后序遍历的结果，但是却在求出前序遍历和中序遍历之后不小心把二叉树摔到了地上，小球和木棍等零件散落了一地！</p>
-<p>小Ho损失了心爱的玩具，正要嚎啕大哭起来，所幸被小Hi发现了，劝说道：“别着急，这不是零件都还在么？拼起来不就是了？”</p>
-<p>“可是我忘记了二叉树长什么样子了！”小Ho沮丧道。</p>
-<p>“这个简单，你不是刚刚求出了这棵二叉树的前序和中序遍历的结果么，利用这两个信息就可以还原出整棵二叉树来哦！”</p>
-<p>“这样么？！！”小Ho止住了泪水，问道：“那要怎么做呢？”</p>
-<p>没错！小Ho在这一周遇到的问题便是：<strong>给出一棵二叉树的前序和中序遍历的结果，还原这棵二叉树并输出其后序遍历的结果</strong>。</p>
-<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第一行为一个由大写英文字母组成的字符串，表示该二叉树的前序遍历的结果。</p>
-<p>每组测试数据的第二行为一个由大写英文字母组成的字符串，表示该二叉树的中序遍历的结果。</p>
-<p>对于100%的数据，满足二叉树的节点数小于等于26。</p>
-<p><strong>输出</strong><br>对于每组测试数据，输出一个由大写英文字母组成的字符串，表示还原出的二叉树的后序遍历的结果。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>AB<br>BA</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>BA</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>一次AC<br>这道题高中的时候遇到过，简直是初赛和各种数据结构考试的必考试题。方法就是分治。<br>对于每一棵树（子树）来讲，其根节点在前序输出中排在第一位，而在中序遍历里它所在的位置可以把输出分成左右不相连的两块，左边是左子树的中序输出，右边是右子树的中序输出。<br>原理就是前序遍历，中序遍历的定义。</p>
-<p>根据这个思路可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node{</div><div class="line">	<span class="keyword">char</span> c;</div><div class="line">	node * leftchild;</div><div class="line">	node * rightchild;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">void</span> houxu(node *cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (cur == NULL)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	houxu(cur-&gt;leftchild);</div><div class="line">	houxu(cur-&gt;rightchild);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; cur-&gt;c;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> destructTree(node *cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (cur == NULL)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	destructTree(cur-&gt;leftchild);</div><div class="line">	destructTree(cur-&gt;rightchild);</div><div class="line">	<span class="keyword">delete</span> cur;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">void</span> constructtree(<span class="built_in">string</span> qianxu, <span class="built_in">string</span> zhongxu, node *&cur)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (qianxu.size() == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		cur = NULL;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">char</span> c = qianxu[<span class="number">0</span>];</div><div class="line">	<span class="keyword">int</span> index = zhongxu.find(c);</div><div class="line">	cur = <span class="keyword">new</span> node;</div><div class="line">	cur-&gt;c = c;</div><div class="line">	<span class="built_in">string</span> leftqianxu, leftzhongxu, rightqianxu, rightzhongxu;</div><div class="line">	leftqianxu = qianxu.substr(<span class="number">1</span>, index);</div><div class="line">	leftzhongxu = zhongxu.substr(<span class="number">0</span>, index);</div><div class="line">	rightqianxu = qianxu.substr(index + <span class="number">1</span>, qianxu.size() - index);</div><div class="line">	rightzhongxu = zhongxu.substr(index + <span class="number">1</span>, zhongxu.size() - index);</div><div class="line">	constructtree(leftqianxu, leftzhongxu, cur-&gt;leftchild);</div><div class="line">	constructtree(rightqianxu, rightzhongxu, cur-&gt;rightchild);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="built_in">string</span> qianxu, zhongxu;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; qianxu &gt;&gt; zhongxu;</div><div class="line">	node *head = NULL;</div><div class="line">	<span class="keyword">if</span> (qianxu.size() == <span class="number">0</span>)</div><div class="line">	{</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	constructtree(qianxu, zhongxu, head);</div><div class="line">	houxu(head);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; endl;</div><div class="line">	destructTree(head);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>一开始我写完之后进行测试发现总是只输出一个回车符号。一直感到奇怪，单步跟踪发现constructtree函数无误，但是head指针的值没有变化。<br>于是我在constructtree函数的形参第三个加了一下引用符号，也算是重新理解了一下指针传递的意思。<br>如果用的是不是引用传递而是值传递。那么head相当于在某个内存空间申请了个位置，位置里面放的值是NULL也就是全零。<br>值传递则是一个复制的过程，重新申请一个空间，里面也放了NULL也就是全零。在constructtree函数里面new node的时候只是将新申请的空间里面放的位置指针的值改掉了。<br>实质上head原有位置的值还是NULL全零。所以并未改变head的指向。<br>所以如果我们要用引用传递。</p>
-<p>这道题我以前做过，把以前的代码也贴上来对比一下,好像也没什么区别，但看起来清爽一点。</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">struct</span> Node</div><div class="line">{</div><div class="line">	<span class="keyword">char</span> element;</div><div class="line">	Node * left,* right;</div><div class="line">	Node(<span class="keyword">char</span> a):element(a){left=NULL;right=NULL;}</div><div class="line">};</div><div class="line"></div><div class="line">Node * dc(<span class="keyword">const</span> <span class="built_in">string</span> & s1,<span class="keyword">const</span> <span class="built_in">string</span> & s2)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (s1.length()==<span class="number">0</span>) <span class="keyword">return</span> NULL;</div><div class="line">	<span class="keyword">if</span> (s1.length()==<span class="number">1</span>)</div><div class="line">	{</div><div class="line">		Node *temp=<span class="keyword">new</span> Node(s1[<span class="number">0</span>]);</div><div class="line">		<span class="keyword">return</span> temp;</div><div class="line">	}</div><div class="line">	<span class="keyword">char</span> root=s1[<span class="number">0</span>];</div><div class="line">	<span class="keyword">int</span> index=s2.find(s1[<span class="number">0</span>]);</div><div class="line">	Node *temp=<span class="keyword">new</span> Node(s1[<span class="number">0</span>]);</div><div class="line">	temp-&gt;left=dc(s1.substr(<span class="number">1</span>,index),s2.substr(<span class="number">0</span>,index));</div><div class="line">	temp-&gt;right=dc(s1.substr(<span class="number">1</span>+index,s1.size()-<span class="number">1</span>-index),s2.substr(index+<span class="number">1</span>,s2.size()-<span class="number">1</span>-index));</div><div class="line">	<span class="keyword">return</span> temp;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> deletetree(Node * temp)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (temp==NULL) <span class="keyword">return</span> ;</div><div class="line">	<span class="keyword">if</span> (temp-&gt;left !=NULL) deletetree(temp-&gt;left);</div><div class="line">	<span class="keyword">if</span> (temp-&gt;right !=NULL) deletetree(temp-&gt;right);</div><div class="line">	<span class="keyword">delete</span> temp;</div><div class="line">}</div><div class="line"><span class="keyword">void</span> printback(Node * temp)</div><div class="line">{</div><div class="line">	<span class="keyword">if</span> (temp==NULL) <span class="keyword">return</span>;</div><div class="line">	printback(temp-&gt;left);</div><div class="line">	printback(temp-&gt;right);</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;temp-&gt;element;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="built_in">string</span> s1,s2;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;s1&gt;&gt;s2;</div><div class="line">	Node *root=dc(s1,s2);</div><div class="line">	printback(root);</div><div class="line">	deletetree(root);</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/22/hiho1049/" data-id="hwf03f3u6seya9r7" data-title="hiho1049 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/22/hiho1049/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -518,7 +515,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -527,7 +524,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -545,7 +542,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -555,6 +552,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/29/hiho1066/">hiho1066</a>
+          </li>
         
           <li>
             <a href="/2015/05/28/hiho1062/">hiho1062</a>
@@ -570,10 +571,6 @@
         
           <li>
             <a href="/2015/05/23/hiho1050/">hiho1050</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/22/hiho1049/">hiho1049</a>
           </li>
         
       </ul>

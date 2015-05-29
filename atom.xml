@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-05-28T11:55:28.407Z</updated>
+  <updated>2015-05-29T13:08:42.185Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,54 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1066]]></title>
+    <link href="http://youngyangyang.com/2015/05/29/hiho1066/"/>
+    <id>http://youngyangyang.com/2015/05/29/hiho1066/</id>
+    <published>2015-05-29T13:07:55.000Z</published>
+    <updated>2015-05-29T13:08:33.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1066_:_无间道之并查集">1066 : 无间道之并查集</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这天天气晴朗、阳光明媚、鸟语花香，空气中弥漫着春天的气息……额，说远了，总之，小Hi和小Ho决定趁着这朗朗春光出去玩。</p>
+<p>但是刚刚离开居住的宾馆不久，抄近道不小心走入了一条偏僻小道的小Hi和小Ho就发现自己的前方走来了几个彪形大汉，定睛一看还都是地地道道的黑人兄弟！小Hi和小Ho这下就慌了神，捡肥皂事小，这一身百把来斤别一不小心葬身他乡可就没处说去了。</p>
+<p>就在两人正举足无措之时，为首的黑叔叔从怀里掏出了一件东西——两张花花绿绿的纸，分别递给了小Hi和小Ho。</p>
+<p>小Hi和小Ho接过来，只见上面写道（译为中文）：“本地最大的帮派——青龙帮，诚邀您的加入！”下面还详细的列出了加入青龙帮的种种好处。</p>
+<p>于是两人略感心安，在同黑叔叔们交谈一番之后，已是均感相见恨晚。同时，在小Hi和小Ho表示自己不日便将回国之后，黑叔叔们也没有再提加入帮派之事，但是那为首的黑叔叔思索一会，开口道（译为中文）：“我现在有一个难题，思索了很久也没法子解决，既然你们俩都是高材生，不如来帮我看看。”</p>
+<p>小Hi和小Ho点了点头表示没问题，于是黑叔叔继续说道：“这个问题是这样的，我们帮派最近混进了许多警察的卧底，但是在我们的调查过程中只能够知道诸如‘某人和另一个人是同阵营的’这样的信息，虽然没有办法知道他们具体是哪个阵营的，但是这样的信息也是很重要的，因为我们经常会想要知道某两个人究竟是不是同一阵营的。”</p>
+<p>小Hi和小Ho赞同的点了点头，毕竟无间道也都是他们看过的。</p>
+<p>黑叔叔接着说道：“于是现在问题就来了，我希望你们能写出这样一个程序，我会有两种操作，一种是告诉它哪两个人是同一阵营的，而另一种是询问某两个人是不是同一阵营的……既然你们就要回国了，不如现在就去我们帮派的总部写好这个程序再走把。”</p>
+<p>为了生命安全与……小Hi和小Ho都不得不解决这个问题！那么他们究竟从何下手呢？</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第1行为一个整数N，表示黑叔叔总共进行的操作次数。</p>
+<p>每组测试数据的第2~N+1行，每行分别描述黑叔叔的一次操作，其中第i+1行为一个整数op_i和两个由大小写字母组成的字符串Name1_i, Name2_i，其中op_i只可能为0或1，当op_i=0时，表示黑叔叔判定Name1_i和Name2_i是同一阵营的，当op_i=1时，表示黑叔叔希望知道Name1_i和Name2_i是否为同一阵营的。</p>
+<p>对于100%的数据，满足N&lt;=10^5, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人），对于所有的i，满足Name1_i和Name2_i是不同的两个人。</p>
+<p><strong>输出</strong><br>对于每组测试数据，对于黑叔叔每次op_i=1的操作，输出一行，表示查询的结果：如果根据已知信息（即这次操作之前的所有op_i=0的操作），可以判定询问中的两个人是同一阵营的，则输出yes，否则输出no。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>10<br>0 Steven David<br>0 Lcch Dzx<br>1 Lcch Dzx<br>1 David Dzx<br>0 Lcch David<br>0 Frank Dzx<br>1 Steven Dzx<br>1 Frank David<br>0 Steven Dzx<br>0 Dzx Frank</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>yes<br>no<br>yes<br>yes</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC。<br>并查集的话最重要的事情就是知道这两个不同的点位于哪两个集合，可能是同一个集合，也可能是不同的集合。<br>我们可以对集合进行编号，当然不一定非要连续的，也不一定非要从0或者1开始，只要不同集合的编号不一样就ok。<br>第一，我用map将每个不同的名字都对应好一个编号，类似于我们的身份证号一样的id。<br>第二，初始化的时候我们认为每个人都只属于自己的集合，为了简单，我们认为每个人初始的集合编号就是自己的id编号。<br>第三，每次执行1操作就很简单了，因为只要查一下名字对应id所在的集合号码是不是相同就ok了。<br>第四，每次执行0操作有点复杂。但是仍然可以分情况讨论。若两个名字本来就是同一个集合，那什么都不用做。如果不是同一个集合，不失一般性，假设一个属于a集合，一个属于b集合。<br>那么我们可以把a集合里的所有id对应的集合都改为b，或者把b集合里所有id对应的集合都改为a。改的方法我们就用深搜就行了。从时间复杂度的角度考虑，最好的方法是把集合元素少的改。<br>但那样需要额外空间记录集合元素个数，并不断更新。所以为了方便我就采用了随机化的方法，用随机数进行选择到底是改哪个集合里的元素。</p>
+<p>根据以上分析可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;time.h&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> belongset[<span class="number">200001</span>];</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span> people;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">200001</span>];</div><div class="line"><span class="keyword">void</span> dfs(<span class="keyword">int</span> cur, <span class="keyword">int</span> ultraset)</div><div class="line">{</div><div class="line">	belongset[cur] = ultraset;</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end();iter++)</div><div class="line">		<span class="keyword">if</span> (belongset[iter-&gt;first] != ultraset)</div><div class="line">		{</div><div class="line">			belongset[iter-&gt;first] = ultraset;</div><div class="line">			dfs(iter-&gt;first, ultraset);</div><div class="line">		}</div><div class="line">	</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	srand((<span class="keyword">unsigned</span>)time(NULL));</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">200001</span>; i++)</div><div class="line">		belongset[i] = i;</div><div class="line">	</div><div class="line">	<span class="keyword">int</span> id = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> operation; <span class="built_in">string</span> name_1, name_2;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; operation;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt;name_1 &gt;&gt; name_2;</div><div class="line">		<span class="keyword">if</span> (operation == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (people.count(name_1) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				people[name_1] = id;</div><div class="line">				id++;</div><div class="line">			}</div><div class="line">			<span class="keyword">if</span> (people.count(name_2) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				people[name_2] = id;</div><div class="line">				id++;</div><div class="line">			}</div><div class="line">			</div><div class="line">			<span class="keyword">if</span> (belongset[people[name_1]] == belongset[people[name_2]])</div><div class="line">			{</div><div class="line">				;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> choice = rand() % <span class="number">2</span>;</div><div class="line">				<span class="keyword">if</span> (choice == <span class="number">0</span>)</div><div class="line">				{</div><div class="line">					dfs(people[name_1], belongset[people[name_2]]);</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span></div><div class="line">				{</div><div class="line">					dfs(people[name_2], belongset[people[name_1]]);</div><div class="line">				}</div><div class="line">			}</div><div class="line">			adjmap[people[name_1]][people[name_2]] = <span class="number">1</span>;</div><div class="line">			adjmap[people[name_2]][people[name_1]] = <span class="number">1</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (operation == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (people.count(name_1) == <span class="number">0</span> || people.count(name_2) == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"no"</span> &lt;&lt; endl;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				<span class="keyword">if</span> (belongset[people[name_1]] == belongset[people[name_2]])</div><div class="line">				{</div><div class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"yes"</span> &lt;&lt; endl;</div><div class="line">				}</div><div class="line">				<span class="keyword">else</span></div><div class="line">				{</div><div class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">"no"</span> &lt;&lt; endl;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1066_:_无间道之并查集">1066 : 无间道之并查集</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>这天天气晴朗、阳光明媚、鸟语花香，空气中]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1062]]></title>
@@ -988,51 +1036,6 @@
       <category term="数据挖掘" scheme="http://youngyangyang.com/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
     
       <category term="DataMining&amp;MachineLearning" scheme="http://youngyangyang.com/categories/DataMining-MachineLearning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[微软编程之美挑战赛2015资格赛第二题]]></title>
-    <link href="http://youngyangyang.com/2015/04/21/hihoartpro2/"/>
-    <id>http://youngyangyang.com/2015/04/21/hihoartpro2/</id>
-    <published>2015-04-21T06:33:11.000Z</published>
-    <updated>2015-04-21T06:38:42.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="微软编程之美2015资格赛：回文字符序列">微软编程之美2015资格赛：回文字符序列</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>给定字符串，求它的回文子序列个数。回文子序列反转字符顺序后仍然与原序列相同。例如字符串aba中，回文子序列为”a”, “a”, “aa”, “b”, “aba”，共5个。内容相同位置不同的子序列算不同的子序列。</p>
-<p><strong>输入</strong><br>第一行一个整数T，表示数据组数。之后是T组数据，每组数据为一行字符串。</p>
-<p><strong>输出</strong><br>对于每组数据输出一行，格式为”Case #X: Y”，X代表数据编号（从1开始），Y为答案。答案对100007取模。</p>
-<p><strong>数据范围</strong><br>1 ≤ T ≤ 30</p>
-<p>小数据</p>
-<p>字符串长度 ≤ 25</p>
-<p>大数据</p>
-<p>字符串长度 ≤ 1000</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5<br>aba<br>abcbaddabcba<br>12111112351121<br>ccccccc<br>fdadfa</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>Case #1: 5<br>Case #2: 277<br>Case #3: 1333<br>Case #4: 127<br>Case #5: 17</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>本题乍看很难，的确很难啊。多亏了某晕哥的某acm学长，学长为什么都这么吊。<br>这种题目肯定只能动态规划了，窝开始也是这么想的，但是不太知道怎么写递推公式。还是学长吊。<br>假设f(i,j)表示从第i个字符开始到第j个字符结束的字符串所有的回文子串的个数。那么结果就直接输出f(1,n)就行了。<br>下面是重要的递推公式：</p>
-<blockquote>
-<p>$$f(i,j)=f(i,j-1)+1+\sum_{k=i}^{j-1} f(k+1,j-1)$$  if string[k]==string[j]<br>看懂什么意思么？看不懂吧。看不懂就对了，我用markdown写这个公式都花了半天，你这么快就懂了，那我面子往哪搁。<br>从i开始到j结束的回文子串有两种情况<br>第一种，包含第j个字符<br>第二种，不包含第j个字符<br>那么不包含第j个字符不就是f(i,j-1)了么<br>包含第j个字符根据到底是跟谁对称的，又分n多种情况，但是，我们是可以枚举的。<br>假设，第k个字符和第j个字符对称，那么以k开头，j结尾的回文子串(包含两个字符)有多少个呢，有f(k+1,j-1)个。<br>把它们统统加起来——庞统<br>最后要+1，为什么不是+10086呢，因为第j个字符本身也是个回文子串啊。<br>好了剩下的就是码代码了。</p>
-</blockquote>
-<p>以下是我的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> mycount[<span class="number">1002</span>][<span class="number">1002</span>];</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t = <span class="number">0</span>;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="built_in">string</span> str;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; t; n++)</div><div class="line">	{</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; str;</div><div class="line">		<span class="keyword">int</span> len = str.size();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">1002</span>; j++)</div><div class="line">				mycount[i][j] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			mycount[i][i] = <span class="number">1</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)</div><div class="line">		{</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; len; j++)</div><div class="line">			{</div><div class="line">				mycount[i][j] = mycount[i][j - <span class="number">1</span>];</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt; j; k++)</div><div class="line">					<span class="keyword">if</span> (str[k] == str[j])</div><div class="line">						mycount[i][j] += (mycount[k + <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>) % <span class="number">100007</span>;</div><div class="line">				mycount[i][j] = (mycount[i][j] + <span class="number">1</span>) % <span class="number">100007</span>;</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"Case #"</span>&lt;&lt;(n+<span class="number">1</span>)&lt;&lt;<span class="string">": "</span> &lt;&lt; mycount[<span class="number">0</span>][len - <span class="number">1</span>] &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="微软编程之美2015资格赛：回文字符序列">微软编程之美2015资格赛：回文字符序列</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>给定字符串，求它]]>
-    </summary>
-    
-      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
-    
-      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
     
   </entry>
   
