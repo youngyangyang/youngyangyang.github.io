@@ -84,6 +84,80 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1175" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/31/hiho1175/" class="article-date">
+  <time datetime="2015-05-31T05:49:20.000Z" itemprop="datePublished">5月 31 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/31/hiho1175/">hiho1175</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1175_:_拓扑排序·二">1175 : 拓扑排序·二</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：<br>1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链接了节点u和节点v，则节点u可以向节点v发送信息，但是节点v不能通过该链接向节点u发送信息。<br>2.在刚感染病毒时，校园网立刻切断了一些网络链接，恰好使得剩下网络连接不存在环，避免了节点被反复感染。也就是说从节点i扩散出的病毒，一定不会再回到节点i。<br>3.当1个病毒感染了节点后，它并不会检查这个节点是否被感染，而是直接将自身的拷贝向所有邻居节点发送，它自身则会留在当前节点。所以一个节点有可能存在多个病毒。<br>4.现在已经知道黑客在一开始在K个节点上分别投放了一个病毒。</p>
+<p>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。<br>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。</p><br><img src="http://media.hihocoder.com/problem_images/20150530/14329733027771.png" style="width: 60%;" title="week48_1.png"><br>最开始节点1向节点2和节点3传送了病毒，自身留有1个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733026264.png" style="width: 60%;" title="week48_2.png"><br>其中一个病毒到达节点2后，向节点3传送了一个病毒。另一个到达节点3的病毒向节点4发送自己的拷贝：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733022993.png" style="width: 60%;" title="week48_3.png"><br>当从节点2传送到节点3的病毒到达之后，该病毒又发送了一份自己的拷贝向节点4。此时节点3上留有2个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733028538.png" style="width: 60%;" title="week48_4.png"><br>最后每个节点上的病毒为：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733025774.png" style="width: 60%;" title="week48_5.png"><br>小Hi和小Ho根据目前的情况发现一段时间之后，所有的节点病毒数量一定不会再发生变化。那么对于整个网络来说，最后会有多少个病毒呢？<p></p>
+<p><strong>输入</strong><br>第1行：3个整数N,M,K，1≤K≤N≤100,000，1≤M≤500,000</p>
+<p>第2行：K个整数A[i]，A[i]表示黑客在节点A[i]上放了1个病毒。1≤A[i]≤N</p>
+<p>第3..M+2行：每行2个整数 u,v，表示存在一条从节点u到节点v的网络链接。数据保证为无环图。1≤u,v≤N</p>
+<p><strong>输出</strong><br>第1行：1个整数，表示最后整个网络的病毒数量 MOD 142857</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>4 4 1<br>1<br>1 2<br>1 3<br>2 3<br>3 4</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>6</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC。<br>最直观的方法当然是模拟整个病毒传播的情况，然后等没有任何一个节点的病毒数再变化的时候统计此时网络中所有病毒的个数就行了。<br>但如果按题目描述的模拟每一个时刻的变化的话，就很复杂了，因为在同一时刻会有很多节点都在向外扩散病毒。<br>但因为题目给的是不存在环的（如果有环肯定是无穷多个病毒），所以我们可以等某个节点的病毒数目不再变化之后再模拟这个节点病毒的扩散情况。毕竟自己扩散出去的病毒不会再扩散到自己了。<br>从这个方案来看，这也就是用宽搜的方法来做了。如果一个节点入度为零，则加入宽搜队列，当搜索过它之后就把它从整个图中删除。反复直到队列中没有节点了。</p>
+<p>根据以上分析可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *numofvirus = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		indegree[i] = <span class="number">0</span>;</div><div class="line">		numofvirus[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> a;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; a;</div><div class="line">		numofvirus[a] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		indegree[v]++;</div><div class="line">	}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		myqueue.pop();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="keyword">if</span> (indegree[i] == <span class="number">0</span>)</div><div class="line">			myqueue.push(i);</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">			indegree[next]--;</div><div class="line">			<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(next);</div><div class="line">			}</div><div class="line">			numofvirus[next] += numofvirus[cur];</div><div class="line">			numofvirus[next] %= <span class="number">142857</span>;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		ans += numofvirus[i];</div><div class="line">		ans %= <span class="number">142857</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">	<span class="keyword">delete</span>[] numofvirus;</div><div class="line">	<span class="keyword">delete</span>[] indegree;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/31/hiho1175/" data-id="twa2zthivctz1ba0" data-title="hiho1175 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/31/hiho1175/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1066" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/29/hiho1066/" class="article-date">
@@ -417,91 +491,6 @@
 
 
   
-    <article id="post-hiho1050" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/23/hiho1050/" class="article-date">
-  <time datetime="2015-05-23T05:14:28.000Z" itemprop="datePublished">5月 23 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/23/hiho1050/">hiho1050</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1050_:_树中的最长路">1050 : 树中的最长路</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上回说到，小Ho得到了一棵二叉树玩具，这个玩具是由小球和木棍连接起来的，而在拆拼它的过程中，小Ho发现他不仅仅可以拼凑成一棵二叉树！还可以拼凑成一棵多叉树——好吧，其实就是更为平常的树而已。</p>
-<p>但是不管怎么说，小Ho喜爱的玩具又升级换代了，于是他更加爱不释手（其实说起来小球和木棍有什么好玩的是吧= =）。小Ho手中的这棵玩具树现在由N个小球和N-1根木棍拼凑而成，这N个小球都被小Ho标上了不同的数字，并且这些数字都是出于1..N的范围之内，每根木棍都连接着两个不同的小球，并且保证任意两个小球间都不存在两条不同的路径可以互相到达。总而言之，是一个相当好玩的玩具啦！</p>
-<p>但是小Hi瞧见小Ho这个样子，觉得他这样沉迷其中并不是一件好事，于是寻思着再找点问题让他来思考思考——不过以小Hi的水准，自然是手到擒来啦！</p>
-<p>于是这天食过早饭后，小Hi便对着又拿着树玩具玩的不亦乐乎的小Ho道：“你说你天天玩这个东西，我就问你一个问题，看看你可否知道？”</p>
-<p>“不好！”小Ho想都不想的拒绝了。</p>
-<p>“那你就继续玩吧，一会回国的时候我不叫上你了~”小Hi严肃道。</p>
-<p>“诶！别别别，你说你说，我听着呢。”一向习惯于开启跟随模式的小Ho忍不住了，马上喊道。</p>
-<p>小Hi满意的点了点头，随即说道：“这才对嘛，我的问题很简单，就是——<strong>你这棵树中哪两个结点之间的距离最长？当然，这里的距离是指从一个结点走到另一个结点经过的木棍数</strong>。”。 </p>
-<p>“啊？”小Ho低头看了看手里的玩具树，困惑了。</p>
-<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第一行为一个整数N，意义如前文所述。</p>
-<p>每组测试数据的第2~N行，每行分别描述一根木棍，其中第i+1行为两个整数Ai，Bi，表示第i根木棍连接的两个小球的编号。</p>
-<p>对于20%的数据，满足N&lt;=10。</p>
-<p>对于50%的数据，满足N&lt;=10^3。</p>
-<p>对于100%的数据，满足N&lt;=10^5，1&lt;=Ai&lt;=N, 1&lt;=Bi&lt;=N</p>
-<p><strong>小Hi的Tip：那些用数组存储树边的记得要开两倍大小哦！</strong></p>
-<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示给出的这棵树中距离最远的两个结点之间相隔的距离。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>8<br>1 2<br>1 3<br>1 4<br>4 5<br>3 6<br>6 7<br>7 8</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>6</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>一次AC<br>这道题写了好久，原因是写着写着就觉得当时的想法好复杂，要修改，然后就修改到现在。<br>首先是因为输入的数据未必是可以直接构造树的，所以需要用邻接表保存起来，当然最佳经验就是map了。<br>然后是构造树，刚开始的时候我考虑把完整的树用struct构造出来，后来发现没有必要真的构造出一棵树来。<br>原因很简单，因为我们用提示的方法做的话，其实我们只要知道父亲节点是谁就行，这用一个数组就ok了，根本不需要用完整的树。<br>于是我用数组把每个节点的父亲信息保存了起来。<br>下面就是如何搜索的问题了。为了方便我把根节点设为0,0唯一连接了某个节点，其边数最多。当然有个特殊情况，如果整棵树里面每个节点最多只有2条边，说明整棵树其实是个链状的，那么最长路径也就是n-1。<br>首先把叶子节点入队，然后依次出队，出队的时候更新父节点的信息（父节点连接的最长和次长边的长度，以及父节点已经有几个子节点入队了）。当父节点的子节点的入队数等于父节点所有边数-1。那么父节点入队。<br>这里可以发现用0作为根节点的好处：如果不这样的话，任意其他的点作为根节点，那么我们就要单独讨论是不是父节点是这个点。</p>
-<p>根据这个思路可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> first, second,queuechildren;</div><div class="line">	node(){ first = second = queuechildren = <span class="number">0</span>; }</div><div class="line">};</div><div class="line">node ans[<span class="number">100001</span>];</div><div class="line"><span class="keyword">void</span> constructTree(<span class="keyword">int</span> *father, <span class="keyword">int</span> cur)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> curfather = father[cur];</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> child = iter-&gt;first;</div><div class="line">		<span class="keyword">if</span> (child != curfather)</div><div class="line">		{</div><div class="line">			father[child] = cur;</div><div class="line">			constructTree(father, child);</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		adjmap[v][u] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> maxchildren = <span class="number">0</span>, index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (maxchildren &lt; adjmap[i].size())</div><div class="line">		{</div><div class="line">			maxchildren = adjmap[i].size();</div><div class="line">			index = i;</div><div class="line">		}</div><div class="line">	<span class="keyword">if</span> (maxchildren == <span class="number">2</span>)</div><div class="line">	{</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; n - <span class="number">1</span> &lt;&lt; endl;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	adjmap[<span class="number">0</span>][index] = <span class="number">1</span>; adjmap[index][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	adjmap[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> *father = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	father[<span class="number">0</span>] = -<span class="number">1</span>; father[index] = <span class="number">0</span>;</div><div class="line">	constructTree(father, index);</div><div class="line">	<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (adjmap[i].size() == <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			myqueue.push(i);</div><div class="line">		}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">int</span> curfather = father[cur];</div><div class="line">		<span class="keyword">if</span> (curfather == <span class="number">0</span>)</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		ans[curfather].queuechildren++;</div><div class="line">		<span class="keyword">if</span> (ans[curfather].queuechildren == adjmap[curfather].size() - <span class="number">1</span>)</div><div class="line">		{</div><div class="line">			myqueue.push(curfather);</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (ans[cur].first + <span class="number">1</span> &gt; ans[curfather].first)</div><div class="line">		{</div><div class="line">			ans[curfather].second = ans[curfather].first;</div><div class="line">			ans[curfather].first = ans[cur].first + <span class="number">1</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (ans[cur].first + <span class="number">1</span>&gt;ans[curfather].second)</div><div class="line">		{</div><div class="line">			ans[curfather].second = ans[cur].first + <span class="number">1</span>;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</div><div class="line">		<span class="keyword">if</span> (count &lt; ans[i].first + ans[i].second)</div><div class="line">		{</div><div class="line">			count = ans[i].first + ans[i].second;</div><div class="line">		}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; count &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/23/hiho1050/" data-id="kbysrts02bkng4z9" data-title="hiho1050 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/23/hiho1050/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -515,7 +504,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -524,7 +513,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -542,7 +531,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -552,6 +541,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/31/hiho1175/">hiho1175</a>
+          </li>
         
           <li>
             <a href="/2015/05/29/hiho1066/">hiho1066</a>
@@ -567,10 +560,6 @@
         
           <li>
             <a href="/2015/05/25/hiho1174/">hiho1174</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/23/hiho1050/">hiho1050</a>
           </li>
         
       </ul>

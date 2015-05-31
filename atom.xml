@@ -4,7 +4,7 @@
   <subtitle><![CDATA[哀吾生之须臾，羡长江之无穷]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://youngyangyang.com/"/>
-  <updated>2015-05-29T13:08:42.185Z</updated>
+  <updated>2015-05-31T05:51:01.393Z</updated>
   <id>http://youngyangyang.com/</id>
   
   <author>
@@ -13,6 +13,46 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hiho1175]]></title>
+    <link href="http://youngyangyang.com/2015/05/31/hiho1175/"/>
+    <id>http://youngyangyang.com/2015/05/31/hiho1175/</id>
+    <published>2015-05-31T05:49:20.000Z</published>
+    <updated>2015-05-31T05:50:51.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="1175_:_拓扑排序·二">1175 : 拓扑排序·二</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：<br>1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链接了节点u和节点v，则节点u可以向节点v发送信息，但是节点v不能通过该链接向节点u发送信息。<br>2.在刚感染病毒时，校园网立刻切断了一些网络链接，恰好使得剩下网络连接不存在环，避免了节点被反复感染。也就是说从节点i扩散出的病毒，一定不会再回到节点i。<br>3.当1个病毒感染了节点后，它并不会检查这个节点是否被感染，而是直接将自身的拷贝向所有邻居节点发送，它自身则会留在当前节点。所以一个节点有可能存在多个病毒。<br>4.现在已经知道黑客在一开始在K个节点上分别投放了一个病毒。</p>
+<p>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。<br>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。</p><br><img src="http://media.hihocoder.com/problem_images/20150530/14329733027771.png" style="width: 60%;" title="week48_1.png"><br>最开始节点1向节点2和节点3传送了病毒，自身留有1个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733026264.png" style="width: 60%;" title="week48_2.png"><br>其中一个病毒到达节点2后，向节点3传送了一个病毒。另一个到达节点3的病毒向节点4发送自己的拷贝：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733022993.png" style="width: 60%;" title="week48_3.png"><br>当从节点2传送到节点3的病毒到达之后，该病毒又发送了一份自己的拷贝向节点4。此时节点3上留有2个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733028538.png" style="width: 60%;" title="week48_4.png"><br>最后每个节点上的病毒为：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733025774.png" style="width: 60%;" title="week48_5.png"><br>小Hi和小Ho根据目前的情况发现一段时间之后，所有的节点病毒数量一定不会再发生变化。那么对于整个网络来说，最后会有多少个病毒呢？<p></p>
+<p><strong>输入</strong><br>第1行：3个整数N,M,K，1≤K≤N≤100,000，1≤M≤500,000</p>
+<p>第2行：K个整数A[i]，A[i]表示黑客在节点A[i]上放了1个病毒。1≤A[i]≤N</p>
+<p>第3..M+2行：每行2个整数 u,v，表示存在一条从节点u到节点v的网络链接。数据保证为无环图。1≤u,v≤N</p>
+<p><strong>输出</strong><br>第1行：1个整数，表示最后整个网络的病毒数量 MOD 142857</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>4 4 1<br>1<br>1 2<br>1 3<br>2 3<br>3 4</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>6</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC。<br>最直观的方法当然是模拟整个病毒传播的情况，然后等没有任何一个节点的病毒数再变化的时候统计此时网络中所有病毒的个数就行了。<br>但如果按题目描述的模拟每一个时刻的变化的话，就很复杂了，因为在同一时刻会有很多节点都在向外扩散病毒。<br>但因为题目给的是不存在环的（如果有环肯定是无穷多个病毒），所以我们可以等某个节点的病毒数目不再变化之后再模拟这个节点病毒的扩散情况。毕竟自己扩散出去的病毒不会再扩散到自己了。<br>从这个方案来看，这也就是用宽搜的方法来做了。如果一个节点入度为零，则加入宽搜队列，当搜索过它之后就把它从整个图中删除。反复直到队列中没有节点了。</p>
+<p>根据以上分析可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *numofvirus = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		indegree[i] = <span class="number">0</span>;</div><div class="line">		numofvirus[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> a;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; a;</div><div class="line">		numofvirus[a] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		indegree[v]++;</div><div class="line">	}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		myqueue.pop();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="keyword">if</span> (indegree[i] == <span class="number">0</span>)</div><div class="line">			myqueue.push(i);</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">			indegree[next]--;</div><div class="line">			<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(next);</div><div class="line">			}</div><div class="line">			numofvirus[next] += numofvirus[cur];</div><div class="line">			numofvirus[next] %= <span class="number">142857</span>;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		ans += numofvirus[i];</div><div class="line">		ans %= <span class="number">142857</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">	<span class="keyword">delete</span>[] numofvirus;</div><div class="line">	<span class="keyword">delete</span>[] indegree;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1175_:_拓扑排序·二">1175 : 拓扑排序·二</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho所在学校的校园网被黑客入侵并投]]>
+    </summary>
+    
+      <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
+    
+      <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hiho1066]]></title>
@@ -930,112 +970,6 @@
       <category term="hihocoder" scheme="http://youngyangyang.com/tags/hihocoder/"/>
     
       <category term="一起刷hihocoder" scheme="http://youngyangyang.com/categories/%E4%B8%80%E8%B5%B7%E5%88%B7hihocoder/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[learning from the best]]></title>
-    <link href="http://youngyangyang.com/2015/04/21/learning-from-the-best/"/>
-    <id>http://youngyangyang.com/2015/04/21/learning-from-the-best/</id>
-    <published>2015-04-21T06:33:29.000Z</published>
-    <updated>2015-04-21T06:48:31.000Z</updated>
-    <content type="html"><![CDATA[<p>这是我自行翻译的一篇Kaggle的博文，作为自己博客里有关数据挖掘和机器学习方面博文的开端。</p>
-<p>由于才疏学浅，英语知识还不够过硬，所以一些英文并不是翻译地很好。</p>
-<p>文章名为<a href="http://blog.kaggle.com/2014/08/01/learning-from-the-best/" target="_blank" rel="external">learnig form the best | no free lunch</a></p>
-<p>特邀投稿者David Kofoed Wind是丹麦技术大学认知领域的博士研究生：</p>
-<p>作为我有关竞争机器学习的硕士论文的一部分，我和一系列的Kaggle大师们以试着去理解他们在各项竞赛里持续表现优异的原因。<br>我所得到的结果是一系列广为人知的策略，和一些相对不显然的窍门。在这篇博客中，我挑选了他们回答我问题的一些答案，试图概括出能使我们在Kaggle中表现地优秀的策略。<br>就好像这篇博客的名字所透露的那样，天下没有免费的午餐，阅读这篇博客并不能让你一夜之间成为一名Kaggle大师。<br>然而，遵循下面所列出来的步骤会尽可能地帮助你在积分排行榜上获得体面的成绩。我将这些答案分成了一系列的宽泛的主题，最后还附上了一系列各种各样的建议。</p>
-<h2 id="特征工程经常是最重要的部分"><strong>特征工程经常是最重要的部分</strong></h2>
-<p>随着针对数据分析的免费的工具包和库函数越来越多，每个人都有机会在一场比赛中尝试高级的统计模型。<br>这导致了，给你最货真价实（bang-for-the-buck）的感觉的并不是你使用的统计学模型，而是你在模型里运用到的特征。<br>通过特征工程，我的意思是使用领域内的特定知识或者自动的方法来在数据集中产生、提取、删除或者修改特征。</p>
-<blockquote>
-<p>特征工程是大多数Kaggle比赛中最重要的部分，而这是最容易去学如何去做的。——（Tim Salimans）</p>
-<p>你使用的特征比其他东西更多地影响到了结果。据我了解，没有任何一个算法可以独自地补充通过正确地特征工程可以得到的信息增益。（Luca Massaron）</p>
-<p>特征工程绝对是Kaggle竞赛中最重要的方面之一，而且它是最需要花时间的部分。总是有一些可以大幅度地提高你的表现的隐式特征。<br>如果你想在积分排行榜上获得好的名次，你需要去发现他们。如果你在这个方面搞砸了，那你几乎很难赢了；而总是有一些人可以发现所有的秘诀。<br>然而，也存在其他重要的部分，比如你如何认知这个问题（formulate the problem）。你可能会用一个回归模型，或是一个分类模型，或者甚至是两者的结合，或者是一些排名需要的。<br>这些，以及特征工程，对在那些比赛里获得一个号的成绩至关重要。同样也有一些比赛可能并不需要（手动的）特征工程；比如在一些图像处理比赛里。<br>深度学习算法的最新进展可以帮你做那些。（Josef Feigl）</p>
-</blockquote>
-<p>相反，有时候获胜的解决方案是那些采用了一些非直观的方案以及简单的采用了黑盒方法。一个例子就是太阳能比赛，<br>获胜的前三甲几乎没有使用任何特征工程（及时这似乎是这个比赛一种直觉的方法），而仅仅是讲整个数据集结合到一个大的数据表格之中，<br>并使用一个复杂的黑盒模型（比如一个梯度boosting回归的综合体）。</p>
-<h2 id="简单的模型会让你前进得更多"><strong>简单的模型会让你前进得更多</strong></h2>
-<p>当一场比赛结束之后，我们仔细去看不同的解决方案的描述。我们会发现有一个令人惊讶的数目的简单的解决方案获得了很好的结果。<br>更令人（最初）感到惊讶的是，最简单的方法经常被一些顶尖的选手反复提及。</p>
-<blockquote>
-<p>我认为初学者经常有时候都没有开始了解数据就把算法“扔”在了问题上。我同样认为有时候初学者会过早地去做太复杂的事情了。<br>有一个观点认为如果你可以发明复杂的事情的话，那会显得你更机智。我“尝试”去遵循爱因斯坦的名言：“任何一个机智的傻逼可以把事情做得繁冗复杂。<br>但是这需要一点天才和一些努力去将事情推向另一个方向。”（Steve Donoho）</p>
-<p>我前几次提交基本上就是几种极度简单的基础提交方案的-好像“猜测均值”或者“猜测根据x变量分隔开的均值”。这些可以用非常简单的模型非常方便地建立。<br>你会感到惊讶，你有时候用很简单的模型就能得到与复杂模型很接近的分数。（Steve Donoho）</p>
-<p>如果你能熟练运用它们的话，简单的模型会让你走的更远。但一般来说，你不可能仅仅通过简单的模型就能获得一场比赛的胜利。<br>简单模型可以很便捷地去训练和理解，而且它们比复杂的黑盒更让你有洞察力。它们也更容易被修改和调整以适应不同的状况。<br>它们也同样强制你在数据本身（特征工程，数据清理，缺失数据估计）上下功夫。另一方面，简单会受制于高的变差，<br>于是它们偏向于不会获得一个你的未知函数的复杂映射。（On the other hand,being simple,they suffer from high bias,<br>so they likely cannot catch a complex mapping of your unknown function.）（Luca Massaron）</p>
-</blockquote>
-<h2 id="过拟合排行榜是一个现实问题"><strong>过拟合排行榜是一个现实问题</strong></h2>
-<p>在一个比赛中，你有机会向排行榜提交。通过向排行榜进行提交解决方案，你会得到测试集的公共部分对你的模型的评价。<br>很显然获得排行榜的评估会给你额外的信息和数据，但是这也会带来过拟合排行榜分数的可能性。<br>两个较近的过拟合排行榜的比赛例子是大数据结合和StumbleUpon Evergreen Classification Challenge。<br>在下面的表格里，StumbleUpon比赛排名前十的公开排行榜和他们各自在私人排行榜上的名次排名。</p>
-<p>| 用户名        | 公开榜   |  私人榜  |</p>
-<p>| ————   | ——-:  | :——:  |</p>
-<p>| Jared Huling     | 1 |   283     |</p>
-<p>| Yevgeniy        |   2   |   7   |</p>
-<p>| Attila Balogh        |    3    |  231  |</p>
-<p>| Abhishek        |    4    |  6  |</p>
-<p>| Issam Laradji        |    5    |  9  |</p>
-<p>| Ankush Shah        |    6    |  11  |</p>
-<p>| Grothendieck        |    7    |  50  |</p>
-<p>| Thakur Raj Anand        |    8    |  247  |</p>
-<p>| Manuel Dias        |    9    |  316  |</p>
-<p>| Juventino        |    10    |  27  |</p>
-<p>这个挑战赛有7395个样本，而且它被广泛地审视过，数据有相当多的噪声。在大数据结合竞赛里，人们的任务是预测多个小时后的股票数值，<br>这一般来说是极度困难的。在排行榜上极端地掉队大多数是因为预测股票的纯粹的困难，以及过拟合。</p>
-<blockquote>
-<p>排行榜肯定存在着各种各样的信息。尤其当排行榜比训练集有更多时间跨度的数据的时候（比如遗产卫生奖）。你可以用这些信息去建模一些选择和超参数调谐。（Tim Salimans）</p>
-<p>公共排行榜也能提供一些帮助，[……]但是需要去注意不要去过拟合，尤其是在一些小数据集上。和我聊过的一些高手选择他们最终的提交是基于他们排行榜的成绩和他们CV成绩的加权<br>（权值是根据数据集的大小）。Kaggle使得过拟合的危险更加具有可能。没有什么比公共榜的一个好排名掉到私人榜的一个坏排名更能教育一个人需要特别特别地注意不要过拟合的了。（Steve Donoho）</p>
-<p>过拟合对于排行榜来说总是一个主要问题。避免它的最好方法是完全忽略排行榜的成绩并且只相信你的交叉验证的结果。最主要的问题是你的交叉验证必须是正确的，<br>而且你的CV成绩和排行榜成绩要存在明显的相关性（例如：你CV成绩的提升会引起你排行榜成绩的提升）。如果对于某个给定竞赛发生了这种情况，那么这会很简单去避免过拟合。<br>这一般对测试集足够大的情况下非常奏效。如果测试集很小而且如果没有很明显的相关性，那么这就很难仅仅去相信你的CV成绩。<br>这可能发生在数据集合是从训练集合以外的分布上选取出来的情况下。（Josef Feigl）</p>
-</blockquote>
-<h2 id="集成是必胜的策略"><strong>集成是必胜的策略</strong></h2>
-<p>如果去看过去竞赛的获胜者，大多数获得奖金的模型是大多数模型的集成，这已经是一个普遍的趋势了。集成的强大能力同样可以被数学上证明可行。</p>
-<blockquote>
-<p>无论你单独的模型多正确，多么被调节好，你都可以通过集成的方法来提高准确率。集成的方法在个别的模型很少关联的情况下效果最好。<br>将多数表现平平的模型放入一个搅拌机里可能会变得事与愿违。将一些构建地非常好的模型结合在一起似乎会表现地更好。说到这些，有可能会过调节某个模型从而危害到整体的效果。<br>那么棘手的部分就是发现正确的平衡点。（Anil Thomas）</p>
-<p>我是一个集成方法的信徒。它们的确会提高准确率。但是我一般会在最后一步才做这个事情。我一般会榨取除了创造派生变量之外的一切和使用单独算法。<br>知道我感觉到我已经把前面所有的东西都做尽了，我才会尝试集成。（Steve Donoho）</p>
-<p>集成法是一个无脑行为。只要它能够提升你的成绩你就需要在每一场比赛里采用它。然而，对于我来说它一般来说是我在一场比赛中最后做的事情，而且我一般不在它上面花太久的时间。（Josef Feigl）</p>
-</blockquote>
-<h2 id="预测正确的事情是很重要的"><strong>预测正确的事情是很重要的</strong></h2>
-<p>一个任务有时候是至关重要的，有时候却不是。这就是预测正确的事情。在预测正确的事情很重要的时候它就显得至关重要（这不是废话么……），但是它不总是实践中一个简单的事情。</p>
-<blockquote>
-<p>下一步是去问：“我到底应该预测什么？”。这重要的一部经常被很多人所忽略，他们只是将原始的变量代入到他们最喜欢的算法中去，以求能得到最棒的结果。<br>但是有时候你想要去得到一个衍生的相关变量。我会用GE航班客户作为一个例子：你不会想要去预测飞机会降落的准确时间；你想要去预测航班飞行的总时长；<br>也许实现它最好的方法是采用航班实际飞行的时长和它原始预估的时长的比值乘以原始估计的次数。（Steve Donoho）</p>
-</blockquote>
-<p>有两种方法可以处理预测正确的事情的问题：第一种方法是引用Steve Donoho在上面有关于预测正确的衍生变量的话；第二个是采用正确的损失函数来训练统计模型。</p>
-<blockquote>
-<p>仅仅是将RMSE变为MAE会大大地改变一个简单的模型（比如线性回归）的系数。优化成正确的度量方法真的可以让你在排行榜上拍的更高，尤其是在涉及变量选择的情况下。（Luca Massaron）</p>
-<p>一般来说优化正确的度量方式是很合理的（尤其在你个人的CV成绩里）。[……]然而，你并不是非做不可。例如一年之前，我赢得了事件推荐动力挑战赛，而度量方法是MAP。<br>我从来没用过这种度量方法，而且评估我所有模型的方法都是log损失函数。它都很有效。（Josef Feigl）</p>
-</blockquote>
-<p>我们用一个例子来展示为什么使用一个错误的损失函数会将问题增高，看下面这个简单的样例：说出你想要去拟合最简单的可能的回归模型，也就是说只是一个截取一个数据的a：<br>X={0.1,0.2,0.4,0.2,0.2,0.1,0.3,0.2,0.3,0.1,100}</p>
-<p>如果我们用$$a<em>{MSE}$$ 代表a最小化均方误差，且让$$a</em>{MAE}$$代表a最小化绝对值误差均值，我们可以得到下面的结果：</p>
-<p>$$a_{MSE} =9.2818$$</p>
-<p>$$a_{MAE}=0.2000$$</p>
-<p>如果我们使用两个a的估计来计算MSE和MAE，我们可以得到以下的结果：</p>
-<p>$$\dfrac{1}{11}\sum\limits<em>{i}|x</em>{i}-a_{MAE}|=9.5909$$</p>
-<p>$$\dfrac{1}{11}\sum\limits<em>{i}|x</em>{i}-a_{MSE}|=16.4942$$</p>
-<p>$$\dfrac{1}{11}\sum\limits<em>{i}|x</em>{i}-a_{MAE}|^2=905.4660$$</p>
-<p>$$\dfrac{1}{11}\sum\limits<em>{i}|x</em>{i}-a_{MSE}|^2=822.9869$$</p>
-<p>就像预期的那样，我们可以看到对于每个损失函数（MAE和MSE），用来的拟合使损失函数最小的变量可以获得一个更低的误差。这点应该不会让人感到惊讶，<br>但是当损失函数和统计模型变得非常复杂的时候。一个方法是否最优化并不是一定那么重要了。</p>
-<h2 id="附加的以及个人建议"><strong>附加的以及个人建议</strong></h2>
-<p>从我参加过的Kaggle竞赛中获得的最重要的事情是立刻行动，并尽快在排行榜上占领有利位置。完成一个完整的流水线将数据读入并输出一个格式正确的提交需要很大的功夫，</p>
-<blockquote>
-<p>这往往被人低估。从排行榜上得到一个简单的评估是一个非常好的开端，如果你不能复制这个评估成绩，那么这应该是你尝试更高级的方法前的第一步。</p>
-<p>我最令人惊讶的经历是发现Friedman梯度提升机持续地有出色的结果。这结果并不是从字面上能看出来的，它在实践中表现出其闪光点。（Gabor Takacs）</p>
-</blockquote>
-<p>作为Kaggle的新手，一开始尝试最炫的模型是非常诱人的。而理想地来说，我们应该将很多的时间花在仔细把玩数据上。尝试一些简单的模型，将不同的变量绘制在一起。<br>这都是在Kaggle中获得好成绩的一个非常重要方面。一开始就选用一个复杂的模型会降低你的速率，因为训练和测试时间会变得非常漫长，这同样意味着你并不能尝试各种不同的东西。<br>即使我曾经个人参加过一些Kaggle的竞赛，将足够的时间放在处理数据上依旧是我最专注做的事。</p>
-<blockquote>
-<p>你在你的工具箱中拥有的工具越多，你为解决一个问题所做的准备就越完备。如果我在我的工具箱里只有一把锤子而你工具箱里满满的都是工具，那么你比我更有可能建造一个更好的房子。所以人们都在他们各自的工具箱里放了好多工具，但是他们不知道“何时”用“何种”工具。我想，知道这些更为重要。有人在他们的工具箱里有很多工具，但是他们只是随机地在工具箱里拿一个工具，却不问为什么：“哪款工具更适合这个问题呢？”（Steve Donoho）</p>
-</blockquote>
-<p>好好利用Kaggle论坛是许多顶尖的选手提出的建议。在比赛期间，很多参赛者会写出高亮数据集中特征和趣事的问题，有的参赛者甚至会在论坛公布获得很高分数的代码。<br>在比赛结束，一般来说，获胜者都会分享他们的解决方案。仔细阅读那些东西，它们一定会在你下次尝试的时候给你很好的启发。</p>
-<blockquote>
-<p>给新来者最好的建议就是阅读论坛。你会在那发现很多很好的建议，和一些能帮助你动手的代码。而且，并不需要在比赛开始的时候就花费很多的时间在优化模型参数上。<br>在比赛末尾的时候，有的是时间留给那些工作。（Josef Feigl）</p>
-<p>在每个比赛中我都从获胜者身上学到了一些。一个比赛并不是因为一次洞察就能赢下来的，而是通过多次仔细的尝试才慢慢靠近好的模型的。<br>所有东西都在发挥它的作用，所以这里并没有什么秘密的方法。仅仅是将几节课上学到的知识运用在这里而已。我认为新的Kaggle选手会从阅读论坛和过去的比赛获胜者的文章中受益匪浅。<br>Kaggle获胜者不会在建议上弄虚作假！（Lucas S）</p>
-</blockquote>
-<p></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>这是我自行翻译的一篇Kaggle的博文，作为自己博客里有关数据挖掘和机器学习方面博文的开端。</p>
-<p>由于才疏学浅，英语知识还不够过硬，所以一些英文并不是翻译地很好。</p>
-<p>文章名为<a href="http://blog.kaggle.com/2014/08]]>
-    </summary>
-    
-      <category term="翻译" scheme="http://youngyangyang.com/tags/%E7%BF%BB%E8%AF%91/"/>
-    
-      <category term="机器学习" scheme="http://youngyangyang.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="数据挖掘" scheme="http://youngyangyang.com/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
-    
-      <category term="DataMining&amp;MachineLearning" scheme="http://youngyangyang.com/categories/DataMining-MachineLearning/"/>
     
   </entry>
   

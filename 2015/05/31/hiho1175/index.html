@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hiho1175 | Young&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1175 : 拓扑排序·二
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hiho1175">
+<meta property="og:url" content="http://youngyangyang.com/2015/05/31/hiho1175/">
+<meta property="og:site_name" content="Young's blog">
+<meta property="og:description" content="1175 : 拓扑排序·二
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150530/14329733027771.png">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150530/14329733026264.png">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150530/14329733022993.png">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150530/14329733028538.png">
+<meta property="og:image" content="http://media.hihocoder.com/problem_images/20150530/14329733025774.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hiho1175">
+<meta name="twitter:description" content="1175 : 拓扑排序·二
+
+时间限制:10000ms单点时限:1000ms内存限制:256MB描述小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Young&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Young&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">哀吾生之须臾，羡长江之无穷</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+	  
+	<!-- 使用swiftype自定义搜索 -->
+	  
+		<div id="search-form-wrap">
+		<form class="search-form">
+			<input type="text" id="st-search-input" class="search-form-input" placeholder="Search" />
+			<input type="submit" value="" class="search-form-submit"> 
+		</form>		
+	</div>
+	  	
+
+    </div>
+  </div>
+  
+<!-- 从Swiftype官网粘贴安装代码到下面，使用overlay的needs a search field类型 -->
+
+
+	<!-- 此处Swiftype搜索代码 -->
+          
+  
+
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hiho1175" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/31/hiho1175/" class="article-date">
+  <time datetime="2015-05-31T05:49:20.000Z" itemprop="datePublished">5月 31 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hiho1175
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1175_:_拓扑排序·二">1175 : 拓扑排序·二</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Hi和小Ho所在学校的校园网被黑客入侵并投放了病毒。这事在校内BBS上立刻引起了大家的讨论，当然小Hi和小Ho也参与到了其中。从大家各自了解的情况中，小Hi和小Ho整理得到了以下的信息：<br>1.校园网主干是由N个节点(编号1..N)组成，这些节点之间有一些单向的网路连接。若存在一条网路连接(u,v)链接了节点u和节点v，则节点u可以向节点v发送信息，但是节点v不能通过该链接向节点u发送信息。<br>2.在刚感染病毒时，校园网立刻切断了一些网络链接，恰好使得剩下网络连接不存在环，避免了节点被反复感染。也就是说从节点i扩散出的病毒，一定不会再回到节点i。<br>3.当1个病毒感染了节点后，它并不会检查这个节点是否被感染，而是直接将自身的拷贝向所有邻居节点发送，它自身则会留在当前节点。所以一个节点有可能存在多个病毒。<br>4.现在已经知道黑客在一开始在K个节点上分别投放了一个病毒。</p>
+<p>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。<br>举个例子，假设切断部分网络连接后学校网络如下图所示，由4个节点和4条链接构成。最开始只有节点1上有病毒。</p><br><img src="http://media.hihocoder.com/problem_images/20150530/14329733027771.png" style="width: 60%;" title="week48_1.png"><br>最开始节点1向节点2和节点3传送了病毒，自身留有1个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733026264.png" style="width: 60%;" title="week48_2.png"><br>其中一个病毒到达节点2后，向节点3传送了一个病毒。另一个到达节点3的病毒向节点4发送自己的拷贝：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733022993.png" style="width: 60%;" title="week48_3.png"><br>当从节点2传送到节点3的病毒到达之后，该病毒又发送了一份自己的拷贝向节点4。此时节点3上留有2个病毒：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733028538.png" style="width: 60%;" title="week48_4.png"><br>最后每个节点上的病毒为：<br><img src="http://media.hihocoder.com/problem_images/20150530/14329733025774.png" style="width: 60%;" title="week48_5.png"><br>小Hi和小Ho根据目前的情况发现一段时间之后，所有的节点病毒数量一定不会再发生变化。那么对于整个网络来说，最后会有多少个病毒呢？<p></p>
+<p><strong>输入</strong><br>第1行：3个整数N,M,K，1≤K≤N≤100,000，1≤M≤500,000</p>
+<p>第2行：K个整数A[i]，A[i]表示黑客在节点A[i]上放了1个病毒。1≤A[i]≤N</p>
+<p>第3..M+2行：每行2个整数 u,v，表示存在一条从节点u到节点v的网络链接。数据保证为无环图。1≤u,v≤N</p>
+<p><strong>输出</strong><br>第1行：1个整数，表示最后整个网络的病毒数量 MOD 142857</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>4 4 1<br>1<br>1 2<br>1 3<br>2 3<br>3 4</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>6</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>一次AC。<br>最直观的方法当然是模拟整个病毒传播的情况，然后等没有任何一个节点的病毒数再变化的时候统计此时网络中所有病毒的个数就行了。<br>但如果按题目描述的模拟每一个时刻的变化的话，就很复杂了，因为在同一时刻会有很多节点都在向外扩散病毒。<br>但因为题目给的是不存在环的（如果有环肯定是无穷多个病毒），所以我们可以等某个节点的病毒数目不再变化之后再模拟这个节点病毒的扩散情况。毕竟自己扩散出去的病毒不会再扩散到自己了。<br>从这个方案来看，这也就是用宽搜的方法来做了。如果一个节点入度为零，则加入宽搜队列，当搜索过它之后就把它从整个图中删除。反复直到队列中没有节点了。</p>
+<p>根据以上分析可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m, k;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;</div><div class="line">	<span class="keyword">int</span> *numofvirus = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		indegree[i] = <span class="number">0</span>;</div><div class="line">		numofvirus[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> a;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; a;</div><div class="line">		numofvirus[a] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> u, v;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">		adjmap[u][v] = <span class="number">1</span>;</div><div class="line">		indegree[v]++;</div><div class="line">	}</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		myqueue.pop();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="keyword">if</span> (indegree[i] == <span class="number">0</span>)</div><div class="line">			myqueue.push(i);</div><div class="line">	<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">		myqueue.pop();</div><div class="line">		<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">			indegree[next]--;</div><div class="line">			<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(next);</div><div class="line">			}</div><div class="line">			numofvirus[next] += numofvirus[cur];</div><div class="line">			numofvirus[next] %= <span class="number">142857</span>;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		ans += numofvirus[i];</div><div class="line">		ans %= <span class="number">142857</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; endl;</div><div class="line">	<span class="keyword">delete</span>[] numofvirus;</div><div class="line">	<span class="keyword">delete</span>[] indegree;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/31/hiho1175/" data-id="twa2zthivctz1ba0" data-title="hiho1175 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/31/hiho1175/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/29/hiho1066/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hiho1066</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/05/31/hiho1175/" data-title="hiho1175" data-url="http://youngyangyang.com/2015/05/31/hiho1175/"></div>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/books/" style="font-size: 13.33px;">books</a><a href="/tags/hihocoder/" style="font-size: 20.00px;">hihocoder</a><a href="/tags/tag1/" style="font-size: 10.00px;">tag1</a><a href="/tags/tag2/" style="font-size: 10.00px;">tag2</a><a href="/tags/tag3/" style="font-size: 10.00px;">tag3</a><a href="/tags/数据挖掘/" style="font-size: 13.33px;">数据挖掘</a><a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a><a href="/tags/生活记录/" style="font-size: 16.67px;">生活记录</a><a href="/tags/翻译/" style="font-size: 13.33px;">翻译</a><a href="/tags/�鼮/" style="font-size: 10.00px;">�鼮</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/05/31/hiho1175/">hiho1175</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/29/hiho1066/">hiho1066</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/28/hiho1062/">hiho1062</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/hiho1055/">hiho1055</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/25/hiho1174/">hiho1174</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://youngyangyang.github.io/" target="_blank">Youngyangyang</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=2484873700&verifier=44959cf7&dpc=1"></iframe>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Young Kun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/Beeder/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+  
+  <!-- 隐藏CNZZ图标 -->
+  <div style="display:none">
+	<!-- 此处粘贴站长统计代码 -->
+  </div> 
+  
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"youngyangyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+  </div>
+</body>
+</html>
