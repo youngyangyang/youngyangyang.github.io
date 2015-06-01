@@ -84,6 +84,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1174" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/25/hiho1174/" class="article-date">
+  <time datetime="2015-05-25T07:47:28.000Z" itemprop="datePublished">5月 25 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/25/hiho1174/">hiho1174</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1174_:_拓扑排序·一">1174 : 拓扑排序·一</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>由于今天上课的老师讲的特别无聊，小Hi和小Ho偷偷地聊了起来。</p>
+<p>小Ho：小Hi，你这学期有选什么课么？</p>
+<p>小Hi：挺多的，比如XXX1,XXX2还有XXX3。本来想选YYY2的，但是好像没有先选过YYY1，不能选YYY2。</p>
+<p>小Ho：先修课程真是个麻烦的东西呢。</p>
+<p>小Hi：没错呢。好多课程都有先修课程，每次选课之前都得先查查有没有先修。教务公布的先修课程记录都是好多年前的，不但有重复的信息，好像很多都不正确了。</p>
+<p>小Ho：课程太多了，教务也没法整理吧。他们也没法一个一个确认有没有写错。</p>
+<p>小Hi：这不正是轮到小Ho你出马的时候了么！</p>
+<p>小Ho：哎？？</p>
+<p>我们都知道大学的课程是可以自己选择的，每一个学期可以自由选择打算学习的课程。唯一限制我们选课是一些课程之间的顺序关系：有的难度很大的课程可能会有一些前置课程的要求。比如课程A是课程B的前置课程，则要求先学习完A课程，才可以选择B课程。大学的教务收集了所有课程的顺序关系，但由于系统故障，可能有一些信息出现了错误。现在小Ho把信息都告诉你，请你帮小Ho判断一下这些信息是否有误。错误的信息主要是指出现了”课程A是课程B的前置课程，同时课程B也是课程A的前置课程”这样的情况。当然”课程A是课程B的前置课程，课程B是课程C的前置课程，课程C是课程A的前置课程”这类也是错误的。<br>。</p>
+<p><strong>输入</strong><br>第1行：1个整数T，表示数据的组数T(1 &lt;= T &lt;= 5)<br>接下来T组数据按照以下格式：<br>第1行：2个整数，N,M。N表示课程总数量，课程编号为1..N。M表示顺序关系的数量。1 &lt;= N &lt;= 100,000. 1 &lt;= M &lt;= 500,000<br>第2..M+1行：每行2个整数，A,B。表示课程A是课程B的前置课程。</p>
+<p><strong>输出</strong><br>第1..T行：每行1个字符串，若该组信息无误，输出”Correct”，若该组信息有误，输出”Wrong”。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>2<br>2 2<br>1 2<br>2 1<br>3 2<br>1 2<br>1 3</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>Wrong<br>Correct</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>没能一次AC，找不到错误之后发帖子问，后来在别人的提示下发现了自己的思维有漏洞，OJ题目真是到处都是陷阱啊。<br>根据提示，我们可以用将入度为0的点u依次入队，u入队时将与点u相连的v的入度全部减一。反复进行这一步，直到没有入度为0的点为止。如果还有点没有入队，则不能构成拓扑排序，否则可以。<br>但是输入数据的边可能会重复。。。。。我就栽在这个问题上。。。。。<br>所以在输入两组相同的有向边的时候，记得合并为一条。</p>
+<p>根据这个思路可以得到以下的代码</p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span> adjmap[<span class="number">100001</span>];<span class="comment">//邻接表</span></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> t;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; t;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">int</span> n, m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			adjmap[j].clear();</div><div class="line">		<span class="keyword">int</span> *indegree = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];<span class="comment">//记录入度</span></div><div class="line">		<span class="comment">//int indegree[3];</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">			indegree[j] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> u, v;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v;</div><div class="line">			<span class="keyword">if</span> (adjmap[u].count(v)==<span class="number">0</span>)</div><div class="line">			{</div><div class="line">				adjmap[u][v] = <span class="number">1</span>;<span class="comment">//添加邻接表</span></div><div class="line">				indegree[v]++;<span class="comment">//入度加一</span></div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> myqueue;</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">			myqueue.pop();</div><div class="line">		<span class="keyword">int</span> remain = n;<span class="comment">//用来记录是不是所有的点都加入过队列</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n;j++)</div><div class="line">			<span class="keyword">if</span> (indegree[j] == <span class="number">0</span>)</div><div class="line">			{</div><div class="line">				myqueue.push(j);<span class="comment">//入度为0就加入队列</span></div><div class="line">				remain--;</div><div class="line">			}</div><div class="line">		<span class="keyword">while</span> (!myqueue.empty())</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> cur = myqueue.front();</div><div class="line">			myqueue.pop();</div><div class="line">			<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = adjmap[cur].begin(); iter != adjmap[cur].end(); iter++)</div><div class="line">			{</div><div class="line">				<span class="keyword">int</span> next = iter-&gt;first;</div><div class="line">				indegree[next]--;</div><div class="line">				<span class="keyword">if</span> (indegree[next] == <span class="number">0</span>)</div><div class="line">				{</div><div class="line">					myqueue.push(next);</div><div class="line">					remain--;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (remain &gt; <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Wrong"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Correct"</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">delete</span>[]indegree;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>刘汝佳的《算法竞赛入门经典》里面也讲到拓扑排序，而且他的方法则更加直接，因为有向图里如果存在环则不能进行拓扑排序，否则可以，于是他就考虑对这些点进行dfs搜索。<br>但是考虑到我们这里的数据量,N可以达到100000，也就是说如果这个拓扑结构是一条线的话，那么dfs根本无法递归这么多层就会stackoverflow了，所以这个方法可以用作一点参考。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/05/25/hiho1174/" data-id="rv7tq8c48y9o0xvf" data-title="hiho1174 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/05/25/hiho1174/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1050" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/23/hiho1050/" class="article-date">
@@ -414,89 +494,6 @@
 
 
   
-    <article id="post-hiho1043" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/19/hiho1043/" class="article-date">
-  <time datetime="2015-05-19T03:16:54.000Z" itemprop="datePublished">5月 19 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/19/hiho1043/">hiho1043</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1043_:_完全背包">1043 : 完全背包</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>且说之前的故事里，小Hi和小Ho费劲心思终于拿到了茫茫多的奖券！而现在，终于到了小Ho领取奖励的时刻了！</p>
-<p>等等，这段故事为何似曾相识？这就要从平行宇宙理论说起了………总而言之，在另一个宇宙中，小Ho面临的问题发生了细微的变化！</p>
-<p>小Ho现在手上有M张奖券，而奖品区有N种奖品，分别标号为1到N，其中第i种奖品需要need(i)张奖券进行兑换，并且可以兑换无数次，为了使得辛苦得到的奖券不白白浪费，小Ho给每件奖品都评了分，其中第i件奖品的评分值为value(i),表示他对这件奖品的喜好值。现在他想知道，凭借他手上的这些奖券，可以换到哪些奖品，使得这些奖品的喜好值之和能够最大。</p>
-<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第一行为两个正整数N和M,表示奖品的种数，以及小Ho手中的奖券数。</p>
-<p>接下来的n行描述每一行描述一种奖品，其中第i行为两个整数need(i)和value(i)，意义如前文所述。</p>
-<p>测试数据保证</p>
-<p>对于100%的数据，N的值不超过500，M的值不超过10^5</p>
-<p>对于100%的数据，need(i)不超过2*10^5, value(i)不超过10^3</p>
-<p><strong>输出</strong><br>对于每组测试数据，输出一个整数Ans，表示小Ho可以获得的总喜好值。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>5 1000<br>144 990<br>487 436<br>210 673<br>567 58<br>1056 897</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>5940</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>继续dp，一次ac<br>这次是完全背包问题，基本思维还是和01背包差不多。无非就是可以拿的东西数目不再有限制了。<br>所以可以假设ans[i,j]表示总共有j张奖券的时候当前考虑第i件物品，前i-1件物品都已经选择完毕能得到的最多的value值是多少。<br>那么ans[i,j]=max{ans[i,j-k<em>need[i]]+k</em>value[i]},k的范围自己算一下就行啦。<br>且ans[i,j]的初始值就设置为ans[i-1,j]的终值。<br>但是这里有很多重复计算的东西，<br>比如ans[i,j]用到了ans[i,j-need[i]],ans[i,j-2*need[i]]</p>
-<p>而ans[i,j-need[i]]用到了ans[i,j-2*need[i]]。那其实我们可以算好了放在那里继续用，而不用再去计算了。<br>于是在前面这些都算好的前提下，我只要考虑，我总共有j张奖券，我是不是要把其中的need[i]张奖券来换一个value[i]的礼品呢？</p>
-<p>根据这个思路可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> mymax(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">{</div><div class="line">	<span class="keyword">return</span> (a &gt; b ? a : b);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="keyword">int</span> *need = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">2</span>];</div><div class="line">	<span class="keyword">int</span> *value = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">2</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; need[i] &gt;&gt; value[i];</div><div class="line">	<span class="keyword">int</span> *ans = <span class="keyword">new</span> <span class="keyword">int</span>[m + <span class="number">2</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++)</div><div class="line">		ans[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m;j++)</div><div class="line">			<span class="keyword">if</span> (j &gt;= need[i])</div><div class="line">			{</div><div class="line">				ans[j] = mymax(ans[j], ans[j - need[i]] + value[i]);</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				;</div><div class="line">			}</div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans[m] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>对比一下上一次01背包的代码：</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> mymax(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">{</div><div class="line">	<span class="keyword">return</span> (a &gt; b ? a: b);</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n,m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n&gt;&gt;m;</div><div class="line">	<span class="keyword">int</span> *need = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">2</span>];</div><div class="line">	<span class="keyword">int</span> *value = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">2</span>];</div><div class="line">	<span class="keyword">int</span> *ans = <span class="keyword">new</span> <span class="keyword">int</span>[m + <span class="number">2</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; need[i] &gt;&gt; value[i];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++)</div><div class="line">		ans[i] = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	{</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = m;j&gt;=<span class="number">0</span>;j--)</div><div class="line">			<span class="keyword">if</span> (j &gt;= need[i])</div><div class="line">			{</div><div class="line">				ans[j] = mymax(ans[j - need[i]] + value[i], ans[j]);</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				;</div><div class="line">			}</div><div class="line"></div><div class="line">	}</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; ans[m] &lt;&lt; endl;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>我们发现也只有在j循环的时候存在一个由小到大和由大到小的区别，而这个区别就在于会不会<strong>重复</strong>地选取第i件商品。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/19/hiho1043/" data-id="8r71mhxwivpmnzoh" data-title="hiho1043 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/19/hiho1043/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -510,7 +507,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -519,7 +516,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -537,7 +534,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -547,6 +544,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/06/01/hiho1067/">hiho1067</a>
+          </li>
         
           <li>
             <a href="/2015/05/31/hiho1175/">hiho1175</a>
@@ -562,10 +563,6 @@
         
           <li>
             <a href="/2015/05/26/hiho1055/">hiho1055</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/25/hiho1174/">hiho1174</a>
           </li>
         
       </ul>
