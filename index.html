@@ -84,6 +84,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hiho1069" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/04/hiho1069/" class="article-date">
+  <time datetime="2015-06-04T13:17:06.000Z" itemprop="datePublished">6月 4 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/04/hiho1069/">hiho1069</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1069_:_最近公共祖先·三">1069 : 最近公共祖先·三</h2>
+<hr>
+<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>上上回说到，小Hi和小Ho使用了Tarjan算法来优化了他们的“最近公共祖先”网站，但是很快这样一个离线算法就出现了问题：如果只有一个人提出了询问，那么小Hi和小Ho很难决定到底是针对这个询问就直接进行计算还是等待一定数量的询问一起计算。毕竟无论是一个询问还是很多个询问，使用离线算法都是只需要做一次深度优先搜索就可以了的。</p>
+<p>那么问题就来了，如果每次计算都只针对一个询问进行的话，那么这样的算法事实上还不如使用最开始的朴素算法呢！但是如果每次要等上很多人一起的话，因为说不准什么时候才能够凑够人——所以事实上有可能要等上很久很久才能够进行一次计算，实际上也是很慢的！</p>
+<p>“那到底要怎么办呢？在等到10分钟，或者凑够一定数量的人两个条件满足一个时就进行运算？”小Ho想出了一个折衷的办法。</p>
+<p>“哪有这么麻烦！别忘了和离线算法相对应的可是有一个叫做在线算法的东西呢！”小Hi笑道。</p>
+<p>小Ho面临的问题还是和之前一样：假设现在小Ho现在知道了N对父子关系——父亲和儿子的名字，并且这N对父子关系中涉及的所有人都拥有一个共同的祖先（这个祖先出现在这N对父子关系中），他需要对于小Hi的若干次提问——每次提问为两个人的名字（这两个人的名字在之前的父子关系中出现过），告诉小Hi这两个人的所有共同祖先中辈分最低的一个是谁？</p>
+<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
+<p>每组测试数据的第1行为一个整数N，意义如前文所述。</p>
+<p>每组测试数据的第2~N+1行，每行分别描述一对父子关系，其中第i+1行为两个由大小写字母组成的字符串Father_i, Son_i，分别表示父亲的名字和儿子的名字。</p>
+<p>每组测试数据的第N+2行为一个整数M，表示小Hi总共询问的次数。</p>
+<p>每组测试数据的第N+3~N+M+2行，每行分别描述一个询问，其中第N+i+2行为两个由大小写字母组成的字符串Name1_i, Name2_i，分别表示小Hi询问中的两个名字。</p>
+<p>对于100%的数据，满足N&lt;=10^5，M&lt;=10^5, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人），<strong>所有询问中出现过的名字均在之前所描述的N对父子关系中出现过，且每个输入文件中第一个出现的名字所确定的人是其他所有人的公共祖先</strong>。</p>
+<p><strong>输出</strong><br>对于每组测试数据，对于每个小Hi的询问，按照在输入中出现的顺序，各输出一行，表示查询的结果：他们的所有共同祖先中辈分最低的一个人的名字。</p>
+<p><strong>样例输入</strong></p>
+<blockquote>
+<p>4<br>Adam Sam<br>Sam Joey<br>Sam Micheal<br>Adam Kevin<br>3<br>Sam Sam<br>Adam Sam<br>Micheal Kevin</p>
+</blockquote>
+<p><strong>样例输出</strong></p>
+<blockquote>
+<p>Sam<br>Adam<br>Adam</p>
+</blockquote>
+<h2 id="分析">分析</h2>
+<p>今天这道题很有意思，融合了之前两次题目的算法。也就是说融合了公共祖先和rmq-st的算法。<br>就按照提示一步一步做就ok了。<br>当然我发现有个小trick很有意思，就是用pair这个东西。<br>在之前的时候我都是用数组存储rmq-st里面的sparse-table，在2维情况下就是i，j两个数字确定数组中的一个元素。但是如果用map<pair<int,int>,int&gt;也可以完成这个功能，用pair唯一记录一个键值对，然后映射到其相应数字。</pair<int,int></p>
+<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;fstream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span> people;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> node{</div><div class="line">	<span class="built_in">string</span> name;</div><div class="line">	<span class="keyword">int</span> father;</div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> children;</div><div class="line">	<span class="keyword">int</span> lastshow;</div><div class="line">	<span class="keyword">int</span> depth;</div><div class="line">	node(){ father = -<span class="number">1</span>; children.clear(); }</div><div class="line">} informations[<span class="number">100002</span>];</div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> dfstrace;</div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>, <span class="keyword">int</span>&gt; sparse_table;</div><div class="line"><span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> mi;</div><div class="line"><span class="keyword">void</span> calcmi(<span class="keyword">int</span> len)</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> temp = <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span> (temp &lt;= len)</div><div class="line">	{</div><div class="line">		mi.push_back(temp);</div><div class="line">		temp *= <span class="number">2</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> mymin(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</div><div class="line">{</div><div class="line">	<span class="keyword">return</span> (a &lt; b ? a : b);</div><div class="line">}</div><div class="line"><span class="keyword">void</span> updatest()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> numoftrace = dfstrace.size();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numoftrace; i++)</div><div class="line">		sparse_table[make_pair(i, <span class="number">0</span>)] = dfstrace[i];</div><div class="line">	calcmi(numoftrace);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; mi.size(); j++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= numoftrace - mi[j]; i++)</div><div class="line">		{</div><div class="line">			<span class="keyword">int</span> a = sparse_table[make_pair(i, j - <span class="number">1</span>)], b = sparse_table[make_pair(i + mi[j - <span class="number">1</span>], j - <span class="number">1</span>)];</div><div class="line">			sparse_table[make_pair(i, j)] = (informations[a].depth &lt; informations[b].depth ? a : b);</div><div class="line">		}</div><div class="line">}</div><div class="line"><span class="keyword">void</span> dfs(<span class="keyword">int</span> cur,<span class="keyword">int</span> depth)</div><div class="line">{</div><div class="line">	dfstrace.push_back(cur);</div><div class="line">	informations[cur].depth = depth;</div><div class="line">	informations[cur].lastshow = dfstrace.size() - <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; informations[cur].children.size(); i++)</div><div class="line">	{</div><div class="line">		dfs(informations[cur].children[i],depth+<span class="number">1</span>);</div><div class="line">		dfstrace.push_back(cur);</div><div class="line">		informations[cur].lastshow = dfstrace.size() - <span class="number">1</span>;</div><div class="line">	}</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="comment">/*ifstream iffile("jiashizupu.txt");</span></div><div class="line">	iffile &gt;&gt; n;*/</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">int</span> id = <span class="number">1</span>;</div><div class="line">	<span class="stl_container"><span class="built_in">set</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span>&gt; myset;</div><div class="line">	myset.clear();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> father_name, son_name;</div><div class="line">		<span class="comment">//iffile &gt;&gt; father_name &gt;&gt; son_name;</span></div><div class="line">		<span class="built_in">cin</span> &gt;&gt; father_name&gt;&gt; son_name;</div><div class="line">		<span class="keyword">if</span> (people.count(father_name) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			people[father_name] = id;</div><div class="line">			informations[id].name = father_name;</div><div class="line">			id++;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (people.count(son_name) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			people[son_name] = id;</div><div class="line">			informations[id].name = son_name;</div><div class="line">			id++;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (myset.find(make_pair(people[father_name], people[son_name])) == myset.end()){</div><div class="line">			informations[people[father_name]].children.push_back(people[son_name]);</div><div class="line">			informations[people[son_name]].father = people[father_name];</div><div class="line">			myset.insert(make_pair(people[father_name], people[son_name]));</div><div class="line">		}</div><div class="line">	}</div><div class="line">		</div><div class="line">	dfstrace.clear();</div><div class="line">	dfs(<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">	updatest();</div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> name_1, name_2;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; name_1 &gt;&gt; name_2;</div><div class="line">		<span class="keyword">if</span> (name_1 == name_2)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; name_1 &lt;&lt; endl;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> index_1 = people[name_1], index_2 = people[name_2];</div><div class="line">		<span class="keyword">int</span> l = mymin(informations[index_1].lastshow, informations[index_2].lastshow);</div><div class="line">		<span class="keyword">int</span> r = informations[index_1].lastshow + informations[index_2].lastshow - l;</div><div class="line">		<span class="keyword">int</span> len = r - l + <span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> j = mi.size()-<span class="number">1</span>;</div><div class="line">		<span class="keyword">while</span> (j &gt;= <span class="number">0</span> && mi[j] &gt; len)</div><div class="line">		{</div><div class="line">			j--;</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> a = sparse_table[make_pair(l, j)], b = sparse_table[make_pair(r-mi[j]+<span class="number">1</span>, j)];</div><div class="line">		<span class="keyword">int</span> ans = (informations[a].depth &lt; informations[b].depth ? a : b);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; informations[ans].name &lt;&lt; endl;</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  
+		<a href="#logo" class="article-top-link">返回顶部</a>
+      
+	  
+      
+        <a data-url="http://youngyangyang.com/2015/06/04/hiho1069/" data-id="bbf3qpdv500vge92" data-title="hiho1069 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
+      
+		
+      
+        <a href="http://youngyangyang.com/2015/06/04/hiho1069/#ds-thread" class="article-comment-link">Comments</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hiho1068" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/06/02/hiho1068/" class="article-date">
@@ -398,94 +477,6 @@
 
 
   
-    <article id="post-hiho1062" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/28/hiho1062/" class="article-date">
-  <time datetime="2015-05-28T07:50:08.000Z" itemprop="datePublished">5月 28 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/28/hiho1062/">hiho1062</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1062_:_最近公共祖先·一">1062 : 最近公共祖先·一</h2>
-<hr>
-<p>时间限制:10000ms<br>单点时限:1000ms<br>内存限制:256MB<br><strong>描述</strong><br>小Ho最近发现了一个神奇的网站！虽然还不够像58同城那样神奇，但这个网站仍然让小Ho乐在其中，但这是为什么呢？</p>
-<p>“为什么呢？”小Hi如是问道，在他的观察中小Ho已经沉迷这个网站一周之久了，甚至连他心爱的树玩具都弃置一边。</p>
-<p>“嘿嘿，小Hi，你快过来看！”小Ho招呼道。</p>
-<p>“你看，在这个对话框里输入我的名字，在另一个对话框里，输入你的名字，再点这个查询按钮，就可以查出来……什么！我们居然有同一个祖祖祖祖祖爷爷？”</p>
-<p>“诶，真是诶……这个网站有点厉害啊。”小Hi不由感叹道。</p>
-<p>“是啊，这是什么算法啊，这么厉害！”小Ho也附和道。</p>
-<p>“别2，我说的是他能弄到这些数据很厉害，而人类的繁殖树这种层数比较浅的树对这类算法的要求可是简单的不得了，你都能写出来呢！”小Hi道。</p>
-<p>“啊？我也能写出来？可是……该从哪开始呢？”小Ho困惑了。</p>
-<p>小Ho要面临的问题是这样的，假设现在他知道了N个人的信息——他们的父亲是谁，他需要对于小Hi的每一次提问——两个人的名字，告诉小Hi这两个人的是否存在同一个祖先，如果存在，那么他们的所有共同祖先中辈分最低的一个是谁？</p>
-<p><strong>输入</strong><br>每个测试点（输入文件）有且仅有一组测试数据。</p>
-<p>每组测试数据的第1行为一个整数N，意义如前文所述。</p>
-<p>每组测试数据的第2~N+1行，每行分别描述一对父子关系，其中第i+1行为两个由大小写字母组成的字符串Father_i, Son_i，分别表示父亲的名字和儿子的名字。</p>
-<p>每组测试数据的第N+2行为一个整数M，表示小Hi总共询问的次数。</p>
-<p>每组测试数据的第N+3~N+M+2行，每行分别描述一个询问，其中第N+i+2行为两个由大小写字母组成的字符串Name1_i, Name2_i，分别表示小Hi询问中的两个名字。</p>
-<p>对于100%的数据，满足N&lt;=10^2，M&lt;=10^2, 且数据中所有涉及的人物中不存在两个名字相同的人（即姓名唯一的确定了一个人）。</p>
-<p><strong>输出</strong><br>对于每组测试数据，对于每个小Hi的询问，输出一行，表示查询的结果：如果根据已知信息，可以判定询问中的两个人存在共同的祖先，则输出他们的所有共同祖先中辈分最低的一个人的名字，否则输出-1。</p>
-<p><strong>样例输入</strong></p>
-<blockquote>
-<p>11<br>JiaYan JiaDaihua<br>JiaDaihua JiaFu<br>JiaDaihua JiaJing<br>JiaJing JiaZhen<br>JiaZhen JiaRong<br>JiaYuan JiaDaishan<br>JiaDaishan JiaShe<br>JiaDaishan JiaZheng<br>JiaShe JiaLian<br>JiaZheng JiaZhu<br>JiaZheng JiaBaoyu<br>3<br>JiaBaoyu JiaLian<br>JiaBaoyu JiaZheng<br>JiaBaoyu LinDaiyu</p>
-</blockquote>
-<p><strong>样例输出</strong></p>
-<blockquote>
-<p>JiaDaishan<br>JiaZheng<br>-1</p>
-</blockquote>
-<h2 id="分析">分析</h2>
-<p>昨晚写的代码，一直没过，然后发帖问也没人回。<br>后来在网上找了一份代码，看懂了之后将前面预处理部分改成和它类似，发现就对了。那就应该是预处理的地方有问题，我再看看是什么问题，到现在还没想通。</p>
-<p>根据提示可以得到以下的代码</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="built_in">string</span> father_name, child_name;</div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;</span> fathers;</div><div class="line">	<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;</span> children;</div><div class="line">	<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span> people;</div><div class="line">	pair&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; pa;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; father_name &gt;&gt; child_name;</div><div class="line">		fathers.push_back(father_name);</div><div class="line">		children.push_back(child_name);</div><div class="line">		people.insert(make_pair(father_name, <span class="number">0</span>));</div><div class="line">		people.insert(make_pair(child_name, <span class="number">0</span>));</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> id = <span class="number">1</span>;</div><div class="line">	<span class="built_in">string</span> *names = <span class="keyword">new</span> <span class="built_in">string</span>[people.size() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span>::iterator iter = people.begin(); iter != people.end(); iter++)</div><div class="line">	{</div><div class="line">		iter-&gt;second = id;</div><div class="line">		names[id] = iter-&gt;first;</div><div class="line">		id++;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> *relationship = <span class="keyword">new</span> <span class="keyword">int</span>[people.size() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= people.size(); i++)</div><div class="line">	{</div><div class="line">		relationship[i] = <span class="number">0</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		relationship[people[children[i]]] = people[fathers[i]];</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> name_1, name_2;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; name_1 &gt;&gt; name_2;</div><div class="line">		<span class="keyword">if</span> (name_1 == name_2)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; name_1 &lt;&lt; endl;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (people.count(name_1) == <span class="number">0</span> || people.count(name_2) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">int</span> cur = people[name_1];</div><div class="line">		<span class="keyword">int</span> *mark = <span class="keyword">new</span> <span class="keyword">int</span>[people.size() + <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= people.size(); j++)</div><div class="line">			mark[j] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span> (cur != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			mark[cur] = <span class="number">1</span>;</div><div class="line">			cur = relationship[cur];</div><div class="line">		}</div><div class="line">		cur = people[name_2];</div><div class="line">		<span class="keyword">while</span> (cur != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (mark[cur] == <span class="number">1</span>)</div><div class="line">			{</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; names[cur] &lt;&lt; endl;</div><div class="line">				cur = -<span class="number">1</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				cur = relationship[cur];</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (cur == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">		<span class="keyword">delete</span>[] mark;</div><div class="line">	}</div><div class="line">	<span class="keyword">delete</span>[] names;</div><div class="line">	<span class="keyword">delete</span>[] relationship;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>更新于2015年5月28日20:00<br>刚开始写的第一版代码里没有考虑到一个状况:<br>假设lindaiyu不在族谱里，但我询问了lindaiyu lindaiyu，从常识就可以知道，那个最近公共祖先肯定是lindaiyu没跑了<br>所以要添加一个person_name_1==person_name_2的判断。<br>但是我很脑抽地在true的情况下输出了-1。。。我是猪么。。。^(*￣(oo)￣)^。。。。。也是给自己给蠢哭了</p>
-<p>现在就对了</p>
-<figure class="highlight C++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;map&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;set&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;</span> names;</div><div class="line"><span class="keyword">int</span> main()</div><div class="line">{</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">	<span class="keyword">int</span> *relations = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>*n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">2</span>*n; i++)</div><div class="line">		relations[i] = <span class="number">0</span>;</div><div class="line">	<span class="built_in">string</span> *namesarr = <span class="keyword">new</span> <span class="built_in">string</span>[<span class="number">2</span>*n + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">2</span>*n; i++)</div><div class="line">		namesarr[i] = <span class="string">""</span>;</div><div class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> father_name, child_name;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; father_name &gt;&gt; child_name;</div><div class="line">		<span class="keyword">int</span> father_index = <span class="number">0</span>, child_index = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (names.count(father_name) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			names[father_name] = ++index;</div><div class="line">			namesarr[index] = father_name;</div><div class="line">			father_index = index;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			father_index = names[father_name];</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (names.count(child_name) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			names[child_name] = ++index;</div><div class="line">			namesarr[index] = child_name;</div><div class="line">			child_index = index;</div><div class="line">		}</div><div class="line">		<span class="keyword">else</span></div><div class="line">		{</div><div class="line">			child_index = names[child_name];</div><div class="line">		}</div><div class="line">		relations[child_index] = father_index;</div><div class="line">	}</div><div class="line">	<span class="keyword">int</span> m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">	{</div><div class="line">		<span class="built_in">string</span> person_name_1, person_name_2;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; person_name_1 &gt;&gt; person_name_2;</div><div class="line">		<span class="keyword">if</span> (person_name_1 == person_name_2)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; person_name_1 &lt;&lt; endl;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (names.count(person_name_1) == <span class="number">0</span> || names.count(person_name_2) == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">			<span class="keyword">continue</span>;</div><div class="line">		}</div><div class="line">		<span class="stl_container"><span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;</span> myset;</div><div class="line">		myset.clear();</div><div class="line">		<span class="keyword">int</span> cur = names[person_name_1];</div><div class="line">		<span class="keyword">while</span> (cur != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			myset.insert(namesarr[cur]); </div><div class="line">			cur = relations[cur];</div><div class="line">		}</div><div class="line">		cur = names[person_name_2];</div><div class="line">		<span class="keyword">while</span> (cur != <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="keyword">if</span> (myset.find(namesarr[cur])!=myset.end())</div><div class="line">			{</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; namesarr[cur] &lt;&lt; endl;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			}</div><div class="line">			<span class="keyword">else</span></div><div class="line">			{</div><div class="line">				cur = relations[cur];</div><div class="line">			}</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (cur == <span class="number">0</span>)</div><div class="line">		{</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; -<span class="number">1</span> &lt;&lt; endl;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  
-		<a href="#logo" class="article-top-link">返回顶部</a>
-      
-	  
-      
-        <a data-url="http://youngyangyang.com/2015/05/28/hiho1062/" data-id="yohtepj0uxcqfc7x" data-title="hiho1062 | Young&#39;s blog" data-weibo-id="" class="article-share-link">分享到</a>
-      
-		
-      
-        <a href="http://youngyangyang.com/2015/05/28/hiho1062/#ds-thread" class="article-comment-link">Comments</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihocoder/">hihocoder</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -499,7 +490,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DataMining-MachineLearning/">DataMining&MachineLearning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/booklist/">booklist</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/一起刷hihocoder/">一起刷hihocoder</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活点滴/">生活点滴</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -508,7 +499,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/">books</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihocoder/">hihocoder</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活记录/">生活记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -526,7 +517,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -536,6 +527,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/06/04/hiho1069/">hiho1069</a>
+          </li>
         
           <li>
             <a href="/2015/06/02/hiho1068/">hiho1068</a>
@@ -551,10 +546,6 @@
         
           <li>
             <a href="/2015/05/29/hiho1066/">hiho1066</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/28/hiho1062/">hiho1062</a>
           </li>
         
       </ul>
